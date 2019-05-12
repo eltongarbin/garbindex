@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MuiThemeProvider } from '@material-ui/core';
+import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 
-import theme from './utils/theme';
-import RootPage from './pages/RootPage';
+import theme from 'utils/theme';
+import RootPage from 'pages/RootPage';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
+    <CssBaseline />
     <RootPage />
   </MuiThemeProvider>,
   document.getElementById('root')
