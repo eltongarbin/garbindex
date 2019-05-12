@@ -1,23 +1,19 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core';
+import { Switch, Route } from 'react-router-dom';
+
+import MyPokedexPage from './MyPokedexPage';
+import HuntingPage from './HuntingPage';
+import PokemonPage from './PokemonPage';
+import NotFoundPage from './NotFoundPage';
 
 function RootPage() {
   return (
-    <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit">
-            Test Theme
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <div>
-        <p>My content will be here :)</p>
-        <Button color="secondary" variant="contained">
-          Test secondary color
-        </Button>
-      </div>
-    </div>
+    <Switch>
+      <Route exact path="/" component={MyPokedexPage} />
+      <Route path="/pokemons/:id" component={PokemonPage} />
+      <Route path="/pokemons" component={HuntingPage} />
+      <Route component={NotFoundPage} />
+    </Switch>
   );
 }
 

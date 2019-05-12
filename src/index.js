@@ -1,15 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router-dom';
 import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
 
-import theme from 'utils/theme';
-import RootPage from 'pages/RootPage';
+import { history, theme } from './utils';
+import RootPage from './pages/RootPage';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
-    <RootPage />
+    <Router history={history}>
+      <RootPage />
+    </Router>
   </MuiThemeProvider>,
   document.getElementById('root')
 );
