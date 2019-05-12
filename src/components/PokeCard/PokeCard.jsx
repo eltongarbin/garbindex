@@ -15,7 +15,7 @@ import {
 
 function PokeCard({
   classes,
-  imageURL,
+  image,
   id,
   name,
   onSeeMoreClick,
@@ -26,7 +26,7 @@ function PokeCard({
     <Card>
       <CardActionArea onClick={onSeeMoreClick}>
         <CardHeaderStyled title={name} subheader={`#${id}`} />
-        <CardMediaStyled image={imageURL} title={name} />
+        <CardMediaStyled image={image} title={name} />
       </CardActionArea>
       <CardActionsStyled>
         <IconButton aria-label="See more" onClick={onSeeMoreClick}>
@@ -48,7 +48,7 @@ function PokeCard({
 }
 
 PokeCard.propTypes = {
-  imageURL: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   onSeeMoreClick: PropTypes.func.isRequired,

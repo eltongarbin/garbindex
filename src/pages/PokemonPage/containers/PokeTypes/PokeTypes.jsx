@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import Segregator from '../../components/Segregator';
+import withCurrentID from '../../components/withCurrentID';
 import PokeTypesItem from './PokeTypesItem';
 
 const GridContent = styled(Grid)`
@@ -22,6 +26,7 @@ class PokeTypes extends PureComponent {
 
   render() {
     const { expandedId } = this.state;
+    const { types } = this.props;
 
     return (
       <GridContent container spacing={8} alignItems="center">
@@ -30,22 +35,14 @@ class PokeTypes extends PureComponent {
         </Grid>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={8}>
-            <PokeTypesItem
-              name="poison"
-              expanded={expandedId === 64}
-              pokemons={[
-                { id: 1, name: 'bulbasaur' },
-                { id: 2, name: 'ivysaur' },
-                { id: 3, name: 'venusaur' }
-              ]}
-              onToggle={this.handleToggleDetail(64)}
-            />
-            <PokeTypesItem
-              name="bug"
-              expanded={expandedId === 65}
-              pokemons={[]}
-              onToggle={this.handleToggleDetail(65)}
-            />
+            {types.map(({ id, name }) => (
+              <PokeTypesItem
+                key={id}
+                name={name}
+                expanded={expandedId === id}
+                onToggle={this.handleToggleDetail(id)}
+              />
+            ))}
           </Grid>
         </Grid>
       </GridContent>
@@ -53,4 +50,20 @@ class PokeTypes extends PureComponent {
   }
 }
 
-export default PokeTypes;
+PokeTypes.propTypes = {
+  types: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  ).isRequired
+};
+
+const mapStateToProps = ({ pokemons }, { pokemonId }) => ({
+  types: pokemons.byId[pokemonId].types
+});
+
+export default compose(
+  withCurrentID,
+  connect(mapStateToProps)
+)(PokeTypes);

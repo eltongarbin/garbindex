@@ -57,17 +57,17 @@ class HuntingPage extends PureComponent {
             }}
           />
         </form>
-        <GridResultStyled container spacing={0}>
+        {/* <GridResultStyled container spacing={0}>
           <Grid item xs={6} md={4}>
             <PokeCard
               id={6}
               name="charizard"
-              imageURL="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
+              image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
               onSeeMoreClick={this.handleSeeMoreClick(6)}
               onDeleteClick={this.handleDeleteClick(6)}
             />
           </Grid>
-        </GridResultStyled>
+        </GridResultStyled> */}
       </div>
     );
   }
@@ -75,5 +75,5 @@ class HuntingPage extends PureComponent {
 
 export default withPageLayout({
   title: 'Search Pokémons',
-  backTo: '/pokemons'
+  backTo: '/'
 })(HuntingPage);

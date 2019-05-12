@@ -1,23 +1,25 @@
 import React from 'react';
-import { Grid, Card, IconButton } from '@material-ui/core';
+import { Card, IconButton, CardContent } from '@material-ui/core';
 import { AddCircle as AddCircleIcon } from '@material-ui/icons';
+import styled from 'styled-components';
 
 import { withPageLayout } from 'components/PageLayout';
-import PokeStats from './containers/PokeStats';
+import HeaderInfo from './containers/HeaderInfo';
+import PokeImage from './containers/PokeImage';
 import PokeTypes from './containers/PokeTypes';
 import PokeProfile from './containers/PokeProfile';
 import PokeEvolutions from './containers/PokeEvolutions';
-import {
-  CardHeaderStyled,
-  CardContentStyled,
-  SummarySection,
-  CardMediaStyled
-} from './PokemonPageStyled';
+
+const CardContentStyled = styled(CardContent)`
+  && {
+    padding-top: 0px;
+  }
+`;
 
 function PokemonPage() {
   return (
     <Card>
-      <CardHeaderStyled
+      <HeaderInfo
         action={
           <IconButton aria-label="Catch">
             <AddCircleIcon />
@@ -27,15 +29,7 @@ function PokemonPage() {
         subheader="#1"
       />
       <CardContentStyled>
-        <SummarySection container spacing={8} alignItems="center">
-          <Grid item xs={4}>
-            <CardMediaStyled
-              image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
-              title="Paella dish"
-            />
-          </Grid>
-          <PokeStats />
-        </SummarySection>
+        <PokeImage />
         <PokeTypes />
         <PokeProfile />
         <PokeEvolutions />
