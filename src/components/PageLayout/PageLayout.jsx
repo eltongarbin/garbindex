@@ -4,7 +4,12 @@ import { Link } from 'react-router-dom';
 import { Toolbar, AppBar, Grid } from '@material-ui/core';
 import { ArrowBack as ArrowBackIcon } from '@material-ui/icons';
 
-import { RootContainer, HeaderTitle, MenuButton } from './PageLayoutStyled';
+import {
+  RootContainer,
+  HeaderTitle,
+  MenuButton,
+  GridContent
+} from './PageLayoutStyled';
 
 function PageLayout({ title, backTo, children }) {
   return (
@@ -26,11 +31,11 @@ function PageLayout({ title, backTo, children }) {
           </HeaderTitle>
         </Toolbar>
       </AppBar>
-      <Grid container justify="center" style={{ padding: 16 }} spacing={0}>
+      <GridContent container justify="center" spacing={0}>
         <Grid item xs={12} sm={8} md={6}>
           {children}
         </Grid>
-      </Grid>
+      </GridContent>
     </RootContainer>
   );
 }
