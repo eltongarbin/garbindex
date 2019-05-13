@@ -6,7 +6,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import Segregator from '../../components/Segregator';
-import withCurrentID from '../../components/hocs/withCurrentID';
+import withCurrentID from '../../components/withCurrentID';
 import PokeAbilities from './PokeAbilities';
 
 const Content = styled.div`

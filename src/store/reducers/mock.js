@@ -1,3 +1,14 @@
+export const pokedexState = {
+  pokemonsId: [1, 2],
+  pokemonsCustomizedById: {
+    2: {
+      id: 2,
+      image:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png'
+    }
+  }
+};
+
 export const pokemonsState = {
   byId: {
     1: {

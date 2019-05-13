@@ -9,8 +9,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import withCurrentID from '../../components/hocs/withCurrentID';
-import { actions } from 'store/ducks/pokedex';
+import withCurrentID from '../../components/withCurrentID';
+import { actions } from 'store/reducers/pokedex';
 
 const CardHeaderStyled = styled(CardHeader)`
   && {

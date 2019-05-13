@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 function withCurrentId(WrappedComponent) {
   return withRouter((props) => {

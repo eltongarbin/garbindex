@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import PokeAbilitiesItem from './PokeAbilitiesItem';
-import withCurrentId from '../../components/hocs/withCurrentID';
+import withCurrentId from '../../components/withCurrentID';
 
 class PokeAbilities extends PureComponent {
   state = { expandedId: 0 };

@@ -1,22 +1,13 @@
 import { createAction, handleActions } from 'redux-actions';
-import { createType } from '../helpers/reduxUtils';
 import merge from 'lodash.merge';
+
+import { createType } from 'utils/reduxHelpers';
+import { pokedexState } from './mock';
 
 // const initialState = {
 //   pokemonsId: [],
 //   pokemonsCustomizedById: {}
 // };
-
-const initialState = {
-  pokemonsId: [1, 2],
-  pokemonsCustomizedById: {
-    2: {
-      id: 2,
-      image:
-        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png'
-    }
-  }
-};
 
 const types = {
   RELEASE_BYID: createType('pokedex', 'RELEASE_BYID'),
@@ -55,7 +46,7 @@ export default handleActions(
       }
     })
   },
-  initialState
+  pokedexState
 );
 
 export const selectors = {

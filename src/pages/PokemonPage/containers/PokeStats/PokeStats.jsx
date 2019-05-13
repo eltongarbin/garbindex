@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
-import withCurrentID from '../../components/hocs/withCurrentID';
+import withCurrentID from '../../components/withCurrentID';
 import PokeStatsItem from './PokeStatsItem';
 
 function PokeStats({ stats }) {

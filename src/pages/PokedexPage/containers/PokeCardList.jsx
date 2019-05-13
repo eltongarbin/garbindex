@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter, Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Grid } from '@material-ui/core';
+import { Grid, SnackbarContent, Link } from '@material-ui/core';
 
 import PokeCard from 'components/PokeCard';
-import { actions, selectors } from 'store/ducks/pokedex';
+import { actions, selectors } from 'store/reducers/pokedex';
 
 class PokeCardList extends PureComponent {
   handleSeeMoreClick = (id) => () => {
@@ -37,6 +37,20 @@ class PokeCardList extends PureComponent {
             />
           </Grid>
         ))}
+        {!pokemons.length && (
+          <Grid item xs={12} container justify="center">
+            <SnackbarContent
+              message={
+                <span>
+                  You dont't have any pokemón yet. Let's find{` `}
+                  <Link component={RouterLink} to="/pokemons">
+                    here!
+                  </Link>
+                </span>
+              }
+            />
+          </Grid>
+        )}
       </Grid>
     );
   }
