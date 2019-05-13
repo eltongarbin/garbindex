@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { createType } from '../helpers/reduxUtils';
+import merge from 'lodash.merge';
 
 // const initialState = {
 //   pokemonsId: [],
@@ -56,3 +57,14 @@ export default handleActions(
   },
   initialState
 );
+
+export const selectors = {
+  getCaughtPokemons: (state) =>
+    state.entities.pokedex.pokemonsId.map((id) =>
+      merge(
+        {},
+        state.entities.pokemons.byId[id],
+        state.entities.pokedex.pokemonsCustomizedById[id]
+      )
+    )
+};

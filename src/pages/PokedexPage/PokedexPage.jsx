@@ -25,7 +25,7 @@ const styles = (theme) => ({
   }
 });
 
-function MyPokedexPage({ classes }) {
+function PokedexPage({ classes }) {
   return (
     <div>
       <PokeCardList />
@@ -57,11 +57,11 @@ function MyPokedexPage({ classes }) {
   );
 }
 
-MyPokedexPage.propTypes = {
+PokedexPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 export default compose(
   withPageLayout({ title: 'My Pokédex' }),
   withStyles(styles, { withTheme: true })
-)(MyPokedexPage);
+)(PokedexPage);

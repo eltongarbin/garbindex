@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
 
 import PokeCard from 'components/PokeCard';
-import { actions } from 'store/ducks/pokedex';
+import { actions, selectors } from 'store/ducks/pokedex';
 
 class PokeCardList extends PureComponent {
   handleSeeMoreClick = (id) => () => {
@@ -53,8 +53,8 @@ PokeCardList.propTypes = {
   releasePokemon: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ entities: { pokedex, pokemons } }) => ({
-  pokemons: pokedex.pokemonsId.map((id) => pokemons.byId[id])
+const mapStateToProps = (state) => ({
+  pokemons: selectors.getCaughtPokemons(state)
 });
 
 const mapDispatchToProps = {
