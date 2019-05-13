@@ -19,7 +19,7 @@ function PokeCard({
   id,
   name,
   onSeeMoreClick,
-  onDeleteClick,
+  onReleaseClick,
   onCatchClick
 }) {
   return (
@@ -32,8 +32,8 @@ function PokeCard({
         <IconButton aria-label="See more" onClick={onSeeMoreClick}>
           <VisibilityIcon />
         </IconButton>
-        {onDeleteClick && (
-          <IconButton aria-label="Delete" onClick={onDeleteClick}>
+        {onReleaseClick && (
+          <IconButton aria-label="Release" onClick={onReleaseClick}>
             <DeleteIcon />
           </IconButton>
         )}
@@ -52,7 +52,7 @@ PokeCard.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   onSeeMoreClick: PropTypes.func.isRequired,
-  onDeleteClick: PropTypes.func,
+  onReleaseClick: PropTypes.func,
   onCatchClick: PropTypes.func
 };
 

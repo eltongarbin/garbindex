@@ -14,7 +14,7 @@ class HuntingPage extends PureComponent {
     history.push(`/pokemons/${id}`);
   };
 
-  handleDeleteClick = (id) => () => {
+  handleReleaseClick = (id) => () => {
     alert(`Delete ${id}`);
   };
 
@@ -64,7 +64,7 @@ class HuntingPage extends PureComponent {
               name="charizard"
               image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
               onSeeMoreClick={this.handleSeeMoreClick(6)}
-              onDeleteClick={this.handleDeleteClick(6)}
+              onReleaseClick={this.handleReleaseClick(6)}
             />
           </Grid>
         </GridResultStyled> */}

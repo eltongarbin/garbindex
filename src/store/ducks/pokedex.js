@@ -10,6 +10,7 @@ const initialState = {
   pokemonsId: [1, 2],
   pokemonsCustomizedById: {
     2: {
+      id: 2,
       image:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png'
     }
@@ -17,11 +18,15 @@ const initialState = {
 };
 
 const types = {
-  RELEASE_BYID: createType('pokedex', 'RELEASE_BYID')
+  RELEASE_BYID: createType('pokedex', 'RELEASE_BYID'),
+  CATCH_BYID: createType('pokedex', 'CATCH_BYID'),
+  CHANGE_IMAGE: createType('pokedex', 'CHANGE_IMAGE')
 };
 
 export const actions = {
-  releasePokemon: createAction(types.RELEASE_BYID)
+  releasePokemon: createAction(types.RELEASE_BYID),
+  catchPokemon: createAction(types.CATCH_BYID),
+  changePokemonImage: createAction(types.CHANGE_IMAGE)
 };
 
 export default handleActions(
@@ -33,7 +38,21 @@ export default handleActions(
         pokemonsId: state.pokemonsId.filter((id) => id !== payload),
         pokemonsCustomizedById: rest
       };
-    }
+    },
+    [types.CATCH_BYID]: (state, { payload }) => ({
+      ...state,
+      pokemonsId: [...state.pokemonsId, payload]
+    }),
+    [types.CHANGE_IMAGE]: (state, { payload }) => ({
+      ...state,
+      pokemonsCustomizedById: {
+        ...state.pokemonsCustomizedById,
+        [payload.id]: {
+          ...state.pokemonsCustomizedById[payload.id],
+          ...payload
+        }
+      }
+    })
   },
   initialState
 );

@@ -14,7 +14,7 @@ class PokeCardList extends PureComponent {
     history.push(`/pokemons/${id}`);
   };
 
-  handleDeleteClick = (id) => () => {
+  handleReleaseClick = (id) => () => {
     // eslint-disable-next-line
     if (confirm('Are you sure you want to release this pokémon?')) {
       this.props.releasePokemon(id);
@@ -33,7 +33,7 @@ class PokeCardList extends PureComponent {
               name={name}
               image={image}
               onSeeMoreClick={this.handleSeeMoreClick(id)}
-              onDeleteClick={this.handleDeleteClick(id)}
+              onReleaseClick={this.handleReleaseClick(id)}
             />
           </Grid>
         ))}
