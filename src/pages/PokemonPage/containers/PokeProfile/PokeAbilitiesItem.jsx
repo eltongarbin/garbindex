@@ -21,7 +21,9 @@ function PokeAbilitiesItem({ name, short_effect, expanded, onToggle }) {
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetailsStyled>
-          {short_effect && <Typography>{short_effect}</Typography>}
+          {short_effect && (
+            <Typography variant="caption">{short_effect}</Typography>
+          )}
           {!short_effect && <LinearProgressStyled color="secondary" />}
         </ExpansionPanelDetailsStyled>
       </ExpansionPanel>

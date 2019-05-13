@@ -6,3 +6,7 @@ import { pokemonsState } from './mock';
 // };
 
 export default (state = pokemonsState, action) => state;
+
+export const selectors = {
+  getPokemonById: (state, id) => state.pokemons[id]
+};

@@ -6,7 +6,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import Segregator from '../../components/Segregator';
-import withCurrentID from '../../components/withCurrentID';
+import withCurrentID from '../../components/hocs/withCurrentID';
 import PokeTypesItem from './PokeTypesItem';
 
 const GridContent = styled(Grid)`
@@ -35,11 +35,12 @@ class PokeTypes extends PureComponent {
         </Grid>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={8}>
-            {types.map(({ id, name }) => (
+            {types.map(({ id, name, pokemons }) => (
               <PokeTypesItem
                 key={id}
                 name={name}
                 expanded={expandedId === id}
+                pokemons={pokemons}
                 onToggle={this.handleToggleDetail(id)}
               />
             ))}
@@ -54,12 +55,18 @@ PokeTypes.propTypes = {
   types: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired,
+      pokemons: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired
+        })
+      )
     })
   ).isRequired
 };
 
-const mapStateToProps = ({ pokemons }, { pokemonId }) => ({
+const mapStateToProps = ({ entities: { pokemons } }, { pokemonId }) => ({
   types: pokemons.byId[pokemonId].types
 });
 

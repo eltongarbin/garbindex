@@ -1,7 +1,11 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import PokeAbilitiesItem from './PokeAbilitiesItem';
+import withCurrentId from '../../components/hocs/withCurrentID';
 
 class PokeAbilities extends PureComponent {
   state = { expandedId: 0 };
@@ -14,26 +18,41 @@ class PokeAbilities extends PureComponent {
 
   render() {
     const { expandedId } = this.state;
+    const { abilities } = this.props;
 
     return (
       <Grid item xs={12}>
         <Grid container justify="center" spacing={8}>
-          <PokeAbilitiesItem
-            name="solar-power"
-            short_effect=""
-            expanded={expandedId === 64}
-            onToggle={this.handleToggleDetail(64)}
-          />
-          <PokeAbilitiesItem
-            name="blaze"
-            short_effect="Increases Special Attack to 1.5× but costs 1/8 max HP after each turn during strong sunlight."
-            expanded={expandedId === 65}
-            onToggle={this.handleToggleDetail(65)}
-          />
+          {abilities.map(({ id, name, short_effect }) => (
+            <PokeAbilitiesItem
+              key={id}
+              name={name}
+              short_effect={short_effect}
+              expanded={expandedId === id}
+              onToggle={this.handleToggleDetail(id)}
+            />
+          ))}
         </Grid>
       </Grid>
     );
   }
 }
 
-export default PokeAbilities;
+PokeAbilities.propTypes = {
+  abilities: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      short_effect: PropTypes.string
+    })
+  ).isRequired
+};
+
+const mapStateToProps = ({ entities: { pokemons } }, { pokemonId }) => ({
+  abilities: pokemons.byId[pokemonId].abilities
+});
+
+export default compose(
+  withCurrentId,
+  connect(mapStateToProps)
+)(PokeAbilities);

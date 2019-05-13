@@ -40,15 +40,41 @@ export const pokemonsState = {
       types: [
         {
           name: 'poison',
-          id: 4
+          id: 4,
+          pokemons: [{ id: 1, name: 'bulbasaur' }]
         },
         {
           name: 'grass',
           id: 12
         }
+      ],
+      height: 7,
+      weight: 69,
+      abilities: [
+        {
+          name: 'chlorophyll',
+          id: 34,
+          short_effect: 'Doubles Speed during strong sunlight.'
+        },
+        {
+          name: 'overgrow',
+          id: 65
+        }
       ]
     },
     2: {
+      abilities: [
+        {
+          name: 'chlorophyll',
+          id: 34
+        },
+        {
+          name: 'overgrow',
+          id: 65
+        }
+      ],
+      weight: 130,
+      height: 10,
       id: 2,
       name: 'ivysaur',
       image:

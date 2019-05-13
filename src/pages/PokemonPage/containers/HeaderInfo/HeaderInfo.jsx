@@ -9,7 +9,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import withCurrentID from '../../components/withCurrentID';
+import withCurrentID from '../../components/hocs/withCurrentID';
 import { actions } from 'store/ducks/pokedex';
 
 const CardHeaderStyled = styled(CardHeader)`
@@ -66,7 +66,10 @@ HeaderInfo.propTypes = {
   catchPokemon: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ pokedex, pokemons }, { pokemonId }) => ({
+const mapStateToProps = (
+  { entities: { pokedex, pokemons } },
+  { pokemonId }
+) => ({
   pokemonId,
   name: pokemons.byId[pokemonId].name,
   captured: pokedex.pokemonsId.includes(pokemonId)

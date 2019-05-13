@@ -6,7 +6,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 
 import { actions } from 'store/ducks/pokedex';
-import withCurrentID from '../../components/withCurrentID';
+import withCurrentID from '../../components/hocs/withCurrentID';
 import PokeStats from '../PokeStats';
 import {
   Content,
@@ -74,8 +74,8 @@ PokeImage.propTypes = {
 
 const imageSelector = (state, pokemonId) => {
   const { image } = {
-    ...state.pokemons.byId[pokemonId],
-    ...state.pokedex.pokemonsCustomizedById[pokemonId]
+    ...state.entities.pokemons.byId[pokemonId],
+    ...state.entities.pokedex.pokemonsCustomizedById[pokemonId]
   };
   return image;
 };
@@ -83,7 +83,7 @@ const imageSelector = (state, pokemonId) => {
 const mapStateToProps = (state, { pokemonId }) => ({
   pokemonId,
   image: imageSelector(state, pokemonId),
-  captured: state.pokedex.pokemonsId.includes(pokemonId)
+  captured: state.entities.pokedex.pokemonsId.includes(pokemonId)
 });
 
 const mapDispathToProps = {

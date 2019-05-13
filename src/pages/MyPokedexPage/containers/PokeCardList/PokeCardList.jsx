@@ -53,7 +53,7 @@ PokeCardList.propTypes = {
   releasePokemon: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ pokedex, pokemons }) => ({
+const mapStateToProps = ({ entities: { pokedex, pokemons } }) => ({
   pokemons: pokedex.pokemonsId.map((id) => pokemons.byId[id])
 });
 

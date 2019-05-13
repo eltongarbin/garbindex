@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 
-import pokedex from './ducks/pokedex';
-import pokemons from './ducks/pokemons';
+import * as mainReducers from './ducks';
 
 const rootReducer = combineReducers({
-  pokedex,
-  pokemons
+  ...mainReducers
 });
 
 export default rootReducer;
