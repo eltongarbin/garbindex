@@ -6,7 +6,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer build/static/js/*.js",
+    "build:analyze": "npm run build && npm run analyze"
   },
   "dependencies": {
     "@material-ui/core": "^3.9.3",
@@ -22,6 +24,7 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "redux-saga": "^1.0.2",
+    "source-map-explorer": "^1.8.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {

@@ -14,7 +14,6 @@ import {
 } from './PokeCardStyled';
 
 function PokeCard({
-  classes,
   image,
   id,
   name,
