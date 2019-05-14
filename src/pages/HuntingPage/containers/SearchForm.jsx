@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { InputAdornment, IconButton, TextField } from '@material-ui/core';
 import { Search as SearchIcon } from '@material-ui/icons';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-export const TextFieldStyled = styled(TextField)`
+import { actions } from '../state';
+
+const TextFieldStyled = styled(TextField)`
   && {
     background-color: white;
   }
@@ -18,7 +22,7 @@ class SearchForm extends PureComponent {
 
   handelSubmit = (event) => {
     event.preventDefault();
-    console.log('submitted');
+    this.props.searchForPokemon(this.state.searchText);
   };
 
   render() {
@@ -42,7 +46,10 @@ class SearchForm extends PureComponent {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton aria-label="Toggle password visibility">
+                <IconButton
+                  type="submit"
+                  aria-label="Toggle password visibility"
+                >
                   <SearchIcon />
                 </IconButton>
               </InputAdornment>
@@ -54,4 +61,15 @@ class SearchForm extends PureComponent {
   }
 }
 
-export default SearchForm;
+SearchForm.propTypes = {
+  searchForPokemon: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = {
+  searchForPokemon: actions.searchForPokemon.request
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SearchForm);

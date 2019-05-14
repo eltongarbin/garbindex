@@ -8,7 +8,11 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash.isempty';
 
 import PokeCard from 'components/PokeCard';
-import { actions, selectors } from '../huntingPageReducer';
+import { actions, selectors } from '../state';
+import {
+  selectors as pokedexSelectors,
+  actions as pokedexActions
+} from 'store/ducks/pokedex/pokedex';
 
 export const GridResultStyled = styled(Grid)`
   && {
@@ -27,8 +31,30 @@ class SearchResult extends PureComponent {
   };
 
   handleReleaseClick = (id) => () => {
-    alert(`Delete ${id}`);
+    // eslint-disable-next-line
+    if (confirm('Are you sure you want to release this pokémon?')) {
+      this.props.releasePokemon(id);
+    }
   };
+
+  handleCatchClick = (id) => () => {
+    this.props.catchPokemon(id);
+  };
+
+  getOtherOperation(pokemonFoundId) {
+    const { pokemonsCapturedIds } = this.props;
+
+    if (
+      !isEmpty(pokemonsCapturedIds) &&
+      pokemonsCapturedIds.includes(pokemonFoundId)
+    ) {
+      return { onReleaseClick: this.handleReleaseClick(pokemonFoundId) };
+    }
+
+    return {
+      onCatchClick: this.handleCatchClick(pokemonFoundId)
+    };
+  }
 
   render() {
     const { pokemonFound } = this.props;
@@ -42,7 +68,7 @@ class SearchResult extends PureComponent {
               name={pokemonFound.name}
               image={pokemonFound.image}
               onSeeMoreClick={this.handleSeeMoreClick(pokemonFound.id)}
-              onReleaseClick={this.handleReleaseClick(pokemonFound.id)}
+              {...this.getOtherOperation(pokemonFound.id)}
             />
           )}
         </Grid>
@@ -53,18 +79,24 @@ class SearchResult extends PureComponent {
 
 SearchResult.propTypes = {
   pokemonFound: PropTypes.object,
-  cleanSearchResult: PropTypes.func.isRequired
+  cleanSearchResult: PropTypes.func.isRequired,
+  pokemonsCapturedIds: PropTypes.array,
+  catchPokemon: PropTypes.func.isRequired,
+  releasePokemon: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   pokemonFound: selectors.getPokemonById(
     state,
     state.huntingPage.pokemonFoundId
-  )
+  ),
+  pokemonsCapturedIds: pokedexSelectors.getCaughtPokemonsId(state)
 });
 
 const mapDispatchToProps = {
-  cleanSearchResult: actions.cleanSearchResult
+  cleanSearchResult: actions.cleanSearchResult,
+  catchPokemon: pokedexActions.catchPokemon,
+  releasePokemon: pokedexActions.releasePokemon
 };
 
 export default compose(

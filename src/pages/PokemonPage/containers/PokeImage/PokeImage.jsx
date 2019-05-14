@@ -5,7 +5,7 @@ import { CloudUpload as CloudUploadIcon } from '@material-ui/icons';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { actions } from 'store/reducers/pokedex';
+import { actions } from 'store/ducks/pokedex/pokedex';
 import withCurrentID from '../../components/withCurrentID';
 import PokeStats from '../PokeStats';
 import {

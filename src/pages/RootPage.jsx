@@ -10,8 +10,8 @@ function RootPage() {
   return (
     <Switch>
       <Route exact path="/" component={PokedexPage} />
-      <Route path="/pokemons/:id" component={PokemonPage} />
-      <Route path="/pokemons" component={HuntingPage} />
+      <Route exact path="/pokemons" component={HuntingPage} />
+      <Route exact path="/pokemons/:id(\d+)" component={PokemonPage} />
       <Route component={NotFoundPage} />
     </Switch>
   );

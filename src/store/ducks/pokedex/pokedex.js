@@ -2,12 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import merge from 'lodash.merge';
 
 import { createType } from 'utils/reduxHelpers';
-import { pokedexState } from './mock';
-
-// const initialState = {
-//   pokemonsId: [],
-//   pokemonsCustomizedById: {}
-// };
 
 const types = {
   RELEASE_BYID: createType('pokedex', 'RELEASE_BYID'),
@@ -19,6 +13,11 @@ export const actions = {
   releasePokemon: createAction(types.RELEASE_BYID),
   catchPokemon: createAction(types.CATCH_BYID),
   changePokemonImage: createAction(types.CHANGE_IMAGE)
+};
+
+const initialState = {
+  pokemonsId: [],
+  pokemonsCustomizedById: {}
 };
 
 export default handleActions(
@@ -46,10 +45,11 @@ export default handleActions(
       }
     })
   },
-  pokedexState
+  initialState
 );
 
 export const selectors = {
+  getCaughtPokemonsId: (state) => state.entities.pokedex.pokemonsId,
   getCaughtPokemons: (state) =>
     state.entities.pokedex.pokemonsId.map((id) =>
       merge(
