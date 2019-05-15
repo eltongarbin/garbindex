@@ -1,95 +1,122 @@
-import { takeEvery, put, delay } from 'redux-saga/effects';
+import { takeEvery, put } from 'redux-saga/effects';
+import keyBy from 'lodash.keyby';
 
+import { extractParamId } from 'utils';
+import { genericAsyncResolver } from 'utils/reduxHelpers';
+import pokemonService from 'services/pokemonService';
 import actions, { types } from './actions';
+import typesService from 'services/typesService';
+import abilityService from 'services/abilityService';
+import speciesService from 'services/speciesService';
 
 function* watchFetchPokemonRequest(action) {
-  yield delay(1000);
-  yield put(
-    actions.fetchPokemon.receive({
-      id: 3,
-      name: 'venusaur',
-      image:
-        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png',
-      stats: [
-        {
-          base_stat: 80,
-          name: 'speed',
-          id: 6
-        },
-        {
-          base_stat: 100,
-          name: 'special-defense',
-          id: 5
-        },
-        {
-          base_stat: 100,
-          name: 'special-attack',
-          id: 4
-        },
-        {
-          base_stat: 83,
-          name: 'defense',
-          id: 3
-        },
-        {
-          base_stat: 82,
-          name: 'attack',
-          id: 2
-        },
-        {
-          base_stat: 80,
-          name: 'hp',
-          id: 1
-        }
-      ],
-      types: [
-        {
-          name: 'poison',
-          id: 4
-        },
-        {
-          name: 'grass',
-          id: 12
-        }
-      ],
-      height: 20,
-      weight: 1000,
-      abilities: [
-        {
-          name: 'chlorophyll',
-          id: 34
-        },
-        {
-          name: 'overgrow',
-          id: 36
-        }
-      ]
-    })
+  const handleData = ({
+    id,
+    name,
+    sprites,
+    weight,
+    height,
+    abilities,
+    stats,
+    types
+  }) => {
+    return {
+      id,
+      name,
+      image: sprites.front_default,
+      weight,
+      height,
+      abilitiesById: keyBy(
+        abilities.map(({ ability }) => ({
+          id: parseInt(extractParamId(ability.url)),
+          name: ability.name
+        })),
+        'id'
+      ),
+      stats: stats.map((stat) => ({
+        base_stat: stat.base_stat,
+        name: stat.stat.name,
+        id: parseInt(extractParamId(stat.stat.url))
+      })),
+      typesById: keyBy(
+        types.map(({ type }) => ({
+          id: parseInt(extractParamId(type.url)),
+          name: type.name
+        })),
+        'id'
+      )
+    };
+  };
+
+  yield genericAsyncResolver(
+    pokemonService.get,
+    action.payload,
+    actions.fetchPokemon,
+    handleData
   );
 }
 
 function* watchFetchPokemonSuccess(action) {
-  yield put(actions.fetchEvolutionChain.request(action.payload.id));
+  yield put(actions.fetchEvolvedFrom.request(action.payload.id));
 }
 
-function* watchFetchEvolutionChainRequest(action) {
-  yield delay(1000);
-  yield put(
-    actions.fetchEvolutionChain.receive({
-      id: action.payload,
-      evolutions: [
-        { pokeId: 1, from: 'bulbasaur', to: 'ivysaur', minLevel: 16 },
-        { pokeId: 2, from: 'ivysaur', to: 'venusaur', minLevel: 32 }
-      ]
-    })
+function* watchFetchEnvolvedFromRequest(action) {
+  const handleData = ({ evolves_from_species }) => ({
+    id: action.payload,
+    evolvedFrom: evolves_from_species ? evolves_from_species.name : null
+  });
+
+  yield genericAsyncResolver(
+    speciesService.get,
+    action.payload,
+    actions.fetchEvolvedFrom,
+    handleData
+  );
+}
+
+function* watchFetchPokemonsByTypeRequest(action) {
+  const handleData = (data) => ({
+    pokemonId: action.payload.pokemonId,
+    typeId: action.payload.typeId,
+    pokemons: data.pokemon.map(({ pokemon }) => ({
+      id: parseInt(extractParamId(pokemon.url)),
+      name: pokemon.name
+    }))
+  });
+
+  yield genericAsyncResolver(
+    typesService.get,
+    action.payload.typeId,
+    actions.fetchPokemonsByTypeId,
+    handleData
+  );
+}
+
+function* watchFetchShortEffectByAbilityRequest(action) {
+  const handleData = ({ effect_entries }) => ({
+    pokemonId: action.payload.pokemonId,
+    abilityId: action.payload.abilityId,
+    short_effect: effect_entries[0].short_effect
+  });
+
+  yield genericAsyncResolver(
+    abilityService.get,
+    action.payload.abilityId,
+    actions.fetchShortEffectByAbilityId,
+    handleData
   );
 }
 
 export default [
   takeEvery(types.FETCH_POKEMON.REQUEST, watchFetchPokemonRequest),
   takeEvery(types.FETCH_POKEMON.SUCCESS, watchFetchPokemonSuccess),
+  takeEvery(types.FETCH_EVOLUTION_CHAIN.REQUEST, watchFetchEnvolvedFromRequest),
   takeEvery(
-    types.FETCH_EVOLUTION_CHAIN.REQUEST,
-    watchFetchEvolutionChainRequest
+    types.FETCH_POKEMONS_BYTYPE.REQUEST,
+    watchFetchPokemonsByTypeRequest
+  ),
+  takeEvery(
+    types.FETCH_SHORT_EFFECT_BYABILITY.REQUEST,
+    watchFetchShortEffectByAbilityRequest
   )
 ];

@@ -9,13 +9,13 @@ const TypoStyled = styled(Typography)`
   }
 `;
 
-function Segregator({ title }) {
+const Segregator = React.memo(function Segregator({ title }) {
   return (
     <TypoStyled variant="h6" align="center" noWrap>
       {title}
     </TypoStyled>
   );
-}
+});
 
 Segregator.propTypes = {
   title: PropTypes.string.isRequired

@@ -27,7 +27,7 @@ class SearchResult extends PureComponent {
 
   handleSeeMoreClick = (id) => () => {
     const { history } = this.props;
-    history.push(`/pokemons/${id}`);
+    history.push(`/pokemons/${id}`, { from: '/pokemons' });
   };
 
   handleReleaseClick = (id) => () => {

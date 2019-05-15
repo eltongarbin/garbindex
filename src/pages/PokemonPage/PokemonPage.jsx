@@ -5,13 +5,14 @@ import styled from 'styled-components';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import isEmpty from 'lodash.isempty';
+import history from 'utils/history';
 
 import { withPageLayout } from 'components/PageLayout';
 import HeaderInfo from './containers/HeaderInfo';
 import PokeImage from './containers/PokeImage';
 import PokeTypes from './containers/PokeTypes';
 import PokeProfile from './containers/PokeProfile';
-import PokeEvolutions from './containers/PokeEvolutions';
+import PokeEvolution from './containers/PokeEvolution';
 import { selectors, actions } from 'store/ducks/pokemons';
 
 const CardContentStyled = styled(CardContent)`
@@ -36,7 +37,7 @@ class PokemonPage extends Component {
           <PokeImage />
           <PokeTypes />
           <PokeProfile />
-          <PokeEvolutions />
+          <PokeEvolution />
         </CardContentStyled>
       </Card>
     );
@@ -57,8 +58,21 @@ const mapDispatchToProps = {
   fetchPokemon: actions.fetchPokemon.request
 };
 
+const handleBackClick = () => {
+  const { state } = history.location;
+  if (state) {
+    history.push(state.from);
+    return;
+  }
+
+  history.push('/');
+};
+
 export default compose(
-  withPageLayout({ title: 'Pokémon Detail', backTo: '/' }),
+  withPageLayout({
+    title: 'Pokémon Detail',
+    onBackClick: handleBackClick
+  }),
   connect(
     mapStateToProps,
     mapDispatchToProps

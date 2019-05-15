@@ -4,10 +4,13 @@ import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash.isempty';
+import lodashMap from 'lodash.map';
 
 import Segregator from '../../components/Segregator';
 import withCurrentID from '../../components/withCurrentID';
 import PokeTypesItem from './PokeTypesItem';
+import { actions } from 'store/ducks/pokemons';
 
 const GridContent = styled(Grid)`
   && {
@@ -18,9 +21,15 @@ const GridContent = styled(Grid)`
 class PokeTypes extends PureComponent {
   state = { expandedId: 0 };
 
-  handleToggleDetail = (id) => (event, expanded) => {
+  handleToggleDetail = (type) => (event, expanded) => {
+    const { fetchPokemonsByTypeId, pokemonId } = this.props;
+
+    if (expanded && isEmpty(type.pokemons)) {
+      fetchPokemonsByTypeId({ pokemonId, typeId: type.id });
+    }
+
     this.setState({
-      expandedId: expanded ? id : 0
+      expandedId: expanded ? type.id : 0
     });
   };
 
@@ -35,13 +44,13 @@ class PokeTypes extends PureComponent {
         </Grid>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={8}>
-            {types.map(({ id, name, pokemons }) => (
+            {types.map((type) => (
               <PokeTypesItem
-                key={id}
-                name={name}
-                expanded={expandedId === id}
-                pokemons={pokemons}
-                onToggle={this.handleToggleDetail(id)}
+                key={type.id}
+                name={type.name}
+                expanded={expandedId === type.id}
+                pokemons={type.pokemons}
+                onToggle={this.handleToggleDetail(type)}
               />
             ))}
           </Grid>
@@ -63,14 +72,22 @@ PokeTypes.propTypes = {
         })
       )
     })
-  ).isRequired
+  ).isRequired,
+  fetchPokemonsByTypeId: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({ entities: { pokemons } }, { pokemonId }) => ({
-  types: pokemons.byId[pokemonId].types
+  types: lodashMap(pokemons.byId[pokemonId].typesById)
 });
+
+const mapDispatchToProps = {
+  fetchPokemonsByTypeId: actions.fetchPokemonsByTypeId.request
+};
 
 export default compose(
   withCurrentID,
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(PokeTypes);

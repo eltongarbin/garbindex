@@ -1,4 +1,5 @@
 import React from 'react';
+import history from 'utils/history';
 
 import { withPageLayout } from 'components/PageLayout';
 import SearchForm from './containers/SearchForm';
@@ -15,5 +16,5 @@ function HuntingPage() {
 
 export default withPageLayout({
   title: 'Search Pokémons',
-  backTo: '/'
+  onBackClick: () => history.push('/')
 })(HuntingPage);

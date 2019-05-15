@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { Toolbar, AppBar, Grid } from '@material-ui/core';
 import { ArrowBack as ArrowBackIcon } from '@material-ui/icons';
 
@@ -11,18 +10,13 @@ import {
   GridContent
 } from './PageLayoutStyled';
 
-function PageLayout({ title, backTo, children }) {
+function PageLayout({ title, onBackClick, children }) {
   return (
     <RootContainer>
       <AppBar position="static">
         <Toolbar>
-          {backTo && (
-            <MenuButton
-              color="inherit"
-              aria-label="Back"
-              component={Link}
-              to={backTo}
-            >
+          {onBackClick && (
+            <MenuButton color="inherit" aria-label="Back" onClick={onBackClick}>
               <ArrowBackIcon />
             </MenuButton>
           )}
@@ -42,7 +36,7 @@ function PageLayout({ title, backTo, children }) {
 
 PageLayout.propTypes = {
   title: PropTypes.string.isRequired,
-  backTo: PropTypes.string,
+  onBackClick: PropTypes.func,
   children: PropTypes.any.isRequired
 };
 
