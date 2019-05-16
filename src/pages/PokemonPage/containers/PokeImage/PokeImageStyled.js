@@ -9,7 +9,7 @@ export const Content = styled(Grid)`
 
 export const CardMediaStyled = styled(CardMedia)`
   && {
-    background-size: auto;
+    background-size: contain;
     height: 100px;
   }
 `;

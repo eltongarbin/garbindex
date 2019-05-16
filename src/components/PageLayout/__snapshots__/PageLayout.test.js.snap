@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageLayout /> matches the snapshot 1`] = `
+<styled.div>
+  <WithStyles(AppBar)
+    position="static"
+  >
+    <WithStyles(Toolbar)>
+      <Styled(WithStyles(Typography))
+        color="inherit"
+        variant="h6"
+      >
+        title
+      </Styled(WithStyles(Typography))>
+    </WithStyles(Toolbar)>
+  </WithStyles(AppBar)>
+  <Styled(WithStyles(Grid))
+    container={true}
+    justify="center"
+    spacing={0}
+  >
+    <WithStyles(Grid)
+      item={true}
+      md={6}
+      sm={8}
+      xs={12}
+    >
+      <div>
+        content
+      </div>
+    </WithStyles(Grid)>
+  </Styled(WithStyles(Grid))>
+</styled.div>
+`;

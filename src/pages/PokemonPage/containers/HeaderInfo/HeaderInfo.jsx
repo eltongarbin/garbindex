@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import withCurrentID from '../../components/withCurrentID';
-import { actions } from 'store/ducks/pokedex/pokedex';
+import { actions } from 'store/ducks/pokedex';
 
 const CardHeaderStyled = styled(CardHeader)`
   && {

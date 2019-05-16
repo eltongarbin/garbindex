@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Segregator from '../../components/Segregator';
 import withCurrentID from '../../components/withCurrentID';
 import PokeAbilities from './PokeAbilities';
+import { selectors } from 'store/ducks/pokemons';
 
 const Content = styled.div`
   margin-bottom: 10px;
@@ -48,10 +49,14 @@ PokeProfile.propTypes = {
   weight: PropTypes.number.isRequired
 };
 
-const mapStateToProps = ({ entities: { pokemons } }, { pokemonId }) => ({
-  height: pokemons.byId[pokemonId].height,
-  weight: pokemons.byId[pokemonId].weight
-});
+const mapStateToProps = (state, { pokemonId }) => {
+  const { height, weight } = selectors.getPokemonById(state, pokemonId);
+
+  return {
+    height,
+    weight
+  };
+};
 
 export default compose(
   withCurrentID,

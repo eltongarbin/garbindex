@@ -7,7 +7,7 @@ import lodashMap from 'lodash.map';
 
 import PokeAbilitiesItem from './PokeAbilitiesItem';
 import withCurrentId from '../../components/withCurrentID';
-import { actions } from 'store/ducks/pokemons';
+import { actions, selectors } from 'store/ducks/pokemons';
 
 class PokeAbilities extends PureComponent {
   state = { expandedId: 0 };
@@ -57,8 +57,8 @@ PokeAbilities.propTypes = {
   fetchShortEffectByAbilityId: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ entities: { pokemons } }, { pokemonId }) => ({
-  abilities: lodashMap(pokemons.byId[pokemonId].abilitiesById)
+const mapStateToProps = (state, { pokemonId }) => ({
+  abilities: lodashMap(selectors.getPokemonById(state, pokemonId).abilitiesById)
 });
 
 const mapDispatchToProps = {

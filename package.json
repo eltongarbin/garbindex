@@ -15,6 +15,7 @@
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "history": "^4.9.0",
+    "jest-enzyme": "^7.0.2",
     "lodash.isempty": "^4.4.0",
     "lodash.keyby": "^4.6.0",
     "lodash.map": "^4.6.0",
@@ -31,9 +32,14 @@
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
+    "check-prop-types": "^1.1.2",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
+    "enzyme-to-json": "^3.3.5",
     "husky": "^2.2.0",
     "lint-staged": "^8.1.6",
     "prettier": "^1.17.0",
+    "react-test-renderer": "^16.8.6",
     "redux-devtools-extension": "^2.13.8"
   },
   "eslintConfig": {

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PokeCard /> matches the snapshot 1`] = `
+<WithStyles(Card)>
+  <WithStyles(CardActionArea)
+    onClick={[Function]}
+  >
+    <Styled(WithStyles(CardHeader))
+      subheader="#1"
+      title="name"
+    />
+    <Styled(WithStyles(CardMedia))
+      image="image"
+      title="name"
+    />
+  </WithStyles(CardActionArea)>
+  <Styled(WithStyles(CardActions))>
+    <WithStyles(IconButton)
+      aria-label="See more"
+      onClick={[Function]}
+    >
+      <pure(VisibilityIcon) />
+    </WithStyles(IconButton)>
+  </Styled(WithStyles(CardActions))>
+</WithStyles(Card)>
+`;

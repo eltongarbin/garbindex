@@ -5,7 +5,8 @@ import { CloudUpload as CloudUploadIcon } from '@material-ui/icons';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { actions } from 'store/ducks/pokedex/pokedex';
+import { selectors, actions } from 'store/ducks/pokedex';
+import { selectors as pokemonSelectors } from 'store/ducks/pokemons';
 import withCurrentID from '../../components/withCurrentID';
 import PokeStats from '../PokeStats';
 import {
@@ -39,7 +40,7 @@ class PokeImage extends PureComponent {
     return (
       <Content container spacing={8} alignItems="center">
         <Grid item xs={4}>
-          <CardMediaStyled image={image} title="Paella dish" />
+          <CardMediaStyled image={image} title="Pokémon" />
           {captured && (
             <Fragment>
               <GridListTileBarStyled
@@ -72,18 +73,10 @@ PokeImage.propTypes = {
   changePokemonImage: PropTypes.func.isRequired
 };
 
-const imageSelector = (state, pokemonId) => {
-  const { image } = {
-    ...state.entities.pokemons.byId[pokemonId],
-    ...state.entities.pokedex.pokemonsCustomizedById[pokemonId]
-  };
-  return image;
-};
-
 const mapStateToProps = (state, { pokemonId }) => ({
   pokemonId,
-  image: imageSelector(state, pokemonId),
-  captured: state.entities.pokedex.pokemonsId.includes(pokemonId)
+  image: pokemonSelectors.getPokemonById(state, pokemonId).image,
+  captured: selectors.isMyPokemon(state, pokemonId)
 });
 
 const mapDispathToProps = {

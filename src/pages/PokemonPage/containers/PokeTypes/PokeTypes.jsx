@@ -10,7 +10,7 @@ import lodashMap from 'lodash.map';
 import Segregator from '../../components/Segregator';
 import withCurrentID from '../../components/withCurrentID';
 import PokeTypesItem from './PokeTypesItem';
-import { actions } from 'store/ducks/pokemons';
+import { actions, selectors } from 'store/ducks/pokemons';
 
 const GridContent = styled(Grid)`
   && {
@@ -76,8 +76,8 @@ PokeTypes.propTypes = {
   fetchPokemonsByTypeId: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ entities: { pokemons } }, { pokemonId }) => ({
-  types: lodashMap(pokemons.byId[pokemonId].typesById)
+const mapStateToProps = (state, { pokemonId }) => ({
+  types: lodashMap(selectors.getPokemonById(state, pokemonId).typesById)
 });
 
 const mapDispatchToProps = {

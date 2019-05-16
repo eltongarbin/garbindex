@@ -7,8 +7,8 @@ import {
 } from 'utils/reduxHelpers';
 
 export const types = {
-  CLEAN_RESULT: createType('pokedex', 'CLEAN_RESULT'),
-  SEARCH_POKEMON: createAsyncTypes('pokedex', 'SEARCH_POKEMON')
+  CLEAN_RESULT: createType('huntingPage', 'CLEAN_RESULT'),
+  SEARCH_POKEMON: createAsyncTypes('huntingPage', 'SEARCH_POKEMON')
 };
 
 export default {

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Grid, SnackbarContent, Link } from '@material-ui/core';
 
 import PokeCard from 'components/PokeCard';
-import { actions, selectors } from 'store/ducks/pokedex/pokedex';
+import { actions, selectors } from 'store/ducks/pokedex';
 
 class PokeCardList extends PureComponent {
   handleSeeMoreClick = (id) => () => {

@@ -9,7 +9,7 @@ export const CardHeaderStyled = styled(CardHeader)`
 
 export const CardMediaStyled = styled(CardMedia)`
   && {
-    background-size: auto;
+    background-size: contain;
     height: 100px;
   }
 `;

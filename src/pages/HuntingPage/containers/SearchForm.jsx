@@ -17,7 +17,7 @@ class SearchForm extends PureComponent {
   state = { searchText: '' };
 
   handleInputSeachChange = (event) => {
-    this.setState({ searchText: event.currentTarget.value });
+    this.setState({ searchText: event.currentTarget.value.toLowerCase() });
   };
 
   handelSubmit = (event) => {

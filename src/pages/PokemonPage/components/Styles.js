@@ -11,5 +11,7 @@ export const ExpansionPanelDetailsStyled = styled(ExpansionPanelDetails)`
   && {
     flex-wrap: wrap;
     padding: 0px 24px 24px;
+    max-height: 200px;
+    overflow-x: auto;
   }
 `;

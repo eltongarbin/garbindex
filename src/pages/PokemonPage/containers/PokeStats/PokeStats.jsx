@@ -6,6 +6,7 @@ import { Grid } from '@material-ui/core';
 
 import withCurrentID from '../../components/withCurrentID';
 import PokeStatsItem from './PokeStatsItem';
+import { selectors } from 'store/ducks/pokemons';
 
 function PokeStats({ stats }) {
   return (
@@ -27,8 +28,8 @@ PokeStats.propTypes = {
   ).isRequired
 };
 
-const mapStateToProps = ({ entities: { pokemons } }, { pokemonId }) => ({
-  stats: pokemons.byId[pokemonId].stats
+const mapStateToProps = (state, { pokemonId }) => ({
+  stats: selectors.getPokemonById(state, pokemonId).stats
 });
 
 export default compose(

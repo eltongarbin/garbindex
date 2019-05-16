@@ -3,11 +3,8 @@ import keyBy from 'lodash.keyby';
 
 import { extractParamId } from 'utils';
 import { genericAsyncResolver } from 'utils/reduxHelpers';
-import pokemonService from 'services/pokemonService';
 import actions, { types } from './actions';
-import typesService from 'services/typesService';
-import abilityService from 'services/abilityService';
-import speciesService from 'services/speciesService';
+import services from 'services';
 
 function* watchFetchPokemonRequest(action) {
   const handleData = ({
@@ -49,7 +46,7 @@ function* watchFetchPokemonRequest(action) {
   };
 
   yield genericAsyncResolver(
-    pokemonService.get,
+    services.getPokemon,
     action.payload,
     actions.fetchPokemon,
     handleData
@@ -67,7 +64,7 @@ function* watchFetchEnvolvedFromRequest(action) {
   });
 
   yield genericAsyncResolver(
-    speciesService.get,
+    services.getSpecie,
     action.payload,
     actions.fetchEvolvedFrom,
     handleData
@@ -85,7 +82,7 @@ function* watchFetchPokemonsByTypeRequest(action) {
   });
 
   yield genericAsyncResolver(
-    typesService.get,
+    services.getType,
     action.payload.typeId,
     actions.fetchPokemonsByTypeId,
     handleData
@@ -100,7 +97,7 @@ function* watchFetchShortEffectByAbilityRequest(action) {
   });
 
   yield genericAsyncResolver(
-    abilityService.get,
+    services.getAbility,
     action.payload.abilityId,
     actions.fetchShortEffectByAbilityId,
     handleData

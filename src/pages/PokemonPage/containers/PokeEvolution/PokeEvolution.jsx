@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import Segregator from '../../components/Segregator';
 import withCurrentID from '../../components/withCurrentID';
+import { selectors } from 'store/ducks/pokemons';
 
 function PokeEvolution({ evolvedFrom }) {
   if (!evolvedFrom) {
@@ -30,8 +31,8 @@ PokeEvolution.propTypes = {
   evolvedFrom: PropTypes.string
 };
 
-const mapStateToProps = ({ entities }, { pokemonId }) => ({
-  evolvedFrom: entities.pokemons.byId[pokemonId].evolvedFrom
+const mapStateToProps = (state, { pokemonId }) => ({
+  evolvedFrom: selectors.getPokemonById(state, pokemonId).evolvedFrom
 });
 
 export default compose(

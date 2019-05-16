@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Grid } from '@material-ui/core';
+import { Grid, SnackbarContent, LinearProgress } from '@material-ui/core';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
@@ -8,11 +8,13 @@ import { connect } from 'react-redux';
 import isEmpty from 'lodash.isempty';
 
 import PokeCard from 'components/PokeCard';
-import { actions, selectors } from '../state';
+import { actions, types, selectors } from '../state';
 import {
   selectors as pokedexSelectors,
   actions as pokedexActions
-} from 'store/ducks/pokedex/pokedex';
+} from 'store/ducks/pokedex';
+import { selectors as pokemonSelectors } from 'store/ducks/pokemons';
+import { createLoadingSelector } from 'store/ducks/loading';
 
 export const GridResultStyled = styled(Grid)`
   && {
@@ -56,13 +58,24 @@ class SearchResult extends PureComponent {
     };
   }
 
+  renderNotFoundMessage(isPokemonFound) {
+    if (!isPokemonFound && !this.props.isFetching)
+      return (
+        <SnackbarContent message="Sorry, we did'nt find the pokémon. Try new search!" />
+      );
+
+    return null;
+  }
+
   render() {
-    const { pokemonFound } = this.props;
+    const { pokemonFound, isFetching, searched } = this.props;
+    const isPokemonFound = !isEmpty(pokemonFound);
 
     return (
       <GridResultStyled container justify="center" spacing={0}>
         <Grid item xs={6} md={4}>
-          {!isEmpty(pokemonFound) && (
+          {isFetching && <LinearProgress color="secondary" />}
+          {isPokemonFound && (
             <PokeCard
               id={pokemonFound.id}
               name={pokemonFound.name}
@@ -70,6 +83,9 @@ class SearchResult extends PureComponent {
               onSeeMoreClick={this.handleSeeMoreClick(pokemonFound.id)}
               {...this.getOtherOperation(pokemonFound.id)}
             />
+          )}
+          {!isPokemonFound && searched && (
+            <SnackbarContent message="Sorry, we did'nt find the pokémon. Try new search!" />
           )}
         </Grid>
       </GridResultStyled>
@@ -82,15 +98,21 @@ SearchResult.propTypes = {
   cleanSearchResult: PropTypes.func.isRequired,
   pokemonsCapturedIds: PropTypes.array,
   catchPokemon: PropTypes.func.isRequired,
-  releasePokemon: PropTypes.func.isRequired
+  releasePokemon: PropTypes.func.isRequired,
+  searched: PropTypes.bool,
+  isFetching: PropTypes.bool
 };
 
+const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON]);
+
 const mapStateToProps = (state) => ({
-  pokemonFound: selectors.getPokemonById(
+  pokemonFound: pokemonSelectors.getPokemonById(
     state,
     state.huntingPage.pokemonFoundId
   ),
-  pokemonsCapturedIds: pokedexSelectors.getCaughtPokemonsId(state)
+  searched: selectors.hasSearched(state),
+  pokemonsCapturedIds: pokedexSelectors.getCaughtPokemonsId(state),
+  isFetching: loadingSelector(state)
 });
 
 const mapDispatchToProps = {

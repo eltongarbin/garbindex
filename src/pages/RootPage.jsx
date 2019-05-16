@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { LinearProgress } from '@material-ui/core';
 
 const PokedexPage = lazy(() => import('./PokedexPage'));
 const HuntingPage = lazy(() => import('./HuntingPage'));
@@ -8,7 +9,7 @@ const NotFoundPage = lazy(() => import('./NotFoundPage'));
 
 function RootPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<LinearProgress />}>
       <Switch>
         <Route exact path="/" component={PokedexPage} />
         <Route exact path="/pokemons" component={HuntingPage} />
