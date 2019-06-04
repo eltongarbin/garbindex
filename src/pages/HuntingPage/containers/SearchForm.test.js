@@ -6,7 +6,7 @@ import { checkProps } from 'utils/testUtils';
 import SearchForm from './SearchForm';
 import configureStore from 'store';
 
-const { store } = configureStore();
+const store = configureStore();
 const setup = () => {
   const wrapper = shallow(<SearchForm store={store} />).dive();
   return wrapper;
