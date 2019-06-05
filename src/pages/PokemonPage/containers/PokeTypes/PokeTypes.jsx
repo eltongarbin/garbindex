@@ -38,12 +38,12 @@ class PokeTypes extends PureComponent {
     const { types } = this.props;
 
     return (
-      <GridContent container spacing={8} alignItems="center">
+      <GridContent container spacing={1} alignItems="center">
         <Grid item xs={12}>
           <Segregator title="Types" />
         </Grid>
         <Grid item xs={12}>
-          <Grid container justify="center" spacing={8}>
+          <Grid container justify="center" spacing={1}>
             {types.map((type) => (
               <PokeTypesItem
                 key={type.id}

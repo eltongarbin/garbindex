@@ -38,7 +38,7 @@ class PokeImage extends PureComponent {
     const { image, captured } = this.props;
 
     return (
-      <Content container spacing={8} alignItems="center">
+      <Content container spacing={1} alignItems="center">
         <Grid item xs={4}>
           <CardMediaStyled image={image} title="Pokémon" />
           {captured && (

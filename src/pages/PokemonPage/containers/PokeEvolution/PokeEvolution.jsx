@@ -14,12 +14,12 @@ function PokeEvolution({ evolvedFrom }) {
   }
 
   return (
-    <Grid container spacing={8}>
+    <Grid container spacing={1}>
       <Grid item xs={12}>
         <Segregator title="Evolution" />
       </Grid>
       <Grid item xs={12}>
-        <Typography>
+        <Typography variant="body2">
           This pokémon envolved from <strong>{evolvedFrom}.</strong>
         </Typography>
       </Grid>

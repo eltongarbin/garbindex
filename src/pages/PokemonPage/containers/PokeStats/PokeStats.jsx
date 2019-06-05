@@ -10,7 +10,7 @@ import { selectors } from 'store/ducks/pokemons';
 
 function PokeStats({ stats }) {
   return (
-    <Grid item xs={8} container direction="column" spacing={16}>
+    <Grid item xs={8} container direction="column" spacing={2}>
       {stats.map(({ id, name, base_stat }) => (
         <PokeStatsItem key={id} name={name} value={base_stat} />
       ))}

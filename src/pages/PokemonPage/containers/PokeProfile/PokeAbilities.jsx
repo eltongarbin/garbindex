@@ -30,7 +30,7 @@ class PokeAbilities extends PureComponent {
 
     return (
       <Grid item xs={12}>
-        <Grid container justify="center" spacing={8}>
+        <Grid container justify="center" spacing={1}>
           {abilities.map((ability) => (
             <PokeAbilitiesItem
               key={ability.id}

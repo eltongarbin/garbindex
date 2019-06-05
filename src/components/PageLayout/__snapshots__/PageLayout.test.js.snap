@@ -2,24 +2,24 @@
 
 exports[`<PageLayout /> matches the snapshot 1`] = `
 <styled.div>
-  <WithStyles(AppBar)
+  <WithStyles(ForwardRef(AppBar))
     position="static"
   >
-    <WithStyles(Toolbar)>
-      <Styled(WithStyles(Typography))
+    <WithStyles(ForwardRef(Toolbar))>
+      <Styled(WithStyles(ForwardRef(Typography)))
         color="inherit"
         variant="h6"
       >
         title
-      </Styled(WithStyles(Typography))>
-    </WithStyles(Toolbar)>
-  </WithStyles(AppBar)>
-  <Styled(WithStyles(Grid))
+      </Styled(WithStyles(ForwardRef(Typography)))>
+    </WithStyles(ForwardRef(Toolbar))>
+  </WithStyles(ForwardRef(AppBar))>
+  <Styled(WithStyles(ForwardRef(Grid)))
     container={true}
     justify="center"
     spacing={0}
   >
-    <WithStyles(Grid)
+    <WithStyles(ForwardRef(Grid))
       item={true}
       md={6}
       sm={8}
@@ -28,7 +28,7 @@ exports[`<PageLayout /> matches the snapshot 1`] = `
       <div>
         content
       </div>
-    </WithStyles(Grid)>
-  </Styled(WithStyles(Grid))>
+    </WithStyles(ForwardRef(Grid))>
+  </Styled(WithStyles(ForwardRef(Grid)))>
 </styled.div>
 `;

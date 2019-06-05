@@ -25,7 +25,7 @@ class PokeCardList extends PureComponent {
     const { pokemons } = this.props;
 
     return (
-      <Grid container spacing={8}>
+      <Grid container spacing={1}>
         {pokemons.map(({ id, name, image }) => (
           <Grid item xs={6} md={4} key={id}>
             <PokeCard

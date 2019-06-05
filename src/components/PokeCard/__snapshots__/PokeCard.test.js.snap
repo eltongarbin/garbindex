@@ -1,26 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PokeCard /> matches the snapshot 1`] = `
-<WithStyles(Card)>
-  <WithStyles(CardActionArea)
+<WithStyles(ForwardRef(Card))>
+  <WithStyles(ForwardRef(CardActionArea))
     onClick={[Function]}
   >
-    <Styled(WithStyles(CardHeader))
+    <Styled(WithStyles(ForwardRef(CardHeader)))
       subheader="#1"
       title="name"
     />
-    <Styled(WithStyles(CardMedia))
+    <Styled(WithStyles(ForwardRef(CardMedia)))
       image="image"
       title="name"
     />
-  </WithStyles(CardActionArea)>
-  <Styled(WithStyles(CardActions))>
-    <WithStyles(IconButton)
+  </WithStyles(ForwardRef(CardActionArea))>
+  <Styled(WithStyles(ForwardRef(CardActions)))>
+    <WithStyles(ForwardRef(IconButton))
       aria-label="See more"
       onClick={[Function]}
     >
-      <pure(VisibilityIcon) />
-    </WithStyles(IconButton)>
-  </Styled(WithStyles(CardActions))>
-</WithStyles(Card)>
+      <VisibilityIcon />
+    </WithStyles(ForwardRef(IconButton))>
+  </Styled(WithStyles(ForwardRef(CardActions)))>
+</WithStyles(ForwardRef(Card))>
 `;

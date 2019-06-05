@@ -19,11 +19,11 @@ const convertoToMeters = (height) => height / 10;
 function PokeProfile({ height, weight }) {
   return (
     <Content>
-      <Grid container spacing={8}>
+      <Grid container spacing={1}>
         <Grid item xs={12}>
           <Segregator title="Profile" />
         </Grid>
-        <Grid item xs={12} container spacing={8}>
+        <Grid item xs={12} container spacing={1}>
           <Grid item xs>
             <Typography variant="subtitle2">Height</Typography>
             <Typography variant="body2">
