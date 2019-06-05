@@ -9,13 +9,16 @@ import { withPageLayout } from 'components/PageLayout';
 import PokeCardList from './containers/PokeCardList';
 
 const styles = (theme) => ({
+  wrapper: {
+    marginBottom: 40
+  },
   fabAdd: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2
   },
   fabAddMobile: {
-    position: 'sticky',
+    position: 'fixed',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
     float: 'right'
@@ -27,7 +30,7 @@ const styles = (theme) => ({
 
 function PokedexPage({ classes }) {
   return (
-    <div>
+    <div className={classes.wrapper}>
       <PokeCardList />
       <Hidden xsDown>
         <Button
