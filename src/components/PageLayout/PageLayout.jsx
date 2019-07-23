@@ -9,6 +9,7 @@ import {
   MenuButton,
   GridContent
 } from './PageLayoutStyled';
+import InstallButton from '../InstallButton';
 
 function PageLayout({ title, onBackClick, children }) {
   return (
@@ -23,6 +24,7 @@ function PageLayout({ title, onBackClick, children }) {
           <HeaderTitle variant="h6" color="inherit">
             {title}
           </HeaderTitle>
+          <InstallButton />
         </Toolbar>
       </AppBar>
       <GridContent container justify="center" spacing={0}>

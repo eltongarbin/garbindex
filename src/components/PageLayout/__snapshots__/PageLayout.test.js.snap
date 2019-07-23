@@ -12,6 +12,7 @@ exports[`<PageLayout /> matches the snapshot 1`] = `
       >
         title
       </Styled(WithStyles(ForwardRef(Typography)))>
+      <InstallButton />
     </WithStyles(ForwardRef(Toolbar))>
   </WithStyles(ForwardRef(AppBar))>
   <Styled(WithStyles(ForwardRef(Grid)))
