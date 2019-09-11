@@ -1,7 +1,9 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Typography, Button } from '@material-ui/core';
 import styled from 'styled-components';
-import { withPageLayout } from 'components/PageLayout';
+import useReactRouter from 'use-react-router';
+
+import { PageLayout } from 'components/PageLayout';
 
 const Container = styled.div`
   display: flex;
@@ -10,13 +12,11 @@ const Container = styled.div`
   padding-top: 50px;
 `;
 
-class PageNotFound extends PureComponent {
-  handleBackClick = () => {
-    this.props.history.goBack();
-  };
+const PageNotFound = React.memo(function PageNotFound() {
+  const { history } = useReactRouter();
 
-  render() {
-    return (
+  return (
+    <PageLayout title="Page not found (404)">
       <Container>
         <Typography variant="h6" gutterBottom>
           Sorry, this page isn't here.
@@ -24,13 +24,13 @@ class PageNotFound extends PureComponent {
         <Button
           variant="contained"
           color="primary"
-          onClick={this.handleBackClick}
+          onClick={() => history.goBack()}
         >
           Voltar
         </Button>
       </Container>
-    );
-  }
-}
+    </PageLayout>
+  );
+});
 
-export default withPageLayout({ title: 'Page not found (404)' })(PageNotFound);
+export default PageNotFound;

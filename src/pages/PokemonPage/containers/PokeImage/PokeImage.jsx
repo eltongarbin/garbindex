@@ -1,9 +1,8 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, IconButton } from '@material-ui/core';
 import { CloudUpload as CloudUploadIcon } from '@material-ui/icons';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { selectors, actions } from 'store/ducks/pokedex';
 import { selectors as pokemonSelectors } from 'store/ducks/pokemons';
@@ -15,78 +14,56 @@ import {
   GridListTileBarStyled
 } from './PokeImageStyled';
 
-class PokeImage extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.fileInputRef = React.createRef();
-  }
+const PokeImage = React.memo(function PokeImage({ pokemonId }) {
+  const fileInputRef = useRef(null);
+  const image = useSelector(
+    (state) => pokemonSelectors.getPokemonById(state, pokemonId).image
+  );
+  const captured = useSelector((state) =>
+    selectors.isMyPokemon(state, pokemonId)
+  );
+  const dispatch = useDispatch();
 
-  handleLoadLocalImage = (event) => {
+  function handleLoadLocalImage(event) {
     event.preventDefault();
     const file = event.target.files[0];
     const localImageUrl = window.URL.createObjectURL(file);
-    const { changePokemonImage, pokemonId } = this.props;
 
-    changePokemonImage({ id: pokemonId, image: localImageUrl });
-  };
-
-  handleUploadClick = () => {
-    this.fileInputRef.current.click();
-  };
-
-  render() {
-    const { image, captured } = this.props;
-
-    return (
-      <Content container spacing={1} alignItems="center">
-        <Grid item xs={4}>
-          <CardMediaStyled image={image} title="Pokémon" />
-          {captured && (
-            <Fragment>
-              <GridListTileBarStyled
-                actionIcon={
-                  <IconButton onClick={this.handleUploadClick}>
-                    <CloudUploadIcon />
-                  </IconButton>
-                }
-              />
-            </Fragment>
-          )}
-          <input
-            ref={this.fileInputRef}
-            type="file"
-            accept=".jpg, .jpeg, .png"
-            onChange={this.handleLoadLocalImage}
-            style={{ display: 'none' }}
-          />
-        </Grid>
-        <PokeStats />
-      </Content>
+    dispatch(
+      actions.changePokemonImage({ id: pokemonId, image: localImageUrl })
     );
   }
-}
 
-PokeImage.propTypes = {
-  pokemonId: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  captured: PropTypes.bool.isRequired,
-  changePokemonImage: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state, { pokemonId }) => ({
-  pokemonId,
-  image: pokemonSelectors.getPokemonById(state, pokemonId).image,
-  captured: selectors.isMyPokemon(state, pokemonId)
+  return (
+    <Content container spacing={1} alignItems="center">
+      <Grid item xs={4}>
+        <CardMediaStyled image={image} title="Pokémon" />
+        {captured && (
+          <Fragment>
+            <GridListTileBarStyled
+              actionIcon={
+                <IconButton onClick={() => fileInputRef.current.click()}>
+                  <CloudUploadIcon />
+                </IconButton>
+              }
+            />
+          </Fragment>
+        )}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept=".jpg, .jpeg, .png"
+          onChange={handleLoadLocalImage}
+          style={{ display: 'none' }}
+        />
+      </Grid>
+      <PokeStats />
+    </Content>
+  );
 });
 
-const mapDispathToProps = {
-  changePokemonImage: actions.changePokemonImage
+PokeImage.propTypes = {
+  pokemonId: PropTypes.number.isRequired
 };
 
-export default compose(
-  withCurrentID,
-  connect(
-    mapStateToProps,
-    mapDispathToProps
-  )
-)(PokeImage);
+export default withCurrentID(PokeImage);

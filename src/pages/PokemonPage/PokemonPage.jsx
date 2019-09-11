@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -8,10 +7,10 @@ import {
   CircularProgress
 } from '@material-ui/core';
 import styled from 'styled-components';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import isEmpty from 'lodash.isempty';
 import { Link as RouterLink } from 'react-router-dom';
+import useReactRouter from 'use-react-router';
 
 import history from 'utils/history';
 import { withPageLayout } from 'components/PageLayout';
@@ -33,69 +32,57 @@ const LoadingContainer = styled.div`
   text-align: center;
 `;
 
-class PokemonPage extends Component {
-  componentDidMount() {
-    const { pokemon, match, fetchPokemon } = this.props;
-    if (isEmpty(pokemon)) fetchPokemon(match.params.id);
-  }
-
-  render() {
-    const { isFetching, pokemon } = this.props;
-
-    if (isFetching) {
-      return (
-        <LoadingContainer>
-          <CircularProgress color="secondary" />
-        </LoadingContainer>
-      );
-    }
-
-    if (isEmpty(pokemon)) {
-      return (
-        <SnackbarContent
-          message={
-            <span>
-              Sorry, we did'nt find the pokémon. Try new search{' '}
-              <Link component={RouterLink} to="/pokemons">
-                here!
-              </Link>
-            </span>
-          }
-        />
-      );
-    }
-
-    return (
-      <Card>
-        <HeaderInfo />
-        <CardContentStyled>
-          <PokeImage />
-          <PokeTypes />
-          <PokeProfile />
-          <PokeEvolution />
-        </CardContentStyled>
-      </Card>
-    );
-  }
-}
-
-PokemonPage.propTypes = {
-  pokemon: PropTypes.object,
-  match: PropTypes.object.isRequired,
-  fetchPokemon: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool
-};
-
 const loadingSelector = createLoadingSelector([types.FETCH_POKEMON]);
 
-const mapStateToProps = (state, { match }) => ({
-  pokemon: selectors.getPokemonById(state, match.params.id),
-  isFetching: loadingSelector(state)
-});
+function PokemonPage() {
+  const { match } = useReactRouter();
+  const pokemon = useSelector((state) =>
+    selectors.getPokemonById(state, match.params.id)
+  );
+  const isFetching = useSelector(loadingSelector);
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = {
-  fetchPokemon: actions.fetchPokemon.request
-};
+  useEffect(() => {
+    if (isEmpty(pokemon) && !isFetching) {
+      dispatch(actions.fetchPokemon.request(match.params.id));
+    }
+  }, [dispatch, isFetching, match.params.id, pokemon]);
+
+  if (isFetching) {
+    return (
+      <LoadingContainer>
+        <CircularProgress color="secondary" />
+      </LoadingContainer>
+    );
+  }
+
+  if (isEmpty(pokemon)) {
+    return (
+      <SnackbarContent
+        message={
+          <span>
+            Sorry, we did'nt find the pokémon. Try new search{' '}
+            <Link component={RouterLink} to="/pokemons">
+              here!
+            </Link>
+          </span>
+        }
+      />
+    );
+  }
+
+  return (
+    <Card>
+      <HeaderInfo />
+      <CardContentStyled>
+        <PokeImage />
+        <PokeTypes />
+        <PokeProfile />
+        <PokeEvolution />
+      </CardContentStyled>
+    </Card>
+  );
+}
 
 const handleBackClick = () => {
   const { state } = history.location;
@@ -107,13 +94,7 @@ const handleBackClick = () => {
   history.push('/');
 };
 
-export default compose(
-  withPageLayout({
-    title: 'Pokémon Detail',
-    onBackClick: handleBackClick
-  }),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(PokemonPage);
+export default withPageLayout({
+  title: 'Pokémon Detail',
+  onBackClick: handleBackClick
+})(PokemonPage);

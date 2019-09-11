@@ -1,84 +1,50 @@
-import React, { PureComponent } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter, Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import useReactRouter from 'use-react-router';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, SnackbarContent, Link } from '@material-ui/core';
 
 import PokeCard from 'components/PokeCard';
 import { actions, selectors } from 'store/ducks/pokedex';
 
-class PokeCardList extends PureComponent {
-  handleSeeMoreClick = (id) => () => {
-    const { history } = this.props;
-    history.push(`/pokemons/${id}`);
-  };
+const PokeCardList = React.memo(function PokeCardList() {
+  const { history } = useReactRouter();
+  const pokemons = useSelector(selectors.getCaughtPokemons);
+  const dispatch = useDispatch();
 
-  handleReleaseClick = (id) => () => {
-    // eslint-disable-next-line
-    if (confirm('Are you sure you want to release this pokémon?')) {
-      this.props.releasePokemon(id);
-    }
-  };
-
-  render() {
-    const { pokemons } = this.props;
-
-    return (
-      <Grid container spacing={1}>
-        {pokemons.map(({ id, name, image }) => (
-          <Grid item xs={6} md={4} key={id}>
-            <PokeCard
-              id={id}
-              name={name}
-              image={image}
-              onSeeMoreClick={this.handleSeeMoreClick(id)}
-              onReleaseClick={this.handleReleaseClick(id)}
-            />
-          </Grid>
-        ))}
-        {!pokemons.length && (
-          <Grid item xs={12} container justify="center">
-            <SnackbarContent
-              message={
-                <span>
-                  You dont't have any pokemón yet. Let's find{` `}
-                  <Link component={RouterLink} to="/pokemons">
-                    here!
-                  </Link>
-                </span>
-              }
-            />
-          </Grid>
-        )}
-      </Grid>
-    );
-  }
-}
-
-PokeCardList.propTypes = {
-  pokemons: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired
-    })
-  ),
-  releasePokemon: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state) => ({
-  pokemons: selectors.getCaughtPokemons(state)
+  return (
+    <Grid container spacing={1}>
+      {pokemons.map(({ id, name, image }) => (
+        <Grid item xs={6} md={4} key={id}>
+          <PokeCard
+            id={id}
+            name={name}
+            image={image}
+            onSeeMoreClick={() => history.push(`/pokemons/${id}`)}
+            onReleaseClick={() =>
+              window.confirm(
+                'Are you sure you want to release this pokémon?'
+              ) && dispatch(actions.releasePokemon(id))
+            }
+          />
+        </Grid>
+      ))}
+      {!pokemons.length && (
+        <Grid item xs={12} container justify="center">
+          <SnackbarContent
+            message={
+              <span>
+                You dont't have any pokemón yet. Let's find{` `}
+                <Link component={RouterLink} to="/pokemons">
+                  here!
+                </Link>
+              </span>
+            }
+          />
+        </Grid>
+      )}
+    </Grid>
+  );
 });
 
-const mapDispatchToProps = {
-  releasePokemon: actions.releasePokemon
-};
-
-export default compose(
-  withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(PokeCardList);
+export default PokeCardList;

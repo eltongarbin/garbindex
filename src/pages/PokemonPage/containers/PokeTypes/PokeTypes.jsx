@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import isEmpty from 'lodash.isempty';
 import lodashMap from 'lodash.map';
 
@@ -18,76 +17,47 @@ const GridContent = styled(Grid)`
   }
 `;
 
-class PokeTypes extends PureComponent {
-  state = { expandedId: 0 };
+const PokeTypes = React.memo(function PokeTypes({ pokemonId }) {
+  const [expandedId, setExpandedId] = useState(0);
+  const types = lodashMap(
+    useSelector((state) => selectors.getPokemonById(state, pokemonId).typesById)
+  );
+  const dispatch = useDispatch();
 
-  handleToggleDetail = (type) => (event, expanded) => {
-    const { fetchPokemonsByTypeId, pokemonId } = this.props;
-
+  const handleToggleDetail = (type) => (_event, expanded) => {
     if (expanded && isEmpty(type.pokemons)) {
-      fetchPokemonsByTypeId({ pokemonId, typeId: type.id });
+      dispatch(
+        actions.fetchPokemonsByTypeId.request({ pokemonId, typeId: type.id })
+      );
     }
 
-    this.setState({
-      expandedId: expanded ? type.id : 0
-    });
+    setExpandedId(expanded ? type.id : 0);
   };
 
-  render() {
-    const { expandedId } = this.state;
-    const { types } = this.props;
-
-    return (
-      <GridContent container spacing={1} alignItems="center">
-        <Grid item xs={12}>
-          <Segregator title="Types" />
+  return (
+    <GridContent container spacing={1} alignItems="center">
+      <Grid item xs={12}>
+        <Segregator title="Types" />
+      </Grid>
+      <Grid item xs={12}>
+        <Grid container justify="center" spacing={1}>
+          {types.map((type) => (
+            <PokeTypesItem
+              key={type.id}
+              name={type.name}
+              expanded={expandedId === type.id}
+              pokemons={type.pokemons}
+              onToggle={handleToggleDetail(type)}
+            />
+          ))}
         </Grid>
-        <Grid item xs={12}>
-          <Grid container justify="center" spacing={1}>
-            {types.map((type) => (
-              <PokeTypesItem
-                key={type.id}
-                name={type.name}
-                expanded={expandedId === type.id}
-                pokemons={type.pokemons}
-                onToggle={this.handleToggleDetail(type)}
-              />
-            ))}
-          </Grid>
-        </Grid>
-      </GridContent>
-    );
-  }
-}
-
-PokeTypes.propTypes = {
-  types: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      pokemons: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired
-        })
-      )
-    })
-  ).isRequired,
-  fetchPokemonsByTypeId: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state, { pokemonId }) => ({
-  types: lodashMap(selectors.getPokemonById(state, pokemonId).typesById)
+      </Grid>
+    </GridContent>
+  );
 });
 
-const mapDispatchToProps = {
-  fetchPokemonsByTypeId: actions.fetchPokemonsByTypeId.request
+PokeTypes.propTypes = {
+  pokemonId: PropTypes.number.isRequired
 };
 
-export default compose(
-  withCurrentID,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(PokeTypes);
+export default withCurrentID(PokeTypes);

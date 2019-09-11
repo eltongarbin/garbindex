@@ -1,47 +1,48 @@
-/* eslint-disable no-undef */
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IconButton } from '@material-ui/core';
 import { AddToHomeScreen as AddToHomeScreenIcon } from '@material-ui/icons';
 
 var deferredInstallPrompt;
 
-class InstallButton extends Component {
-  state = { showInstallButton: Boolean(deferredInstallPrompt) };
+function InstallButton() {
+  const [showInstallButton, setShowInstallButton] = useState(
+    Boolean(deferredInstallPrompt)
+  );
 
-  componentDidMount() {
+  useEffect(() => {
+    function saveBeforeInstallPromptEvent(event) {
+      deferredInstallPrompt = event;
+      setShowInstallButton(true);
+    }
+
     window.addEventListener(
       'beforeinstallprompt',
-      this.saveBeforeInstallPromptEvent
+      saveBeforeInstallPromptEvent
     );
-  }
 
-  saveBeforeInstallPromptEvent = (event) => {
-    deferredInstallPrompt = event;
-    this.setState({ showInstallButton: true });
-  };
+    return () => {
+      window.removeEventListener(
+        'beforeinstallprompt',
+        saveBeforeInstallPromptEvent
+      );
+    };
+  }, []);
 
-  handleInstallPWA = () => {
+  function handleInstallPWA() {
     deferredInstallPrompt.prompt();
     deferredInstallPrompt.userChoice.then(() => {
       deferredInstallPrompt = null;
-      this.setState({ showInstallButton: false });
+      setShowInstallButton(false);
     });
-  };
-
-  render() {
-    const { showInstallButton } = this.state;
-    if (!showInstallButton) return null;
-
-    return (
-      <IconButton
-        color="inherit"
-        aria-label="Menu"
-        onClick={this.handleInstallPWA}
-      >
-        <AddToHomeScreenIcon />
-      </IconButton>
-    );
   }
+
+  if (!showInstallButton) return null;
+
+  return (
+    <IconButton color="inherit" aria-label="Menu" onClick={handleInstallPWA}>
+      <AddToHomeScreenIcon />
+    </IconButton>
+  );
 }
 
 export default InstallButton;

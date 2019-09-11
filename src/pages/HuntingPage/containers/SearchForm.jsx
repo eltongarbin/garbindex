@@ -1,9 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useCallback } from 'react';
 import { InputAdornment, IconButton, TextField } from '@material-ui/core';
 import { Search as SearchIcon } from '@material-ui/icons';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { actions } from '../state';
 
@@ -13,63 +12,45 @@ const TextFieldStyled = styled(TextField)`
   }
 `;
 
-class SearchForm extends PureComponent {
-  state = { searchText: '' };
+const SearchForm = React.memo(function SearchForm(params) {
+  const [searchText, setSearchText] = useState('');
+  const dispatch = useDispatch();
 
-  handleInputSeachChange = (event) => {
-    this.setState({ searchText: event.currentTarget.value.toLowerCase() });
-  };
+  const handelSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      dispatch(actions.searchForPokemon.request(searchText));
+    },
+    [dispatch, searchText]
+  );
 
-  handelSubmit = (event) => {
-    event.preventDefault();
-    this.props.searchForPokemon(this.state.searchText);
-  };
+  return (
+    <form onSubmit={handelSubmit} autoComplete="off">
+      <TextFieldStyled
+        label="Name or Number"
+        value={searchText}
+        onChange={(event) => setSearchText(event.target.value)}
+        margin="normal"
+        variant="outlined"
+        type="text"
+        fullWidth
+        required
+        InputLabelProps={{
+          shrink: true
+        }}
+        autoFocus
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton type="submit" aria-label="Toggle password visibility">
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+      />
+    </form>
+  );
+});
 
-  render() {
-    const { searchText } = this.state;
-
-    return (
-      <form onSubmit={this.handelSubmit} autoComplete="off">
-        <TextFieldStyled
-          label="Name or Number"
-          value={searchText}
-          onChange={this.handleInputSeachChange}
-          margin="normal"
-          variant="outlined"
-          type="text"
-          fullWidth
-          required
-          InputLabelProps={{
-            shrink: true
-          }}
-          autoFocus
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  type="submit"
-                  aria-label="Toggle password visibility"
-                >
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-        />
-      </form>
-    );
-  }
-}
-
-SearchForm.propTypes = {
-  searchForPokemon: PropTypes.func.isRequired
-};
-
-const mapDispatchToProps = {
-  searchForPokemon: actions.searchForPokemon.request
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SearchForm);
+export default SearchForm;
