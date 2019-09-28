@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { IconButton, CardHeader } from '@material-ui/core';
 import {
   AddCircle as AddCircleIcon,
@@ -8,8 +7,8 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import withCurrentID from '../../components/withCurrentID';
 import { actions } from 'store/ducks/pokedex';
+import usePokemonId from '../../hooks/usePokemonId';
 
 const CardHeaderStyled = styled(CardHeader)`
   && {
@@ -17,12 +16,13 @@ const CardHeaderStyled = styled(CardHeader)`
   }
 `;
 
-const HeaderInfo = React.memo(function HeaderInfo({ pokemonId }) {
+const HeaderInfo = React.memo(function HeaderInfo() {
+  const pokemonId = usePokemonId();
   const name = useSelector(
     (state) => state.entities.pokemons.byId[pokemonId].name
   );
   const captured = useSelector((state) =>
-    state.entities.pokedex.pokemonsId.includes(pokemonId)
+    state.entities.pokedex.pokemonsId.includes(parseInt(pokemonId))
   );
   const dispatch = useDispatch();
 
@@ -51,8 +51,4 @@ const HeaderInfo = React.memo(function HeaderInfo({ pokemonId }) {
   );
 });
 
-HeaderInfo.propTypes = {
-  pokemonId: PropTypes.number.isRequired
-};
-
-export default withCurrentID(HeaderInfo);
+export default HeaderInfo;

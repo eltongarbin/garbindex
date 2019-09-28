@@ -1,12 +1,11 @@
 import React, { Fragment, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { Grid, IconButton } from '@material-ui/core';
 import { CloudUpload as CloudUploadIcon } from '@material-ui/icons';
 import { useSelector, useDispatch } from 'react-redux';
 
+import usePokemonId from '../../hooks/usePokemonId';
 import { selectors, actions } from 'store/ducks/pokedex';
 import { selectors as pokemonSelectors } from 'store/ducks/pokemons';
-import withCurrentID from '../../components/withCurrentID';
 import PokeStats from '../PokeStats';
 import {
   Content,
@@ -14,8 +13,8 @@ import {
   GridListTileBarStyled
 } from './PokeImageStyled';
 
-const PokeImage = React.memo(function PokeImage({ pokemonId }) {
-  const fileInputRef = useRef(null);
+const PokeImage = React.memo(function PokeImage() {
+  const pokemonId = usePokemonId();
   const image = useSelector(
     (state) => pokemonSelectors.getPokemonById(state, pokemonId).image
   );
@@ -23,6 +22,7 @@ const PokeImage = React.memo(function PokeImage({ pokemonId }) {
     selectors.isMyPokemon(state, pokemonId)
   );
   const dispatch = useDispatch();
+  const fileInputRef = useRef(null);
 
   function handleLoadLocalImage(event) {
     event.preventDefault();
@@ -62,8 +62,4 @@ const PokeImage = React.memo(function PokeImage({ pokemonId }) {
   );
 });
 
-PokeImage.propTypes = {
-  pokemonId: PropTypes.number.isRequired
-};
-
-export default withCurrentID(PokeImage);
+export default PokeImage;

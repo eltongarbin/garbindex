@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Segregator from '../../components/Segregator';
-import withCurrentID from '../../components/withCurrentID';
+import usePokemonId from '../../hooks/usePokemonId';
 import { selectors } from 'store/ducks/pokemons';
 
-function PokeEvolution({ evolvedFrom }) {
+function PokeEvolution() {
+  const pokemonId = usePokemonId();
+  const evolvedFrom = useSelector(
+    (state) => selectors.getPokemonById(state, pokemonId).evolvedFrom
+  );
+
   if (!evolvedFrom) {
     return null;
   }
@@ -27,15 +30,4 @@ function PokeEvolution({ evolvedFrom }) {
   );
 }
 
-PokeEvolution.propTypes = {
-  evolvedFrom: PropTypes.string
-};
-
-const mapStateToProps = (state, { pokemonId }) => ({
-  evolvedFrom: selectors.getPokemonById(state, pokemonId).evolvedFrom
-});
-
-export default compose(
-  withCurrentID,
-  connect(mapStateToProps)
-)(PokeEvolution);
+export default PokeEvolution;

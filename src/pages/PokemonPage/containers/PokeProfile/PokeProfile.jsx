@@ -1,12 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Typography, Grid } from '@material-ui/core';
 import styled from 'styled-components';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import usePokemonId from '../../hooks/usePokemonId';
 import Segregator from '../../components/Segregator';
-import withCurrentID from '../../components/withCurrentID';
 import PokeAbilities from './PokeAbilities';
 import { selectors } from 'store/ducks/pokemons';
 
@@ -16,7 +14,12 @@ const Content = styled.div`
 
 const convertoToMeters = (height) => height / 10;
 
-function PokeProfile({ height, weight }) {
+function PokeProfile() {
+  const pokemonId = usePokemonId();
+  const { height, weight } = useSelector((state) =>
+    selectors.getPokemonById(state, pokemonId)
+  );
+
   return (
     <Content>
       <Grid container spacing={1}>
@@ -44,21 +47,4 @@ function PokeProfile({ height, weight }) {
   );
 }
 
-PokeProfile.propTypes = {
-  height: PropTypes.number.isRequired,
-  weight: PropTypes.number.isRequired
-};
-
-const mapStateToProps = (state, { pokemonId }) => {
-  const { height, weight } = selectors.getPokemonById(state, pokemonId);
-
-  return {
-    height,
-    weight
-  };
-};
-
-export default compose(
-  withCurrentID,
-  connect(mapStateToProps)
-)(PokeProfile);
+export default PokeProfile;

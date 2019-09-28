@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import lodashMap from 'lodash.map';
 
+import usePokemonId from '../../hooks/usePokemonId';
 import PokeAbilitiesItem from './PokeAbilitiesItem';
-import withCurrentId from '../../components/withCurrentID';
 import { actions, selectors } from 'store/ducks/pokemons';
 
-const PokeAbilities = React.memo(function PokeAbilities({ pokemonId }) {
+const PokeAbilities = React.memo(function PokeAbilities() {
+  const pokemonId = usePokemonId();
   const [expandedId, setExpandedId] = useState(0);
   const abilities = lodashMap(
     useSelector(
@@ -47,8 +47,4 @@ const PokeAbilities = React.memo(function PokeAbilities({ pokemonId }) {
   );
 });
 
-PokeAbilities.propTypes = {
-  pokemonId: PropTypes.number.isRequired
-};
-
-export default withCurrentId(PokeAbilities);
+export default PokeAbilities;

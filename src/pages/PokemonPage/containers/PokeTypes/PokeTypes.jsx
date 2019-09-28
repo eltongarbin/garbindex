@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 import isEmpty from 'lodash.isempty';
 import lodashMap from 'lodash.map';
 
+import usePokemonId from '../../hooks/usePokemonId';
 import Segregator from '../../components/Segregator';
-import withCurrentID from '../../components/withCurrentID';
 import PokeTypesItem from './PokeTypesItem';
 import { actions, selectors } from 'store/ducks/pokemons';
 
@@ -17,7 +16,8 @@ const GridContent = styled(Grid)`
   }
 `;
 
-const PokeTypes = React.memo(function PokeTypes({ pokemonId }) {
+const PokeTypes = React.memo(function PokeTypes() {
+  const pokemonId = usePokemonId();
   const [expandedId, setExpandedId] = useState(0);
   const types = lodashMap(
     useSelector((state) => selectors.getPokemonById(state, pokemonId).typesById)
@@ -56,8 +56,4 @@ const PokeTypes = React.memo(function PokeTypes({ pokemonId }) {
   );
 });
 
-PokeTypes.propTypes = {
-  pokemonId: PropTypes.number.isRequired
-};
-
-export default withCurrentID(PokeTypes);
+export default PokeTypes;
