@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Fab, withStyles, Hidden, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-import { withPageLayout } from 'components/PageLayout';
+import { withScreenLayout } from 'components/ScreenLayout';
 import PokeCardList from './containers/PokeCardList';
 
 const styles = (theme) => ({
@@ -28,7 +28,7 @@ const styles = (theme) => ({
   }
 });
 
-function PokedexPage({ classes }) {
+function PokedexScreen({ classes }) {
   return (
     <div className={classes.wrapper}>
       <PokeCardList />
@@ -60,11 +60,11 @@ function PokedexPage({ classes }) {
   );
 }
 
-PokedexPage.propTypes = {
+PokedexScreen.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 export default compose(
-  withPageLayout({ title: 'My Pokédex' }),
+  withScreenLayout({ title: 'My Pokédex' }),
   withStyles(styles, { withTheme: true })
-)(PokedexPage);
+)(PokedexScreen);

@@ -13,7 +13,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import useReactRouter from 'use-react-router';
 
 import history from 'utils/history';
-import { withPageLayout } from 'components/PageLayout';
+import { withScreenLayout } from 'components/ScreenLayout';
 import HeaderInfo from './containers/HeaderInfo';
 import PokeImage from './containers/PokeImage';
 import PokeTypes from './containers/PokeTypes';
@@ -34,7 +34,7 @@ const LoadingContainer = styled.div`
 
 const loadingSelector = createLoadingSelector([types.FETCH_POKEMON]);
 
-function PokemonPage() {
+function PokemonScreen() {
   const { match } = useReactRouter();
   const pokemon = useSelector((state) =>
     selectors.getPokemonById(state, match.params.id)
@@ -94,7 +94,7 @@ const handleBackClick = () => {
   history.push('/');
 };
 
-export default withPageLayout({
+export default withScreenLayout({
   title: 'Pokémon Detail',
   onBackClick: handleBackClick
-})(PokemonPage);
+})(PokemonScreen);

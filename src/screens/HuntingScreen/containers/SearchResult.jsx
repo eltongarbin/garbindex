@@ -25,7 +25,7 @@ const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON]);
 const SearchResult = React.memo(function SearchResult() {
   const searched = useSelector(selectors.hasSearched);
   const pokemonFound = useSelector((state) =>
-    pokemonSelectors.getPokemonById(state, state.huntingPage.pokemonFoundId)
+    pokemonSelectors.getPokemonById(state, state.huntingScreen.pokemonFoundId)
   );
   const isFetching = useSelector(loadingSelector);
   const pokemonsCapturedIds = useSelector(pokedexSelectors.getCaughtPokemonsId);

@@ -20,5 +20,5 @@ export default handleActions(
 );
 
 export const selectors = {
-  hasSearched: (state) => state.huntingPage.searched
+  hasSearched: (state) => state.huntingScreen.searched
 };

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PageLayout /> matches the snapshot 1`] = `
+exports[`<ScreenLayout /> matches the snapshot 1`] = `
 <styled.div>
   <WithStyles(ForwardRef(AppBar))
     position="static"

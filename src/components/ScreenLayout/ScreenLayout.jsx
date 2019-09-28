@@ -8,10 +8,10 @@ import {
   HeaderTitle,
   MenuButton,
   GridContent
-} from './PageLayoutStyled';
+} from './ScreenLayoutStyled';
 import InstallButton from '../InstallButton';
 
-function PageLayout({ title, onBackClick, children }) {
+function ScreenLayout({ title, onBackClick, children }) {
   return (
     <RootContainer>
       <AppBar position="static">
@@ -36,10 +36,10 @@ function PageLayout({ title, onBackClick, children }) {
   );
 }
 
-PageLayout.propTypes = {
+ScreenLayout.propTypes = {
   title: PropTypes.string.isRequired,
   onBackClick: PropTypes.func,
   children: PropTypes.any.isRequired
 };
 
-export default PageLayout;
+export default ScreenLayout;

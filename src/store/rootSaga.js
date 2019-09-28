@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
 
 import { sagas as PokemonsSagas } from './ducks/pokemons';
-import { sagas as HuntingPageSagas } from 'pages/HuntingPage/state';
+import { sagas as HuntingScreenSagas } from 'screens/HuntingScreen/state';
 
 export default function* root() {
-  yield all([...PokemonsSagas, ...HuntingPageSagas]);
+  yield all([...PokemonsSagas, ...HuntingScreenSagas]);
 }

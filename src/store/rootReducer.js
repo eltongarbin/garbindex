@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 import * as mainReducers from './ducks';
-import huntingPageReducer from 'pages/HuntingPage/state';
+import huntingScreenReducer from 'screens/HuntingScreen/state';
 
 const rootReducer = combineReducers({
   ...mainReducers,
-  huntingPage: huntingPageReducer
+  huntingScreen: huntingScreenReducer
 });
 
 export default rootReducer;

@@ -2,7 +2,7 @@ import reducer, { initialState } from './reducer';
 import actions from './actions';
 
 /* eslint-disable func-names */
-describe('huntingPageReducer', function() {
+describe('huntingScreenReducer', function() {
   describe('cleanSearchResult', function() {
     const action = actions.cleanSearchResult();
     const state = reducer(initialState, action);

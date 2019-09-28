@@ -3,7 +3,7 @@ import { Typography, Button } from '@material-ui/core';
 import styled from 'styled-components';
 import useReactRouter from 'use-react-router';
 
-import { PageLayout } from 'components/PageLayout';
+import { ScreenLayout } from 'components/ScreenLayout';
 
 const Container = styled.div`
   display: flex;
@@ -12,11 +12,11 @@ const Container = styled.div`
   padding-top: 50px;
 `;
 
-const PageNotFound = React.memo(function PageNotFound() {
+const ScreenNotFound = React.memo(function ScreenNotFound() {
   const { history } = useReactRouter();
 
   return (
-    <PageLayout title="Page not found (404)">
+    <ScreenLayout title="Page not found (404)">
       <Container>
         <Typography variant="h6" gutterBottom>
           Sorry, this page isn't here.
@@ -29,8 +29,8 @@ const PageNotFound = React.memo(function PageNotFound() {
           Voltar
         </Button>
       </Container>
-    </PageLayout>
+    </ScreenLayout>
   );
 });
 
-export default PageNotFound;
+export default ScreenNotFound;
