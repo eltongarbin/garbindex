@@ -36,7 +36,7 @@
     "check-prop-types": "^1.1.2",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.13.0",
-    "enzyme-to-json": "^3.4.0",
+    "enzyme-to-json": "^3.4.1",
     "husky": "^3.0.6",
     "lint-staged": "^9.4.0",
     "prettier": "^1.17.0",
