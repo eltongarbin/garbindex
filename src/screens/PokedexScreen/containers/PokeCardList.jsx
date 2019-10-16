@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import useReactRouter from 'use-react-router';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid, SnackbarContent, Link } from '@material-ui/core';
 
@@ -8,7 +7,7 @@ import PokeCard from 'components/PokeCard';
 import { actions, selectors } from 'store/ducks/pokedex';
 
 const PokeCardList = React.memo(function PokeCardList() {
-  const { history } = useReactRouter();
+  const history = useHistory();
   const pokemons = useSelector(selectors.getCaughtPokemons);
   const dispatch = useDispatch();
 

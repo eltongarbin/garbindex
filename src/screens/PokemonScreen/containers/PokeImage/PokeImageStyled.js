@@ -1,11 +1,5 @@
 import styled from 'styled-components';
-import { Grid, CardMedia, GridListTileBar } from '@material-ui/core';
-
-export const Content = styled(Grid)`
-  && {
-    margin-bottom: 10px;
-  }
-`;
+import { CardMedia, GridListTileBar } from '@material-ui/core';
 
 export const CardMediaStyled = styled(CardMedia)`
   && {
