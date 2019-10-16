@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Grid, SnackbarContent, LinearProgress } from '@material-ui/core';
 import styled from 'styled-components';
-import useReactRouter from 'use-react-router';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import isEmpty from 'lodash.isempty';
 
@@ -30,7 +30,7 @@ const SearchResult = React.memo(function SearchResult() {
   const isFetching = useSelector(loadingSelector);
   const pokemonsCapturedIds = useSelector(pokedexSelectors.getCaughtPokemonsId);
   const dispatch = useDispatch();
-  const { history } = useReactRouter();
+  const history = useHistory();
 
   useEffect(() => {
     return () => {

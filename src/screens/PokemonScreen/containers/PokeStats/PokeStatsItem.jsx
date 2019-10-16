@@ -8,7 +8,7 @@ function getPercentage(value) {
 
 function PokeStatsListItem({ name, value }) {
   return (
-    <Grid item xs={12} container direction="column" spacing={1}>
+    <Grid item xs={12}>
       <Typography component="label">
         {name} - {value}
       </Typography>

@@ -1,7 +1,7 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Typography, Button } from '@material-ui/core';
 import styled from 'styled-components';
-import useReactRouter from 'use-react-router';
 
 import { ScreenLayout } from 'components/ScreenLayout';
 
@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const ScreenNotFound = React.memo(function ScreenNotFound() {
-  const { history } = useReactRouter();
+  const history = useHistory();
 
   return (
     <ScreenLayout title="Page not found (404)">
