@@ -33,6 +33,12 @@ const LoadingContainer = styled.div`
   text-align: center;
 `;
 
+const GridMainInfo = styled(Grid)`
+  && {
+    margin-bottom: 10px;
+  }
+`;
+
 const loadingSelector = createLoadingSelector([types.FETCH_POKEMON]);
 
 function PokemonScreen() {
@@ -74,19 +80,14 @@ function PokemonScreen() {
     <Card>
       <HeaderInfo />
       <CardContentStyled>
-        <Grid
-          container
-          spacing={1}
-          alignItems="center"
-          style={{ marginBottom: '10px' }}
-        >
+        <GridMainInfo container spacing={1} alignItems="center">
           <Grid item xs={12} sm={5} md={4}>
             <PokeImage />
           </Grid>
           <Grid item xs={12} sm={7} md={8}>
             <PokeStats />
           </Grid>
-        </Grid>
+        </GridMainInfo>
         <PokeTypes />
         <PokeProfile />
         <PokeEvolution />

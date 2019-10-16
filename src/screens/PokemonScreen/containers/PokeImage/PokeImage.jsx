@@ -5,12 +5,17 @@ import {
   PhotoCamera as PhotoCameraIcon
 } from '@material-ui/icons';
 import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
 
 import usePokemonId from '../../hooks/usePokemonId';
 import { selectors, actions } from 'store/ducks/pokedex';
 import { selectors as pokemonSelectors } from 'store/ducks/pokemons';
 import { CardMediaStyled, GridListTileBarStyled } from './PokeImageStyled';
 import PokeCamera from './PokeCamera';
+
+const FileInputStyled = styled.input`
+  display: none;
+`;
 
 const PokeImage = React.memo(function PokeImage() {
   const pokemonId = usePokemonId();
@@ -29,7 +34,7 @@ const PokeImage = React.memo(function PokeImage() {
 
   useEffect(() => {
     setEnableCamera(false);
-  }, [image]);
+  }, [image, captured]);
 
   function handleLoadLocalImage(event) {
     event.preventDefault();
@@ -77,12 +82,11 @@ const PokeImage = React.memo(function PokeImage() {
           />
         </Fragment>
       )}
-      <input
+      <FileInputStyled
         ref={fileInputRef}
         type="file"
         accept=".jpg, .jpeg, .png"
         onChange={handleLoadLocalImage}
-        style={{ display: 'none' }}
       />
     </Grid>
   );
