@@ -5,10 +5,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:analyze": "npm run build && npm run analyze",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "analyze": "source-map-explorer build/static/js/*.js",
-    "build:analyze": "npm run build && npm run analyze"
+    "cypress:open": "cypress open",
+    "cypress:all": "cypress run",
+    "analyze": "source-map-explorer build/static/js/*.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.5.1",
@@ -20,8 +21,8 @@
     "lodash.keyby": "^4.6.0",
     "lodash.map": "^4.6.0",
     "lodash.merge": "^4.6.1",
-    "react": "^16.10.0",
-    "react-dom": "^16.10.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
@@ -34,13 +35,14 @@
   },
   "devDependencies": {
     "check-prop-types": "^1.1.2",
+    "cypress": "^3.5.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.15.1",
-    "enzyme-to-json": "^3.4.2",
+    "enzyme-to-json": "^3.4.3",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
     "prettier": "^1.17.0",
-    "react-test-renderer": "^16.10.2",
+    "react-test-renderer": "^16.11.0",
     "redux-devtools-extension": "^2.13.8"
   },
   "eslintConfig": {
