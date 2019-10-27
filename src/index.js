@@ -2,14 +2,19 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
-import { MuiThemeProvider, CssBaseline } from '@material-ui/core';
+import {
+  MuiThemeProvider,
+  CssBaseline,
+  LinearProgress
+} from '@material-ui/core';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { history, theme } from './utils';
 import RootScreen from './screens/RootScreen';
 import configureStore from './store';
 import * as serviceWorker from './serviceWorker';
 
-const store = configureStore();
+const { store, persistor } = configureStore();
 
 const renderApp = () =>
   render(
@@ -17,7 +22,9 @@ const renderApp = () =>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <Router history={history}>
-          <RootScreen />
+          <PersistGate loading={<LinearProgress />} persistor={persistor}>
+            <RootScreen />
+          </PersistGate>
         </Router>
       </MuiThemeProvider>
     </Provider>,
