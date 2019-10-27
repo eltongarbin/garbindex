@@ -41,6 +41,7 @@ function PokedexScreen({ classes }) {
           size="large"
           component={Link}
           to="/pokemons"
+          data-testid="hunting-link-button"
         >
           Catch Pokémon
           <AddIcon />
@@ -52,6 +53,7 @@ function PokedexScreen({ classes }) {
           className={classes.fabAddMobile}
           component={Link}
           to="/pokemons"
+          data-testid="hunting-link-fab"
         >
           <AddIcon />
         </Fab>
