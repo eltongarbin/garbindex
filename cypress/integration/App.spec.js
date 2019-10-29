@@ -31,5 +31,44 @@ describe('App E2E', () => {
       cy.get('[data-testid=input-search]').type('{enter}');
       cy.get('input:invalid').should('have.length', 1);
     });
+
+    it('should not find a pokemon', () => {
+      cy.get('[data-testid=input-search]').type('notfound{enter}');
+      cy.get('[data-testid=empty-message]').should(
+        'have.text',
+        "Sorry, we did'nt find the pokémon. Try new search!"
+      );
+    });
+
+    it('should find a pokemon', () => {
+      cy.get('[data-testid=input-search]')
+        .clear()
+        .type('pikachu{enter}');
+
+      cy.get('[data-testid=pokecard-header]')
+        .should('contain', 'pikachu')
+        .and('contain', '#25');
+
+      cy.get('[data-testid=pokecard-image]').should(
+        'have.css',
+        'background-image',
+        'url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png")'
+      );
+
+      cy.get('[data-testid=pokecard-image]').should(
+        'have.css',
+        'background-image',
+        'url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png")'
+      );
+
+      cy.get('[aria-label="Release"]').should('not.exist');
+      cy.get('[aria-label="See more"]').should('be.visible');
+      cy.get('[aria-label="Catch"]').should('be.visible');
+    });
+
+    it('should redirect to pokemon detail screen', () => {
+      cy.get('[data-testid=pokecard-image]').click();
+      cy.url().should('include', '/pokemons/25');
+    });
   });
 });
