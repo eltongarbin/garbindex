@@ -22,7 +22,7 @@ function PokeCard({
   onCatchClick
 }) {
   return (
-    <Card>
+    <Card data-testid="pokecard">
       <CardActionArea onClick={onSeeMoreClick}>
         <CardHeaderStyled
           title={name}

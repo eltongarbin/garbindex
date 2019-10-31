@@ -1,4 +1,10 @@
 describe('App E2E', () => {
+  before(() => {
+    cy.window().then((win) => {
+      win.sessionStorage.clear();
+    });
+  });
+
   context('when pokedex is empty', () => {
     it('should have a message with link', () => {
       cy.visit('/');
@@ -69,6 +75,23 @@ describe('App E2E', () => {
     it('should redirect to pokemon detail screen', () => {
       cy.get('[data-testid=pokecard-image]').click();
       cy.url().should('include', '/pokemons/25');
+    });
+  });
+
+  context('when see pokemon details ', () => {
+    it('should catch this pokemon', () => {
+      cy.get('[aria-label="Release"]').should('not.exist');
+      cy.get('[aria-label="Catch"]')
+        .should('be.visible')
+        .click();
+      cy.get('[aria-label="Release"]').should('exist');
+    });
+  });
+
+  context('when pokedex is not empty', () => {
+    it('should see pokemon catched', () => {
+      cy.visit('/');
+      cy.get('[data-testid=pokecard]').should('have.length', 1);
     });
   });
 });
