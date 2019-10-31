@@ -48,6 +48,9 @@ const SearchForm = React.memo(function SearchForm(params) {
             </InputAdornment>
           )
         }}
+        inputProps={{
+          'data-testid': 'input-search'
+        }}
       />
     </form>
   );

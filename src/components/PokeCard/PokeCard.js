@@ -22,10 +22,18 @@ function PokeCard({
   onCatchClick
 }) {
   return (
-    <Card>
+    <Card data-testid="pokecard">
       <CardActionArea onClick={onSeeMoreClick}>
-        <CardHeaderStyled title={name} subheader={`#${id}`} />
-        <CardMediaStyled image={image} title={name} />
+        <CardHeaderStyled
+          title={name}
+          subheader={`#${id}`}
+          data-testid="pokecard-header"
+        />
+        <CardMediaStyled
+          image={image}
+          title={name}
+          data-testid="pokecard-image"
+        />
       </CardActionArea>
       <CardActionsStyled>
         <IconButton aria-label="See more" onClick={onSeeMoreClick}>

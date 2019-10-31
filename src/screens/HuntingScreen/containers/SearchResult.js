@@ -75,7 +75,10 @@ const SearchResult = React.memo(function SearchResult() {
         {isFetching && <LinearProgress color="secondary" />}
         {!isEmpty(pokemonFound) && renderPokeCard()}
         {isEmpty(pokemonFound) && searched && (
-          <SnackbarContent message="Sorry, we did'nt find the pokémon. Try new search!" />
+          <SnackbarContent
+            message="Sorry, we did'nt find the pokémon. Try new search!"
+            data-testid="empty-message"
+          />
         )}
       </Grid>
     </GridResultStyled>

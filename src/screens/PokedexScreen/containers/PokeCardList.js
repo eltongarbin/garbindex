@@ -32,9 +32,13 @@ const PokeCardList = React.memo(function PokeCardList() {
         <Grid item xs={12} container justify="center">
           <SnackbarContent
             message={
-              <span>
+              <span data-testid="empty-message">
                 You dont't have any pokemón yet. Let's find{` `}
-                <Link component={RouterLink} to="/pokemons">
+                <Link
+                  component={RouterLink}
+                  to="/pokemons"
+                  data-testid="hunting-link"
+                >
                   here!
                 </Link>
               </span>
