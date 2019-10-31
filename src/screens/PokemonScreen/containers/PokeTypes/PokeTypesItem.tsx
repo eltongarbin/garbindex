@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -21,7 +20,19 @@ const ChipStyled = styled(Chip)`
   }
 `;
 
-function PokeTypesItem({ name, pokemons, expanded, onToggle }) {
+type PokeTypesItemProps = {
+  name: string;
+  pokemons?: any[];
+  expanded: boolean;
+  onToggle: (...args: any[]) => any;
+};
+
+const PokeTypesItem: React.SFC<PokeTypesItemProps> = ({
+  name,
+  pokemons = [],
+  expanded,
+  onToggle
+}) => {
   return (
     <Grid item xs={12} sm={6}>
       <ExpansionPanel expanded={expanded} onChange={onToggle} elevation={1}>
@@ -37,17 +48,6 @@ function PokeTypesItem({ name, pokemons, expanded, onToggle }) {
       </ExpansionPanel>
     </Grid>
   );
-}
-
-PokeTypesItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  pokemons: PropTypes.arrayOf(PropTypes.object),
-  expanded: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired
-};
-
-PokeTypesItem.defaultProps = {
-  pokemons: []
 };
 
 export default PokeTypesItem;

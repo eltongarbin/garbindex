@@ -3,7 +3,7 @@ import { Grid, SnackbarContent, LinearProgress } from '@material-ui/core';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import isEmpty from 'lodash.isempty';
+import { isEmpty } from 'lodash-es';
 
 import PokeCard from 'components/PokeCard';
 import { actions, types, selectors } from '../state';
@@ -24,7 +24,7 @@ const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON]);
 
 const SearchResult = React.memo(function SearchResult() {
   const searched = useSelector(selectors.hasSearched);
-  const pokemonFound = useSelector((state) =>
+  const pokemonFound = useSelector((state: any) =>
     pokemonSelectors.getPokemonById(state, state.huntingScreen.pokemonFoundId)
   );
   const isFetching = useSelector(loadingSelector);

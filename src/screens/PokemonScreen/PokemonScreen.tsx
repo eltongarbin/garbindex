@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import isEmpty from 'lodash.isempty';
+import { isEmpty } from 'lodash-es';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 
 import history from 'utils/history';

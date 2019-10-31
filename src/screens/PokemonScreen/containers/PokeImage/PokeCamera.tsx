@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Grid } from '@material-ui/core';
 import Webcam from 'react-webcam';
 import { useDispatch } from 'react-redux';
@@ -15,7 +14,12 @@ const WebcamStyled = styled(Webcam)`
   width: 100%;
 `;
 
-function PokeCamera({ onCancel, onError }) {
+type PokeCameraProps = {
+  onCancel: (...args: any[]) => any;
+  onError: (...args: any[]) => any;
+};
+
+const PokeCamera: React.FC<PokeCameraProps> = ({ onCancel, onError }) => {
   const pokemonId = usePokemonId();
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
@@ -46,11 +50,6 @@ function PokeCamera({ onCancel, onError }) {
       />
     </Grid>
   );
-}
-
-PokeCamera.propTypes = {
-  onCancel: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired
 };
 
 export default PokeCamera;

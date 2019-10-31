@@ -1,12 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Grid, Typography, LinearProgress } from '@material-ui/core';
 
 function getPercentage(value) {
   return Math.round((value * 100) / 300);
 }
 
-function PokeStatsListItem({ name, value }) {
+type PokeStatsListItemProps = {
+  name: string;
+  value: number;
+};
+
+const PokeStatsListItem: React.FC<PokeStatsListItemProps> = ({
+  name,
+  value
+}) => {
   return (
     <Grid item xs={12}>
       <Typography component="label">
@@ -15,11 +22,6 @@ function PokeStatsListItem({ name, value }) {
       <LinearProgress variant="determinate" value={getPercentage(value)} />
     </Grid>
   );
-}
-
-PokeStatsListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired
 };
 
 export default PokeStatsListItem;

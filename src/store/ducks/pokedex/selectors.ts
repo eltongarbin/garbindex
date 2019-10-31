@@ -1,4 +1,4 @@
-import merge from 'lodash.merge';
+import { merge } from 'lodash-es';
 
 export const getCaughtPokemonsId = (state) => state.entities.pokedex.pokemonsId;
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -13,7 +12,19 @@ import {
   ExpansionPanelDetailsStyled
 } from '../../components/Styles';
 
-function PokeAbilitiesItem({ name, short_effect, expanded, onToggle }) {
+type PokeAbilitiesItemProps = {
+  name: string;
+  short_effect?: string;
+  expanded: boolean;
+  onToggle: (...args: any[]) => any;
+};
+
+const PokeAbilitiesItem: React.FC<PokeAbilitiesItemProps> = ({
+  name,
+  short_effect,
+  expanded,
+  onToggle
+}) => {
   return (
     <Grid item xs={12} sm={6}>
       <ExpansionPanel expanded={expanded} onChange={onToggle} elevation={1}>
@@ -29,13 +40,6 @@ function PokeAbilitiesItem({ name, short_effect, expanded, onToggle }) {
       </ExpansionPanel>
     </Grid>
   );
-}
-
-PokeAbilitiesItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  short_effect: PropTypes.string,
-  expanded: PropTypes.bool.isRequired,
-  onToggle: PropTypes.func.isRequired
 };
 
 export default PokeAbilitiesItem;

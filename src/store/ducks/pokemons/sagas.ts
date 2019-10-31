@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import keyBy from 'lodash.keyby';
+import { keyBy } from 'lodash-es';
 
 import { extractParamId } from 'utils';
 import { genericAsyncResolver } from 'utils/reduxHelpers';

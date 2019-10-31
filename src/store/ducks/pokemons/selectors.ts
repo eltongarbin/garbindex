@@ -1,4 +1,4 @@
-import merge from 'lodash.merge';
+import { merge } from 'lodash-es';
 
 export const getPokemonById = (state, id) =>
   merge(

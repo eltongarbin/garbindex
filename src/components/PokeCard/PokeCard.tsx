@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import { Card, IconButton, CardActionArea } from '@material-ui/core';
 import {
   Visibility as VisibilityIcon,
@@ -13,14 +13,23 @@ import {
   CardActionsStyled
 } from './PokeCardStyled';
 
-function PokeCard({
+type PokeCardProps = {
+  image: string;
+  id: number;
+  name: string;
+  onSeeMoreClick: any;
+  onReleaseClick?: any;
+  onCatchClick?: any;
+};
+
+const PokeCard: React.FC<PokeCardProps> = ({
   image,
   id,
   name,
   onSeeMoreClick,
   onReleaseClick,
   onCatchClick
-}) {
+}) => {
   return (
     <Card data-testid="pokecard">
       <CardActionArea onClick={onSeeMoreClick}>
@@ -52,15 +61,5 @@ function PokeCard({
       </CardActionsStyled>
     </Card>
   );
-}
-
-PokeCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  onSeeMoreClick: PropTypes.func.isRequired,
-  onReleaseClick: PropTypes.func,
-  onCatchClick: PropTypes.func
 };
-
 export default PokeCard;

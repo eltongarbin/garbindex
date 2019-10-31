@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import { Toolbar, AppBar, Grid } from '@material-ui/core';
 import { ArrowBack as ArrowBackIcon } from '@material-ui/icons';
 
@@ -11,7 +11,16 @@ import {
 } from './ScreenLayoutStyled';
 import InstallButton from '../InstallButton';
 
-function ScreenLayout({ title, onBackClick, children }) {
+type ScreenLayoutProps = {
+  title: string;
+  onBackClick?: (...args: any[]) => any;
+};
+
+const ScreenLayout: React.FC<ScreenLayoutProps> = ({
+  title,
+  onBackClick,
+  children
+}) => {
   return (
     <RootContainer>
       <AppBar position="static">
@@ -34,12 +43,5 @@ function ScreenLayout({ title, onBackClick, children }) {
       </GridContent>
     </RootContainer>
   );
-}
-
-ScreenLayout.propTypes = {
-  title: PropTypes.string.isRequired,
-  onBackClick: PropTypes.func,
-  children: PropTypes.any.isRequired
 };
-
 export default ScreenLayout;

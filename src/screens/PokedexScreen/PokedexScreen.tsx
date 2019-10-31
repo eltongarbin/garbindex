@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { Fab, withStyles, Hidden, Button } from '@material-ui/core';
@@ -28,7 +27,11 @@ const styles = (theme) => ({
   }
 });
 
-function PokedexScreen({ classes }) {
+type PokedexScreenProps = {
+  classes: any;
+};
+
+const PokedexScreen: React.FC<PokedexScreenProps> = ({ classes }) => {
   return (
     <div className={classes.wrapper}>
       <PokeCardList />
@@ -60,10 +63,6 @@ function PokedexScreen({ classes }) {
       </Hidden>
     </div>
   );
-}
-
-PokedexScreen.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
 export default compose(

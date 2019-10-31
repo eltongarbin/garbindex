@@ -15,7 +15,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default function configureStore(preloadedState) {
+export default function configureStore(preloadedState?: any) {
   const composeEnhancers = composeWithDevTools({});
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(

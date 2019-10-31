@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { IconButton } from '@material-ui/core';
 import { AddToHomeScreen as AddToHomeScreenIcon } from '@material-ui/icons';
 
-var deferredInstallPrompt;
-
+var deferredInstallPrompt: any;
 function InstallButton() {
   const [showInstallButton, setShowInstallButton] = useState(
     Boolean(deferredInstallPrompt)
   );
 
   useEffect(() => {
-    function saveBeforeInstallPromptEvent(event) {
+    function saveBeforeInstallPromptEvent(event: any) {
       deferredInstallPrompt = event;
       setShowInstallButton(true);
     }

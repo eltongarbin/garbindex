@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import lodashMap from 'lodash.map';
+import { map as lodashMap } from 'lodash-es';
 
 import usePokemonId from '../../hooks/usePokemonId';
 import PokeAbilitiesItem from './PokeAbilitiesItem';

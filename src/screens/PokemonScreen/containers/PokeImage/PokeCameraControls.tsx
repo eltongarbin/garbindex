@@ -1,20 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Camera as CameraIcon,
   Done as DoneIcon,
   Clear as ClearIcon
 } from '@material-ui/icons';
-import { GridListTileBarStyled } from './PokeImageStyled';
 import { IconButton } from '@material-ui/core';
 
-function PokeCameraControls({
+import { GridListTileBarStyled } from './PokeImageStyled';
+
+type PokeCameraControlsProps = {
+  isCaptured?: boolean;
+  onCapture: (...args: any[]) => any;
+  onCancel: (...args: any[]) => any;
+  onConfirm: (...args: any[]) => any;
+  onClear: (...args: any[]) => any;
+};
+
+const PokeCameraControls: React.FC<PokeCameraControlsProps> = ({
   isCaptured,
   onCapture,
   onCancel,
   onConfirm,
   onClear
-}) {
+}) => {
   if (!isCaptured) {
     return (
       <GridListTileBarStyled
@@ -31,7 +39,6 @@ function PokeCameraControls({
       />
     );
   }
-
   return (
     <GridListTileBarStyled
       actionIcon={
@@ -46,14 +53,6 @@ function PokeCameraControls({
       }
     />
   );
-}
-
-PokeCameraControls.propTypes = {
-  isCaptured: PropTypes.bool,
-  onCapture: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired,
-  onClear: PropTypes.func.isRequired
 };
 
 export default PokeCameraControls;

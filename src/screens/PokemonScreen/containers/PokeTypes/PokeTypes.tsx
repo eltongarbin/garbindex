@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
-import isEmpty from 'lodash.isempty';
-import lodashMap from 'lodash.map';
+import { isEmpty, map as lodashMap } from 'lodash-es';
 
 import usePokemonId from '../../hooks/usePokemonId';
 import Segregator from '../../components/Segregator';

@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 import { call, put } from 'redux-saga/effects';
-import isEmpty from 'lodash.isempty';
+import { isEmpty } from 'lodash-es';
 
 export const createType = (stateKey, type) =>
   `${process.env.REACT_APP_NAME}/${stateKey}/${type}`;
