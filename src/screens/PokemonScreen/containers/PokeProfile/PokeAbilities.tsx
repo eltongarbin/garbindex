@@ -12,12 +12,15 @@ const PokeAbilities = React.memo(function PokeAbilities() {
   const [expandedId, setExpandedId] = useState(0);
   const abilities = lodashMap(
     useSelector(
-      (state) => selectors.getPokemonById(state, pokemonId).abilitiesById
+      (state: any) => selectors.getPokemonById(state, pokemonId).abilitiesById
     )
   );
   const dispatch = useDispatch();
 
-  const handleToggleDetail = (ability) => (_event, expanded) => {
+  const handleToggleDetail = (ability: any) => (
+    _event: any,
+    expanded: boolean
+  ) => {
     if (expanded && !ability.short_effect) {
       dispatch(
         actions.fetchShortEffectByAbilityId.request({
@@ -33,7 +36,7 @@ const PokeAbilities = React.memo(function PokeAbilities() {
   return (
     <Grid item xs={12}>
       <Grid container justify="center" spacing={1}>
-        {abilities.map((ability) => (
+        {abilities.map((ability: any) => (
           <PokeAbilitiesItem
             key={ability.id}
             name={ability.name}

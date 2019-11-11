@@ -1,15 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PokeCard /> matches the snapshot 1`] = `
-<WithStyles(ForwardRef(Card))>
+<WithStyles(ForwardRef(Card))
+  data-testid="pokecard"
+>
   <WithStyles(ForwardRef(CardActionArea))
     onClick={[Function]}
   >
     <Styled(WithStyles(ForwardRef(CardHeader)))
+      data-testid="pokecard-header"
       subheader="#1"
       title="name"
     />
     <Styled(WithStyles(ForwardRef(CardMedia)))
+      data-testid="pokecard-image"
       image="image"
       title="name"
     />

@@ -19,11 +19,16 @@ const PokeTypes = React.memo(function PokeTypes() {
   const pokemonId = usePokemonId();
   const [expandedId, setExpandedId] = useState(0);
   const types = lodashMap(
-    useSelector((state) => selectors.getPokemonById(state, pokemonId).typesById)
+    useSelector(
+      (state: any) => selectors.getPokemonById(state, pokemonId).typesById
+    )
   );
   const dispatch = useDispatch();
 
-  const handleToggleDetail = (type) => (_event, expanded) => {
+  const handleToggleDetail = (type: any) => (
+    _event: any,
+    expanded: boolean
+  ) => {
     if (expanded && isEmpty(type.pokemons)) {
       dispatch(
         actions.fetchPokemonsByTypeId.request({ pokemonId, typeId: type.id })
@@ -40,7 +45,7 @@ const PokeTypes = React.memo(function PokeTypes() {
       </Grid>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={1}>
-          {types.map((type) => (
+          {types.map((type: any) => (
             <PokeTypesItem
               key={type.id}
               name={type.name}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography, LinearProgress } from '@material-ui/core';
 
-function getPercentage(value) {
+function getPercentage(value: number) {
   return Math.round((value * 100) / 300);
 }
 

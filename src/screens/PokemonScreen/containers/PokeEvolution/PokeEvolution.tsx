@@ -9,7 +9,7 @@ import { selectors } from 'store/ducks/pokemons';
 function PokeEvolution() {
   const pokemonId = usePokemonId();
   const evolvedFrom = useSelector(
-    (state) => selectors.getPokemonById(state, pokemonId).evolvedFrom
+    (state: any) => selectors.getPokemonById(state, pokemonId).evolvedFrom
   );
 
   if (!evolvedFrom) {

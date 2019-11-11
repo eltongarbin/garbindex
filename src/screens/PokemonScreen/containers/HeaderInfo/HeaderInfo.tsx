@@ -19,10 +19,10 @@ const CardHeaderStyled = styled(CardHeader)`
 const HeaderInfo = React.memo(function HeaderInfo() {
   const pokemonId = usePokemonId();
   const name = useSelector(
-    (state) => state.entities.pokemons.byId[pokemonId].name
+    (state: any) => state.entities.pokemons.byId[pokemonId].name
   );
-  const captured = useSelector((state) =>
-    state.entities.pokedex.pokemonsId.includes(parseInt(pokemonId))
+  const captured = useSelector((state: any) =>
+    state.entities.pokedex.pokemonsId.includes(pokemonId)
   );
   const dispatch = useDispatch();
 

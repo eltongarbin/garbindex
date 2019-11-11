@@ -9,12 +9,12 @@ import { selectors } from 'store/ducks/pokemons';
 function PokeStats() {
   const pokemonId = usePokemonId();
   const stats = useSelector(
-    (state) => selectors.getPokemonById(state, pokemonId).stats
+    (state: any) => selectors.getPokemonById(state, pokemonId).stats
   );
 
   return (
     <Grid container direction="column" spacing={1}>
-      {stats.map(({ id, name, base_stat }) => (
+      {stats.map(({ id, name, base_stat }: any) => (
         <PokeStatsItem key={id} name={name} value={base_stat} />
       ))}
     </Grid>

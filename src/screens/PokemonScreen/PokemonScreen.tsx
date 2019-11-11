@@ -39,17 +39,19 @@ const GridMainInfo = styled(Grid)`
   }
 `;
 
-const loadingSelector = createLoadingSelector([types.FETCH_POKEMON]);
+const loadingSelector = createLoadingSelector([types.FETCH_POKEMON_REQUEST]);
 
 function PokemonScreen() {
-  const { id } = useParams();
-  const pokemon = useSelector((state) => selectors.getPokemonById(state, id));
+  const { id }: any = useParams();
+  const pokemon = useSelector((state: any) =>
+    selectors.getPokemonById(state, id)
+  );
   const isFetching = useSelector(loadingSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isEmpty(pokemon) && !isFetching) {
-      dispatch(actions.fetchPokemon.request(id));
+      dispatch(actions.fetchPokemon.request(parseInt(id)));
     }
   }, [dispatch, isFetching, id, pokemon]);
 

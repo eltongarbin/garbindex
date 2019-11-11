@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-import { checkProps } from 'utils/testUtils';
 import ScreenLayout from './ScreenLayout';
 import { MenuButton } from './ScreenLayoutStyled';
 
@@ -15,11 +14,6 @@ describe('<ScreenLayout />', () => {
     );
 
     expect(toJson(tree)).toMatchSnapshot();
-  });
-
-  it('does not throw warning with expected props', () => {
-    const expectedProps = { title: 'title', children: 'children' };
-    checkProps(ScreenLayout, expectedProps);
   });
 
   it('should render back button when pass `onBackClick` prop', () => {

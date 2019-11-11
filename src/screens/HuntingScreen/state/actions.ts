@@ -1,17 +1,10 @@
-import { createAction } from 'redux-actions';
+import { createAction, createAsyncAction } from 'typesafe-actions';
 
-import {
-  createType,
-  createAsyncTypes,
-  createAsyncActions
-} from 'utils/reduxHelpers';
+import { ActionTypes } from './types';
 
-export const types = {
-  CLEAN_RESULT: createType('huntingScreen', 'CLEAN_RESULT'),
-  SEARCH_POKEMON: createAsyncTypes('huntingScreen', 'SEARCH_POKEMON')
-};
-
-export default {
-  cleanSearchResult: createAction(types.CLEAN_RESULT),
-  searchForPokemon: createAsyncActions(types.SEARCH_POKEMON)
-};
+export const cleanSearchResult = createAction(ActionTypes.CLEAN_RESULT)<void>();
+export const searchForPokemon = createAsyncAction(
+  ActionTypes.SEARCH_POKEMON_REQUEST,
+  ActionTypes.SEARCH_POKEMON_SUCCESS,
+  ActionTypes.SEARCH_POKEMON_FAILURE
+)<string, number, Error>();

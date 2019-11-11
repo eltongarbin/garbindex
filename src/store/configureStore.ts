@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistStore, persistReducer } from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
+import { RootState } from 'typesafe-actions';
 
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
@@ -15,7 +16,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default function configureStore(preloadedState?: any) {
+export default function configureStore(preloadedState?: RootState) {
   const composeEnhancers = composeWithDevTools({});
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(

@@ -20,13 +20,13 @@ const FileInputStyled = styled.input`
 const PokeImage = React.memo(function PokeImage() {
   const pokemonId = usePokemonId();
   const image = useSelector(
-    (state) => pokemonSelectors.getPokemonById(state, pokemonId).image
+    (state: any) => pokemonSelectors.getPokemonById(state, pokemonId).image
   );
-  const captured = useSelector((state) =>
+  const captured = useSelector((state: any) =>
     selectors.isMyPokemon(state, pokemonId)
   );
   const dispatch = useDispatch();
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [enableCamera, setEnableCamera] = useState(false);
   const [supportsCamera, setSupportCamera] = useState(
     'mediaDevices' in navigator
@@ -36,7 +36,7 @@ const PokeImage = React.memo(function PokeImage() {
     setEnableCamera(false);
   }, [image, captured]);
 
-  function handleLoadLocalImage(event) {
+  function handleLoadLocalImage(event: any) {
     event.preventDefault();
     const file = event.target.files[0];
     const localImageUrl = window.URL.createObjectURL(file);
@@ -74,7 +74,13 @@ const PokeImage = React.memo(function PokeImage() {
                     <PhotoCameraIcon />
                   </IconButton>
                 )}
-                <IconButton onClick={() => fileInputRef.current.click()}>
+                <IconButton
+                  onClick={() =>
+                    fileInputRef &&
+                    fileInputRef.current &&
+                    fileInputRef.current.click()
+                  }
+                >
                   <CloudUploadIcon />
                 </IconButton>
               </Fragment>

@@ -1,20 +1,27 @@
-import { createAsyncTypes, createAsyncActions } from 'utils/reduxHelpers';
+import { createAsyncAction } from 'typesafe-actions';
 
-export const types = {
-  FETCH_POKEMON: createAsyncTypes('pokemons', 'FETCH_POKEMON'),
-  FETCH_EVOLUTION_CHAIN: createAsyncTypes('pokemons', 'FETCH_EVOLUTION_CHAIN'),
-  FETCH_POKEMONS_BYTYPE: createAsyncTypes('pokemons', 'FETCH_POKEMONS_BYTYPE'),
-  FETCH_SHORT_EFFECT_BYABILITY: createAsyncTypes(
-    'pokemons',
-    'FETCH_SHORT_EFFECT_BYABILITY'
-  )
-};
+import { ActionTypes } from './types';
 
-export default {
-  fetchPokemon: createAsyncActions(types.FETCH_POKEMON),
-  fetchEvolvedFrom: createAsyncActions(types.FETCH_EVOLUTION_CHAIN),
-  fetchPokemonsByTypeId: createAsyncActions(types.FETCH_POKEMONS_BYTYPE),
-  fetchShortEffectByAbilityId: createAsyncActions(
-    types.FETCH_SHORT_EFFECT_BYABILITY
-  )
-};
+export const fetchPokemon = createAsyncAction(
+  ActionTypes.FETCH_POKEMON_REQUEST,
+  ActionTypes.FETCH_POKEMON_SUCCESS, // TODO: Improve payload type
+  ActionTypes.FETCH_POKEMON_FAILURE
+)<string | number, any, Error>();
+
+export const fetchEvolvedFrom = createAsyncAction(
+  ActionTypes.FETCH_EVOLUTION_CHAIN_REQUEST,
+  ActionTypes.FETCH_EVOLUTION_CHAIN_SUCCESS, // TODO: Improve payload type
+  ActionTypes.FETCH_EVOLUTION_CHAIN_FAILURE
+)<number, any, Error>();
+
+export const fetchPokemonsByTypeId = createAsyncAction(
+  ActionTypes.FETCH_POKEMONS_BYTYPE_REQUEST, // TODO: Improve payload type
+  ActionTypes.FETCH_POKEMONS_BYTYPE_SUCCESS, // TODO: Improve payload type
+  ActionTypes.FETCH_POKEMONS_BYTYPE_FAILURE
+)<{ pokemonId: number; typeId: number }, any, Error>();
+
+export const fetchShortEffectByAbilityId = createAsyncAction(
+  ActionTypes.FETCH_SHORT_EFFECT_BYABILITY_REQUEST, // TODO: Improve payload type
+  ActionTypes.FETCH_SHORT_EFFECT_BYABILITY_SUCCESS, // TODO: Improve payload type
+  ActionTypes.FETCH_SHORT_EFFECT_BYABILITY_FAILURE
+)<{ pokemonId: number; abilityId: number }, any, Error>();

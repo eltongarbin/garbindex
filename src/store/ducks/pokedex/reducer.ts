@@ -1,35 +1,32 @@
-import { handleActions } from 'redux-actions';
-import { types } from './actions';
+import { createReducer } from 'typesafe-actions';
 
-const initialState = {
+import { PokedexState } from './types';
+import { releasePokemon, catchPokemon, changePokemonImage } from './actions';
+
+const initialState: PokedexState = {
   pokemonsId: [],
-  pokemonsCustomizedById: {}
+  customPokemonPhotoById: {}
 };
 
-export default handleActions(
-  {
-    [types.RELEASE_BYID]: (state, { payload }) => {
-      const { [payload]: value, ...rest } = state.pokemonsCustomizedById;
+export default createReducer(initialState)
+  .handleAction(releasePokemon, (state, { payload }) => {
+    const { [payload]: value, ...rest } = state.customPokemonPhotoById;
 
-      return {
-        pokemonsId: state.pokemonsId.filter((id) => id !== payload),
-        pokemonsCustomizedById: rest
-      };
-    },
-    [types.CATCH_BYID]: (state, { payload }) => ({
-      ...state,
-      pokemonsId: [...state.pokemonsId, payload]
-    }),
-    [types.CHANGE_IMAGE]: (state, { payload }) => ({
-      ...state,
-      pokemonsCustomizedById: {
-        ...state.pokemonsCustomizedById,
-        [payload.id]: {
-          ...state.pokemonsCustomizedById[payload.id],
-          ...payload
-        }
+    return {
+      pokemonsId: state.pokemonsId.filter((id) => id !== payload),
+      customPokemonPhotoById: rest
+    };
+  })
+  .handleAction(catchPokemon, (state, { payload }) => ({
+    ...state,
+    pokemonsId: [...state.pokemonsId, payload]
+  }))
+  .handleAction(changePokemonImage, (state, { payload }) => ({
+    ...state,
+    customPokemonPhotoById: {
+      ...state.customPokemonPhotoById,
+      [payload.id]: {
+        ...payload
       }
-    })
-  },
-  initialState
-);
+    }
+  }));

@@ -20,11 +20,11 @@ export const GridResultStyled = styled(Grid)`
   }
 `;
 
-const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON]);
+const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON_REQUEST]);
 
 const SearchResult = React.memo(function SearchResult() {
   const searched = useSelector(selectors.hasSearched);
-  const pokemonFound = useSelector((state: any) =>
+  const pokemonFound: any = useSelector((state: any) =>
     pokemonSelectors.getPokemonById(state, state.huntingScreen.pokemonFoundId)
   );
   const isFetching = useSelector(loadingSelector);

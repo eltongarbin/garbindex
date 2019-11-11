@@ -1,24 +1,18 @@
-import { handleActions, combineActions } from 'redux-actions';
-import { types } from './actions';
+import { createReducer } from 'typesafe-actions';
 
-export const initialState = {
+import { HuntingScreenState } from './types';
+import { cleanSearchResult, searchForPokemon } from './actions';
+
+export const initialState: HuntingScreenState = {
   searched: false,
-  pokemonFoundId: null
+  pokemonFoundId: undefined
 };
 
-export default handleActions(
-  {
-    [combineActions(types.CLEAN_RESULT, types.SEARCH_POKEMON.REQUEST)]: () => ({
-      ...initialState
-    }),
-    [types.SEARCH_POKEMON.SUCCESS]: (state, { payload }) => ({
-      searched: true,
-      pokemonFoundId: payload
-    })
-  },
-  initialState
-);
-
-export const selectors = {
-  hasSearched: (state) => state.huntingScreen.searched
-};
+export default createReducer(initialState)
+  .handleAction([cleanSearchResult, searchForPokemon.request], () => ({
+    ...initialState
+  }))
+  .handleAction(searchForPokemon.success, (_state, { payload }) => ({
+    searched: true,
+    pokemonFoundId: payload
+  }));

@@ -1,6 +1,6 @@
 const initialState = {};
 
-export default (state = initialState, { type }) => {
+export default (state = initialState, { type }: any) => {
   const matches = /(.*)_(REQUEST|SUCCESS|FAILURE)/.exec(type);
 
   if (!matches) return state;
@@ -12,8 +12,8 @@ export default (state = initialState, { type }) => {
   };
 };
 
-export const createLoadingSelector = (actions) => (state) => {
-  return actions.some((action) => {
+export const createLoadingSelector = (actions: any) => (state: any) => {
+  return actions.some((action: any) => {
     const actionName =
       typeof action === 'object'
         ? action.REQUEST.replace('_REQUEST', '')

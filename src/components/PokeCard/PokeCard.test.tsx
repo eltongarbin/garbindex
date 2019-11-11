@@ -7,7 +7,6 @@ import {
   AddCircle as AddCircleIcon
 } from '@material-ui/icons';
 
-import { checkProps } from 'utils/testUtils';
 import PokeCard from './PokeCard';
 
 const expectedRequiredProps = {
@@ -21,10 +20,6 @@ describe('<PokeCard />', () => {
   it('matches the snapshot', () => {
     const tree = shallow(<PokeCard {...expectedRequiredProps} />);
     expect(toJson(tree)).toMatchSnapshot();
-  });
-
-  it('does not throw warning with expected props', () => {
-    checkProps(PokeCard, expectedRequiredProps);
   });
 
   it('calls `onSeeMoreClick` prop upon button click', () => {
