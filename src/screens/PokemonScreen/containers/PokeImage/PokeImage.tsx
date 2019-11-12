@@ -25,7 +25,7 @@ const PokeImage = React.memo(() => {
   const { image } = useSelector(pokemonSelectors.getPokemonById(pokemonId));
   const captured = useSelector(pokedexSelectors.isMyPokemon(pokemonId));
   const dispatch = useDispatch();
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null!);
   const [enableCamera, setEnableCamera] = useState(false);
   const [supportsCamera, setSupportCamera] = useState(
     'mediaDevices' in navigator

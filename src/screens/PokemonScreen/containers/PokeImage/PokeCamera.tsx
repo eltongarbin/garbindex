@@ -22,7 +22,7 @@ const PokeCamera = ({ onCancel, onError }: PokeCameraProps) => {
   const pokemonId = usePokemonId();
   const dispatch = useDispatch();
   const [image, setImage] = useState();
-  const webcamRef = useRef<Webcam>(null);
+  const webcamRef = useRef<Webcam>(null!);
   const handleCapture = useCallback(() => {
     if (webcamRef && webcamRef.current) {
       setImage(webcamRef.current.getScreenshot());
