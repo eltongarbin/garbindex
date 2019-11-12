@@ -7,7 +7,11 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import { actions } from 'store/ducks/pokedex';
+import {
+  actions as pokedexActions,
+  selectors as pokedexSelectors
+} from 'store/ducks/pokedex';
+import { selectors as pokemonsSelectors } from 'store/ducks/pokemons';
 import usePokemonId from '../../hooks/usePokemonId';
 
 const CardHeaderStyled = styled(CardHeader)`
@@ -18,12 +22,8 @@ const CardHeaderStyled = styled(CardHeader)`
 
 const HeaderInfo = React.memo(function HeaderInfo() {
   const pokemonId = usePokemonId();
-  const name = useSelector(
-    (state: any) => state.entities.pokemons.byId[pokemonId].name
-  );
-  const captured = useSelector((state: any) =>
-    state.entities.pokedex.pokemonsId.includes(pokemonId)
-  );
+  const { name } = useSelector(pokemonsSelectors.getPokemonById(pokemonId));
+  const captured = useSelector(pokedexSelectors.isMyPokemon(pokemonId));
   const dispatch = useDispatch();
 
   return (
@@ -32,14 +32,14 @@ const HeaderInfo = React.memo(function HeaderInfo() {
         captured ? (
           <IconButton
             aria-label="Release"
-            onClick={() => dispatch(actions.releasePokemon(pokemonId))}
+            onClick={() => dispatch(pokedexActions.releasePokemon(pokemonId))}
           >
             <DeleteIcon />
           </IconButton>
         ) : (
           <IconButton
             aria-label="Catch"
-            onClick={() => dispatch(actions.catchPokemon(pokemonId))}
+            onClick={() => dispatch(pokedexActions.catchPokemon(pokemonId))}
           >
             <AddCircleIcon />
           </IconButton>

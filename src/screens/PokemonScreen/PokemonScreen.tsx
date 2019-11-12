@@ -43,9 +43,7 @@ const loadingSelector = createLoadingSelector([types.FETCH_POKEMON_REQUEST]);
 
 function PokemonScreen() {
   const { id }: any = useParams();
-  const pokemon = useSelector((state: any) =>
-    selectors.getPokemonById(state, id)
-  );
+  const pokemon = useSelector(selectors.getPokemonById(id));
   const isFetching = useSelector(loadingSelector);
   const dispatch = useDispatch();
 

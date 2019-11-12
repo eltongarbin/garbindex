@@ -13,5 +13,5 @@ export const getCaughtPokemons = (state: RootState) =>
     )
   );
 
-export const isMyPokemon = (state: RootState, id: number) =>
+export const isMyPokemon = (id: number) => (state: RootState) =>
   getCaughtPokemonsId(state).includes(id);

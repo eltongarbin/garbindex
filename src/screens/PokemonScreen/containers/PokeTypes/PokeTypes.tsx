@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import styled from 'styled-components';
-import { isEmpty, map as lodashMap } from 'lodash-es';
+import { isEmpty } from 'lodash-es';
 
-import usePokemonId from '../../hooks/usePokemonId';
-import Segregator from '../../components/Segregator';
-import PokeTypesItem from './PokeTypesItem';
 import { actions, selectors } from 'store/ducks/pokemons';
+import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
+import Segregator from 'screens/PokemonScreen/components/Segregator';
+import PokeTypesItem from './PokeTypesItem';
 
 const GridContent = styled(Grid)`
   && {
@@ -18,11 +18,7 @@ const GridContent = styled(Grid)`
 const PokeTypes = React.memo(function PokeTypes() {
   const pokemonId = usePokemonId();
   const [expandedId, setExpandedId] = useState(0);
-  const types = lodashMap(
-    useSelector(
-      (state: any) => selectors.getPokemonById(state, pokemonId).typesById
-    )
-  );
+  const { types } = useSelector(selectors.getPokemonById(pokemonId));
   const dispatch = useDispatch();
 
   const handleToggleDetail = (type: any) => (

@@ -16,9 +16,7 @@ const convertoToMeters = (height: number) => height / 10;
 
 function PokeProfile() {
   const pokemonId = usePokemonId();
-  const { height, weight } = useSelector((state: any) =>
-    selectors.getPokemonById(state, pokemonId)
-  );
+  const { height, weight } = useSelector(selectors.getPokemonById(pokemonId));
 
   return (
     <Content>

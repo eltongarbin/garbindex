@@ -7,9 +7,12 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-import usePokemonId from '../../hooks/usePokemonId';
-import { selectors, actions } from 'store/ducks/pokedex';
+import {
+  selectors as pokedexSelectors,
+  actions as pokedexActions
+} from 'store/ducks/pokedex';
 import { selectors as pokemonSelectors } from 'store/ducks/pokemons';
+import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
 import { CardMediaStyled, GridListTileBarStyled } from './PokeImageStyled';
 import PokeCamera from './PokeCamera';
 
@@ -19,12 +22,8 @@ const FileInputStyled = styled.input`
 
 const PokeImage = React.memo(function PokeImage() {
   const pokemonId = usePokemonId();
-  const image = useSelector(
-    (state: any) => pokemonSelectors.getPokemonById(state, pokemonId).image
-  );
-  const captured = useSelector((state: any) =>
-    selectors.isMyPokemon(state, pokemonId)
-  );
+  const { image } = useSelector(pokemonSelectors.getPokemonById(pokemonId));
+  const captured = useSelector(pokedexSelectors.isMyPokemon(pokemonId));
   const dispatch = useDispatch();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [enableCamera, setEnableCamera] = useState(false);
@@ -42,7 +41,7 @@ const PokeImage = React.memo(function PokeImage() {
     const localImageUrl = window.URL.createObjectURL(file);
 
     dispatch(
-      actions.changePokemonImage({ id: pokemonId, image: localImageUrl })
+      pokedexActions.changePokemonImage({ id: pokemonId, image: localImageUrl })
     );
   }
 

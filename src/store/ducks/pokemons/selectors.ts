@@ -1,7 +1,7 @@
 import { merge } from 'lodash-es';
 import { RootState } from 'typesafe-actions';
 
-export const getPokemonById = (state: RootState, id: number): any =>
+export const getPokemonById = (id: number) => (state: RootState): any =>
   merge(
     {},
     state.entities.pokemons.byId[id],

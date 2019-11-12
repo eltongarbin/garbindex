@@ -2,15 +2,13 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
-import Segregator from '../../components/Segregator';
-import usePokemonId from '../../hooks/usePokemonId';
 import { selectors } from 'store/ducks/pokemons';
+import Segregator from 'screens/PokemonScreen/components/Segregator';
+import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
 
 function PokeEvolution() {
   const pokemonId = usePokemonId();
-  const evolvedFrom = useSelector(
-    (state: any) => selectors.getPokemonById(state, pokemonId).evolvedFrom
-  );
+  const { evolvedFrom } = useSelector(selectors.getPokemonById(pokemonId));
 
   if (!evolvedFrom) {
     return null;
