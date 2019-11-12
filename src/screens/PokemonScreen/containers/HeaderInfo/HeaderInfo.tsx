@@ -20,7 +20,7 @@ const CardHeaderStyled = styled(CardHeader)`
   }
 `;
 
-const HeaderInfo = React.memo(function HeaderInfo() {
+const HeaderInfo = React.memo(() => {
   const pokemonId = usePokemonId();
   const { name } = useSelector(pokemonsSelectors.getPokemonById(pokemonId));
   const captured = useSelector(pokedexSelectors.isMyPokemon(pokemonId));

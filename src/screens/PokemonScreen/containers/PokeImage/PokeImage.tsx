@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Grid, IconButton } from '@material-ui/core';
 import {
   CloudUpload as CloudUploadIcon,
@@ -20,7 +20,7 @@ const FileInputStyled = styled.input`
   display: none;
 `;
 
-const PokeImage = React.memo(function PokeImage() {
+const PokeImage = React.memo(() => {
   const pokemonId = usePokemonId();
   const { image } = useSelector(pokemonSelectors.getPokemonById(pokemonId));
   const captured = useSelector(pokedexSelectors.isMyPokemon(pokemonId));
@@ -64,10 +64,10 @@ const PokeImage = React.memo(function PokeImage() {
     <Grid item xs={12}>
       <CardMediaStyled image={image} title="Pokémon" />
       {captured && (
-        <Fragment>
+        <>
           <GridListTileBarStyled
             actionIcon={
-              <Fragment>
+              <>
                 {supportsCamera && (
                   <IconButton onClick={() => setEnableCamera(true)}>
                     <PhotoCameraIcon />
@@ -82,10 +82,10 @@ const PokeImage = React.memo(function PokeImage() {
                 >
                   <CloudUploadIcon />
                 </IconButton>
-              </Fragment>
+              </>
             }
           />
-        </Fragment>
+        </>
       )}
       <FileInputStyled
         ref={fileInputRef}

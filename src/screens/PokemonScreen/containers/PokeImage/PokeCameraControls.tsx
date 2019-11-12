@@ -16,22 +16,16 @@ type PokeCameraControlsProps = {
   onClear: (...args: any[]) => any;
 };
 
-const PokeCameraControls: React.FC<PokeCameraControlsProps> = ({
-  isCaptured,
-  onCapture,
-  onCancel,
-  onConfirm,
-  onClear
-}) => {
-  if (!isCaptured) {
+const PokeCameraControls = (props: PokeCameraControlsProps) => {
+  if (!props.isCaptured) {
     return (
       <GridListTileBarStyled
         actionIcon={
           <>
-            <IconButton onClick={onCapture}>
+            <IconButton onClick={props.onCapture}>
               <CameraIcon />
             </IconButton>
-            <IconButton onClick={onCancel}>
+            <IconButton onClick={props.onCancel}>
               <ClearIcon />
             </IconButton>
           </>
@@ -43,10 +37,10 @@ const PokeCameraControls: React.FC<PokeCameraControlsProps> = ({
     <GridListTileBarStyled
       actionIcon={
         <>
-          <IconButton onClick={onConfirm}>
+          <IconButton onClick={props.onConfirm}>
             <DoneIcon />
           </IconButton>
-          <IconButton onClick={onClear}>
+          <IconButton onClick={props.onClear}>
             <ClearIcon />
           </IconButton>
         </>

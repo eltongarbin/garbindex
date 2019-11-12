@@ -21,7 +21,7 @@ export const GridResultStyled = styled(Grid)`
 
 const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON_REQUEST]);
 
-const SearchResult = React.memo(function SearchResult() {
+const SearchResult = React.memo(() => {
   const searched = useSelector(selectors.hasSearched);
   const pokemonFound: any = useSelector(selectors.getPokemonFound);
   const isFetching = useSelector(loadingSelector);
@@ -60,8 +60,8 @@ const SearchResult = React.memo(function SearchResult() {
             from: '/pokemons'
           })
         }
-        onReleaseClick={showReleaseBtn ? handleReleaseClick : null}
-        onCatchClick={!showReleaseBtn ? handleCatchClick : null}
+        onReleaseClick={showReleaseBtn ? handleReleaseClick : undefined}
+        onCatchClick={!showReleaseBtn ? handleCatchClick : undefined}
       />
     );
   };

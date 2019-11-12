@@ -12,7 +12,7 @@ const TextFieldStyled = styled(TextField)`
   }
 `;
 
-const SearchForm = React.memo(function SearchForm(params) {
+const SearchForm = React.memo(() => {
   const [searchText, setSearchText] = useState('');
   const dispatch = useDispatch();
 

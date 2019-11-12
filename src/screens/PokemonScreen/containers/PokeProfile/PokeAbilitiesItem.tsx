@@ -19,27 +19,24 @@ type PokeAbilitiesItemProps = {
   onToggle: (...args: any[]) => any;
 };
 
-const PokeAbilitiesItem: React.FC<PokeAbilitiesItemProps> = ({
-  name,
-  short_effect,
-  expanded,
-  onToggle
-}) => {
-  return (
-    <Grid item xs={12} sm={6}>
-      <ExpansionPanel expanded={expanded} onChange={onToggle} elevation={1}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{name}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetailsStyled>
-          {short_effect && (
-            <Typography variant="caption">{short_effect}</Typography>
-          )}
-          {!short_effect && <LinearProgressStyled color="secondary" />}
-        </ExpansionPanelDetailsStyled>
-      </ExpansionPanel>
-    </Grid>
-  );
-};
+const PokeAbilitiesItem = (props: PokeAbilitiesItemProps) => (
+  <Grid item xs={12} sm={6}>
+    <ExpansionPanel
+      expanded={props.expanded}
+      onChange={props.onToggle}
+      elevation={1}
+    >
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography>{props.name}</Typography>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetailsStyled>
+        {props.short_effect && (
+          <Typography variant="caption">{props.short_effect}</Typography>
+        )}
+        {!props.short_effect && <LinearProgressStyled color="secondary" />}
+      </ExpansionPanelDetailsStyled>
+    </ExpansionPanel>
+  </Grid>
+);
 
 export default PokeAbilitiesItem;

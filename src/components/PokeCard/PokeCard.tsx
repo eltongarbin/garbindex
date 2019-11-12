@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { MouseEvent } from 'react';
 import { Card, IconButton, CardActionArea } from '@material-ui/core';
 import {
   Visibility as VisibilityIcon,
@@ -17,49 +16,41 @@ type PokeCardProps = {
   image: string;
   id: number;
   name: string;
-  onSeeMoreClick: any;
-  onReleaseClick?: any;
-  onCatchClick?: any;
+  onSeeMoreClick: (event: MouseEvent<HTMLElement>) => void;
+  onReleaseClick?: (event: MouseEvent<HTMLElement>) => void;
+  onCatchClick?: (event: MouseEvent<HTMLElement>) => void;
 };
 
-const PokeCard: React.FC<PokeCardProps> = ({
-  image,
-  id,
-  name,
-  onSeeMoreClick,
-  onReleaseClick,
-  onCatchClick
-}) => {
-  return (
-    <Card data-testid="pokecard">
-      <CardActionArea onClick={onSeeMoreClick}>
-        <CardHeaderStyled
-          title={name}
-          subheader={`#${id}`}
-          data-testid="pokecard-header"
-        />
-        <CardMediaStyled
-          image={image}
-          title={name}
-          data-testid="pokecard-image"
-        />
-      </CardActionArea>
-      <CardActionsStyled>
-        <IconButton aria-label="See more" onClick={onSeeMoreClick}>
-          <VisibilityIcon />
+const PokeCard = (props: PokeCardProps) => (
+  <Card data-testid="pokecard">
+    <CardActionArea onClick={props.onSeeMoreClick}>
+      <CardHeaderStyled
+        title={props.name}
+        subheader={`#${props.id}`}
+        data-testid="pokecard-header"
+      />
+      <CardMediaStyled
+        image={props.image}
+        title={props.name}
+        data-testid="pokecard-image"
+      />
+    </CardActionArea>
+    <CardActionsStyled>
+      <IconButton aria-label="See more" onClick={props.onSeeMoreClick}>
+        <VisibilityIcon />
+      </IconButton>
+      {props.onReleaseClick && (
+        <IconButton aria-label="Release" onClick={props.onReleaseClick}>
+          <DeleteIcon />
         </IconButton>
-        {onReleaseClick && (
-          <IconButton aria-label="Release" onClick={onReleaseClick}>
-            <DeleteIcon />
-          </IconButton>
-        )}
-        {onCatchClick && (
-          <IconButton aria-label="Catch" onClick={onCatchClick}>
-            <AddCircleIcon />
-          </IconButton>
-        )}
-      </CardActionsStyled>
-    </Card>
-  );
-};
+      )}
+      {props.onCatchClick && (
+        <IconButton aria-label="Catch" onClick={props.onCatchClick}>
+          <AddCircleIcon />
+        </IconButton>
+      )}
+    </CardActionsStyled>
+  </Card>
+);
+
 export default PokeCard;

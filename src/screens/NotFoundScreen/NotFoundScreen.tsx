@@ -12,7 +12,7 @@ const Container = styled.div`
   padding-top: 50px;
 `;
 
-const ScreenNotFound = React.memo(function ScreenNotFound() {
+const ScreenNotFound = React.memo(() => {
   const history = useHistory();
 
   return (

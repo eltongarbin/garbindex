@@ -39,39 +39,37 @@ type PokedexScreenProps = {
   classes: any;
 };
 
-const PokedexScreen: React.FC<PokedexScreenProps> = ({ classes }) => {
-  return (
-    <div className={classes.wrapper}>
-      <PokeCardList />
-      <Hidden xsDown>
-        <Button
-          variant="contained"
-          color="secondary"
-          fullWidth
-          className={classes.addButton}
-          size="large"
-          component={Link}
-          to="/pokemons"
-          data-testid="hunting-link-button"
-        >
-          Catch Pokémon
-          <AddIcon />
-        </Button>
-      </Hidden>
-      <Hidden smUp>
-        <Fab
-          color="secondary"
-          className={classes.fabAddMobile}
-          component={Link}
-          to="/pokemons"
-          data-testid="hunting-link-fab"
-        >
-          <AddIcon />
-        </Fab>
-      </Hidden>
-    </div>
-  );
-};
+const PokedexScreen = ({ classes }: PokedexScreenProps) => (
+  <div className={classes.wrapper}>
+    <PokeCardList />
+    <Hidden xsDown>
+      <Button
+        variant="contained"
+        color="secondary"
+        fullWidth
+        className={classes.addButton}
+        size="large"
+        component={Link}
+        to="/pokemons"
+        data-testid="hunting-link-button"
+      >
+        Catch Pokémon
+        <AddIcon />
+      </Button>
+    </Hidden>
+    <Hidden smUp>
+      <Fab
+        color="secondary"
+        className={classes.fabAddMobile}
+        component={Link}
+        to="/pokemons"
+        data-testid="hunting-link-fab"
+      >
+        <AddIcon />
+      </Fab>
+    </Hidden>
+  </div>
+);
 
 export default compose(
   withScreenLayout({ title: 'My Pokédex' }),

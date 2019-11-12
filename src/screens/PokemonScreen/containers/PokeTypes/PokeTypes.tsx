@@ -15,7 +15,7 @@ const GridContent = styled(Grid)`
   }
 `;
 
-const PokeTypes = React.memo(function PokeTypes() {
+const PokeTypes = React.memo(() => {
   const pokemonId = usePokemonId();
   const [expandedId, setExpandedId] = useState(0);
   const { types } = useSelector(selectors.getPokemonById(pokemonId));

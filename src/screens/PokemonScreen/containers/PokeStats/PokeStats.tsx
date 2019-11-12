@@ -8,9 +8,7 @@ import { selectors } from 'store/ducks/pokemons';
 
 function PokeStats() {
   const pokemonId = usePokemonId();
-  const stats = useSelector(
-    (state: any) => selectors.getPokemonById(state, pokemonId).stats
-  );
+  const { stats } = useSelector(selectors.getPokemonById(pokemonId));
 
   return (
     <Grid container direction="column" spacing={1}>

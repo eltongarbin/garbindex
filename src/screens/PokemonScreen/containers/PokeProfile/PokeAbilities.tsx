@@ -6,7 +6,7 @@ import usePokemonId from '../../hooks/usePokemonId';
 import PokeAbilitiesItem from './PokeAbilitiesItem';
 import { actions, selectors } from 'store/ducks/pokemons';
 
-const PokeAbilities = React.memo(function PokeAbilities() {
+const PokeAbilities = React.memo(() => {
   const pokemonId = usePokemonId();
   const [expandedId, setExpandedId] = useState(0);
   const { abilities } = useSelector(selectors.getPokemonById(pokemonId));

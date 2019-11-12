@@ -10,10 +10,7 @@ type PokeStatsListItemProps = {
   value: number;
 };
 
-const PokeStatsListItem: React.FC<PokeStatsListItemProps> = ({
-  name,
-  value
-}) => {
+const PokeStatsListItem = ({ name, value }: PokeStatsListItemProps) => {
   return (
     <Grid item xs={12}>
       <Typography component="label">

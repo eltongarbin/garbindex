@@ -12,14 +12,10 @@ type SegregatorProps = {
   title: string;
 };
 
-const Segregator: React.FC<SegregatorProps> = React.memo(function Segregator({
-  title
-}) {
-  return (
-    <TypoStyled variant="h6" align="center" noWrap>
-      {title}
-    </TypoStyled>
-  );
-});
+const Segregator = React.memo(({ title }: SegregatorProps) => (
+  <TypoStyled variant="h6" align="center" noWrap>
+    {title}
+  </TypoStyled>
+));
 
 export default Segregator;

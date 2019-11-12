@@ -6,7 +6,7 @@ import { Grid, SnackbarContent, Link } from '@material-ui/core';
 import PokeCard from 'components/PokeCard';
 import { actions, selectors } from 'store/ducks/pokedex';
 
-const PokeCardList = React.memo(function PokeCardList() {
+const PokeCardList = React.memo(() => {
   const history = useHistory();
   const pokemons = useSelector(selectors.getCaughtPokemons);
   const dispatch = useDispatch();

@@ -18,7 +18,7 @@ type PokeCameraProps = {
   onError: (...args: any[]) => any;
 };
 
-const PokeCamera: React.FC<PokeCameraProps> = ({ onCancel, onError }) => {
+const PokeCamera = ({ onCancel, onError }: PokeCameraProps) => {
   const pokemonId = usePokemonId();
   const dispatch = useDispatch();
   const [image, setImage] = useState();
