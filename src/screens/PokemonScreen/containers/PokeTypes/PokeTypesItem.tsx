@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -24,30 +24,28 @@ type PokeTypesItemProps = {
   name: string;
   pokemons?: any[];
   expanded: boolean;
-  onToggle: (...args: any[]) => any;
+  onToggle: (event: ChangeEvent<{}>, expanded: boolean) => void;
 };
 
-const PokeTypesItem: React.SFC<PokeTypesItemProps> = ({
+const PokeTypesItem = ({
   name,
   pokemons = [],
   expanded,
   onToggle
-}) => {
-  return (
-    <Grid item xs={12} sm={6}>
-      <ExpansionPanel expanded={expanded} onChange={onToggle} elevation={1}>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>{name}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetailsStyled>
-          {pokemons.map(({ id, name }) => (
-            <ChipStyled label={name} key={id} color="secondary" />
-          ))}
-          {!pokemons.length && <LinearProgressStyled color="secondary" />}
-        </ExpansionPanelDetailsStyled>
-      </ExpansionPanel>
-    </Grid>
-  );
-};
+}: PokeTypesItemProps) => (
+  <Grid item xs={12} sm={6}>
+    <ExpansionPanel expanded={expanded} onChange={onToggle} elevation={1}>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography>{name}</Typography>
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetailsStyled>
+        {pokemons.map(({ id, name }) => (
+          <ChipStyled label={name} key={id} color="secondary" />
+        ))}
+        {!pokemons.length && <LinearProgressStyled color="secondary" />}
+      </ExpansionPanelDetailsStyled>
+    </ExpansionPanel>
+  </Grid>
+);
 
 export default PokeTypesItem;

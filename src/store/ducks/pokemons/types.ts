@@ -17,6 +17,8 @@ export enum ActionTypes {
 type Pokemon = {
   [Key: number]: {
     id: number;
+    name: string;
+    image: string;
     typesById: any;
     abilitiesById: any;
   };

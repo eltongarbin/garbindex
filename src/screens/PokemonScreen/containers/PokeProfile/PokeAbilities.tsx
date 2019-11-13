@@ -13,7 +13,7 @@ const PokeAbilities = React.memo(() => {
   const dispatch = useDispatch();
 
   const handleToggleDetail = (ability: any) => (
-    _event: any,
+    _event: React.ChangeEvent<{}>,
     expanded: boolean
   ) => {
     if (expanded && !ability.short_effect) {

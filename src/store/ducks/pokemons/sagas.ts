@@ -5,7 +5,7 @@ import { extractParamId } from 'utils';
 import { genericAsyncResolver } from 'utils/reduxHelpers';
 import * as actions from './actions';
 import { ActionTypes } from './types';
-import services from 'services';
+import * as services from 'services/pokemonServices';
 
 function* watchFetchPokemonRequest(
   action: ReturnType<typeof actions.fetchPokemon.request>

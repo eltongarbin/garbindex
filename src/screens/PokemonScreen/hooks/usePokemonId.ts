@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 
 function usePokemonId() {
-  let { id }: any = useParams();
+  let { id = '' } = useParams();
 
   return parseInt(id);
 }

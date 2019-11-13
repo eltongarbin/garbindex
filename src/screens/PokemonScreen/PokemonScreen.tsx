@@ -15,7 +15,7 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import history from 'utils/history';
 import { withScreenLayout } from 'components/ScreenLayout';
 import { selectors, actions, types } from 'store/ducks/pokemons';
-import { createLoadingSelector } from 'store/ducks/loading';
+import { createLoadingSelector } from 'store/ducks/loading/selectors';
 import HeaderInfo from './containers/HeaderInfo';
 import PokeImage from './containers/PokeImage';
 import PokeTypes from './containers/PokeTypes';
@@ -42,8 +42,8 @@ const GridMainInfo = styled(Grid)`
 const loadingSelector = createLoadingSelector([types.FETCH_POKEMON_REQUEST]);
 
 function PokemonScreen() {
-  const { id }: any = useParams();
-  const pokemon = useSelector(selectors.getPokemonById(id));
+  const { id = '' } = useParams();
+  const pokemon = useSelector(selectors.getPokemonById(parseInt(id)));
   const isFetching = useSelector(loadingSelector);
   const dispatch = useDispatch();
 

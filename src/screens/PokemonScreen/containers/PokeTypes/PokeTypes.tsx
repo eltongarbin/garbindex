@@ -22,7 +22,7 @@ const PokeTypes = React.memo(() => {
   const dispatch = useDispatch();
 
   const handleToggleDetail = (type: any) => (
-    _event: any,
+    _event: React.ChangeEvent<{}>,
     expanded: boolean
   ) => {
     if (expanded && isEmpty(type.pokemons)) {

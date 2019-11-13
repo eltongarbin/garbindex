@@ -11,7 +11,7 @@ import {
   selectors as pokedexSelectors,
   actions as pokedexActions
 } from 'store/ducks/pokedex';
-import { createLoadingSelector } from 'store/ducks/loading';
+import { createLoadingSelector } from 'store/ducks/loading/selectors';
 
 export const GridResultStyled = styled(Grid)`
   && {
@@ -23,7 +23,7 @@ const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON_REQUEST]);
 
 const SearchResult = React.memo(() => {
   const searched = useSelector(selectors.hasSearched);
-  const pokemonFound: any = useSelector(selectors.getPokemonFound);
+  const pokemonFound = useSelector(selectors.getPokemonFound);
   const isFetching = useSelector(loadingSelector);
   const pokemonsCapturedIds = useSelector(pokedexSelectors.getCaughtPokemonsId);
   const dispatch = useDispatch();

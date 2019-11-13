@@ -14,8 +14,8 @@ const WebcamStyles = {
 };
 
 type PokeCameraProps = {
-  onCancel: (...args: any[]) => any;
-  onError: (...args: any[]) => any;
+  onCancel: () => void;
+  onError: (error: string) => void;
 };
 
 const PokeCamera = ({ onCancel, onError }: PokeCameraProps) => {

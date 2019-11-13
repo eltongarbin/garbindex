@@ -15,8 +15,8 @@ export function* genericAsyncResolver(
       dataFormatted = yield cbFormatData(data);
     }
 
-    yield put(asyncActions.receive(dataFormatted || data));
+    yield put(asyncActions.success(dataFormatted || data));
   } catch (error) {
-    yield put(asyncActions.error(error));
+    yield put(asyncActions.failure(error));
   }
 }

@@ -13,7 +13,7 @@ const PokeCardList = React.memo(() => {
 
   return (
     <Grid container spacing={1}>
-      {pokemons.map(({ id, name, image }: any) => (
+      {pokemons.map(({ id, name, image }) => (
         <Grid item xs={6} md={4} key={id}>
           <PokeCard
             id={id}

@@ -10,10 +10,10 @@ import { GridListTileBarStyled } from './PokeImageStyled';
 
 type PokeCameraControlsProps = {
   isCaptured?: boolean;
-  onCapture: (...args: any[]) => any;
-  onCancel: (...args: any[]) => any;
-  onConfirm: (...args: any[]) => any;
-  onClear: (...args: any[]) => any;
+  onCapture: () => void;
+  onCancel: () => void;
+  onConfirm: () => void;
+  onClear: () => void;
 };
 
 const PokeCameraControls = (props: PokeCameraControlsProps) => {

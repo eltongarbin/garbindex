@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, ChangeEvent } from 'react';
 import { Grid, IconButton } from '@material-ui/core';
 import {
   CloudUpload as CloudUploadIcon,
@@ -35,9 +35,9 @@ const PokeImage = React.memo(() => {
     setEnableCamera(false);
   }, [image, captured]);
 
-  function handleLoadLocalImage(event: any) {
+  function handleLoadLocalImage(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
-    const file = event.target.files[0];
+    const file = event.target.files && event.target.files[0];
     const localImageUrl = window.URL.createObjectURL(file);
 
     dispatch(
