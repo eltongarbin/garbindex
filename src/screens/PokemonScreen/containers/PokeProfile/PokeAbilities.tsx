@@ -5,11 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import usePokemonId from '../../hooks/usePokemonId';
 import PokeAbilitiesItem from './PokeAbilitiesItem';
 import { actions, selectors } from 'store/ducks/pokemons';
+import { map } from 'lodash-es';
 
 const PokeAbilities = React.memo(() => {
   const pokemonId = usePokemonId();
   const [expandedId, setExpandedId] = useState(0);
-  const { abilities } = useSelector(selectors.getPokemonById(pokemonId));
+  const { abilitiesById } = useSelector(selectors.getPokemonById(pokemonId));
   const dispatch = useDispatch();
 
   const handleToggleDetail = (ability: any) => (
@@ -31,7 +32,7 @@ const PokeAbilities = React.memo(() => {
   return (
     <Grid item xs={12}>
       <Grid container justify="center" spacing={1}>
-        {abilities.map((ability: any) => (
+        {map(abilitiesById).map((ability: any) => (
           <PokeAbilitiesItem
             key={ability.id}
             name={ability.name}

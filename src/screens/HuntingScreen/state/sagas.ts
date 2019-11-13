@@ -1,7 +1,6 @@
 import { takeEvery, put, race, take } from 'redux-saga/effects';
 
 import * as actions from './actions';
-import { ActionTypes } from './types';
 import {
   actions as pokemonActions,
   types as pokemonTypes
@@ -21,5 +20,5 @@ function* watchSearchPokemonRequest(
 }
 
 export default [
-  takeEvery(ActionTypes.SEARCH_POKEMON_REQUEST, watchSearchPokemonRequest)
+  takeEvery(actions.searchForPokemon.request, watchSearchPokemonRequest)
 ];

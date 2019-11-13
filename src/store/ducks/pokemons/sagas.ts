@@ -4,7 +4,6 @@ import { keyBy } from 'lodash-es';
 import { extractParamId } from 'utils';
 import { genericAsyncResolver } from 'utils/reduxHelpers';
 import * as actions from './actions';
-import { ActionTypes } from './types';
 import * as services from 'services/pokemonServices';
 
 function* watchFetchPokemonRequest(
@@ -99,18 +98,15 @@ function* watchFetchShortEffectByAbilityRequest(
 }
 
 export default [
-  takeEvery(ActionTypes.FETCH_POKEMON_REQUEST, watchFetchPokemonRequest),
-  takeEvery(ActionTypes.FETCH_POKEMON_SUCCESS, watchFetchPokemonSuccess),
+  takeEvery(actions.fetchPokemon.request, watchFetchPokemonRequest),
+  takeEvery(actions.fetchPokemon.success, watchFetchPokemonSuccess),
+  takeEvery(actions.fetchEvolvedFrom.request, watchFetchEnvolvedFromRequest),
   takeEvery(
-    ActionTypes.FETCH_EVOLUTION_CHAIN_REQUEST,
-    watchFetchEnvolvedFromRequest
-  ),
-  takeEvery(
-    ActionTypes.FETCH_POKEMONS_BYTYPE_REQUEST,
+    actions.fetchPokemonsByTypeId.request,
     watchFetchPokemonsByTypeRequest
   ),
   takeEvery(
-    ActionTypes.FETCH_SHORT_EFFECT_BYABILITY_REQUEST,
+    actions.fetchShortEffectByAbilityId.request,
     watchFetchShortEffectByAbilityRequest
   )
 ];
