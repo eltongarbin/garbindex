@@ -8,6 +8,7 @@ import { actions, selectors } from 'store/ducks/pokemons';
 import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
 import Segregator from 'screens/PokemonScreen/components/Segregator';
 import PokeTypesItem from './PokeTypesItem';
+import { PokemonType } from 'store/ducks/pokemons/types';
 
 const GridContent = styled(Grid)`
   && {
@@ -21,7 +22,7 @@ const PokeTypes = React.memo(() => {
   const { typesById } = useSelector(selectors.getPokemonById(pokemonId));
   const dispatch = useDispatch();
 
-  const handleToggleDetail = (type: any) => (
+  const handleToggleDetail = (type: PokemonType) => (
     _event: React.ChangeEvent<{}>,
     expanded: boolean
   ) => {
@@ -41,7 +42,7 @@ const PokeTypes = React.memo(() => {
       </Grid>
       <Grid item xs={12}>
         <Grid container justify="center" spacing={1}>
-          {map(typesById).map((type: any) => (
+          {map(typesById).map((type) => (
             <PokeTypesItem
               key={type.id}
               name={type.name}

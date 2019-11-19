@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -22,27 +22,26 @@ const ChipStyled = styled(Chip)`
 
 type PokeTypesItemProps = {
   name: string;
-  pokemons?: any[];
   expanded: boolean;
-  onToggle: (event: ChangeEvent<{}>, expanded: boolean) => void;
+  pokemons: Array<{ id: number; name: string }>;
+  onToggle: (event: React.ChangeEvent<{}>, expanded: boolean) => void;
 };
 
-const PokeTypesItem = ({
-  name,
-  pokemons = [],
-  expanded,
-  onToggle
-}: PokeTypesItemProps) => (
+const PokeTypesItem = (props: PokeTypesItemProps) => (
   <Grid item xs={12} sm={6}>
-    <ExpansionPanel expanded={expanded} onChange={onToggle} elevation={1}>
+    <ExpansionPanel
+      expanded={props.expanded}
+      onChange={props.onToggle}
+      elevation={1}
+    >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography>{name}</Typography>
+        <Typography>{props.name}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetailsStyled>
-        {pokemons.map(({ id, name }) => (
+        {props.pokemons.map(({ id, name }) => (
           <ChipStyled label={name} key={id} color="secondary" />
         ))}
-        {!pokemons.length && <LinearProgressStyled color="secondary" />}
+        {!props.pokemons.length && <LinearProgressStyled color="secondary" />}
       </ExpansionPanelDetailsStyled>
     </ExpansionPanel>
   </Grid>

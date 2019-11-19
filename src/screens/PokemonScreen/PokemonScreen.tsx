@@ -39,7 +39,9 @@ const GridMainInfo = styled(Grid)`
   }
 `;
 
-const loadingSelector = createLoadingSelector([types.FETCH_POKEMON_REQUEST]);
+const loadingSelector = createLoadingSelector([
+  types.ActionTypes.FETCH_POKEMON_REQUEST
+]);
 
 function PokemonScreen() {
   const { id = '' } = useParams();

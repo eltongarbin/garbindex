@@ -13,17 +13,39 @@ export enum ActionTypes {
   FETCH_SHORT_EFFECT_BYABILITY_FAILURE = '@@pokemons/FETCH_SHORT_EFFECT_BYABILITY_FAILURE'
 }
 
-// TODO: improve this type
-type Pokemon = {
-  [Key: number]: {
+export type PokemonType = {
+  id: number;
+  name: string;
+  pokemons: Array<{
     id: number;
     name: string;
-    image: string;
-    typesById: any;
-    abilitiesById: any;
-  };
+  }>;
+};
+
+export type PokemonAbility = {
+  id: number;
+  name: string;
+  short_effect?: string;
+};
+
+export type PokemonStat = {
+  id: number;
+  name: string;
+  base_stat: number;
+};
+
+export type Pokemon = {
+  id: number;
+  name: string;
+  image: string;
+  evolvedFrom?: string;
+  abilitiesById: IDictionary<PokemonAbility>;
+  height: number;
+  weight: number;
+  stats: Array<PokemonStat>;
+  typesById: IDictionary<PokemonType>;
 };
 
 export type PokemonState = Readonly<{
-  byId: Readonly<Pokemon>;
+  byId: Readonly<IDictionary<Pokemon>>;
 }>;

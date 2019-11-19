@@ -1,11 +1,16 @@
 import { call, put } from 'redux-saga/effects';
 import { isEmpty } from 'lodash-es';
 
+interface IAsyncActions {
+  success: (payload: any) => any;
+  failure: (payload: Error) => any;
+}
+
 export function* genericAsyncResolver(
-  fnService: any,
+  fnService: (param: any) => Promise<any>,
   parameter: any,
-  asyncActions: any,
-  cbFormatData: any
+  asyncActions: IAsyncActions,
+  cbFormatData?: (data: any) => any
 ) {
   try {
     const data = yield call(fnService, parameter);

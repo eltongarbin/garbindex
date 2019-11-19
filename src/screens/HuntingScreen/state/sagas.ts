@@ -12,8 +12,8 @@ function* watchSearchPokemonRequest(
   yield put(pokemonActions.fetchPokemon.request(action.payload));
 
   const { task } = yield race({
-    task: take(pokemonTypes.FETCH_POKEMON_SUCCESS),
-    cancel: take(pokemonTypes.FETCH_POKEMON_FAILURE)
+    task: take(pokemonTypes.ActionTypes.FETCH_POKEMON_SUCCESS),
+    cancel: take(pokemonTypes.ActionTypes.FETCH_POKEMON_FAILURE)
   });
 
   yield put(actions.searchForPokemon.success(task ? task.payload.id : null));

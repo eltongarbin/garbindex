@@ -12,7 +12,7 @@ function PokeStats() {
 
   return (
     <Grid container direction="column" spacing={1}>
-      {stats.map(({ id, name, base_stat }: any) => (
+      {stats.map(({ id, name, base_stat }) => (
         <PokeStatsItem key={id} name={name} value={base_stat} />
       ))}
     </Grid>

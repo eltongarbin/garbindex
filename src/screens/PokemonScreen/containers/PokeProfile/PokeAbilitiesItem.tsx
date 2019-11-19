@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -16,7 +16,7 @@ type PokeAbilitiesItemProps = {
   name: string;
   short_effect?: string;
   expanded: boolean;
-  onToggle: (event: ChangeEvent<{}>, expanded: boolean) => void;
+  onToggle: (event: React.ChangeEvent<{}>, expanded: boolean) => void;
 };
 
 const PokeAbilitiesItem = (props: PokeAbilitiesItemProps) => (
