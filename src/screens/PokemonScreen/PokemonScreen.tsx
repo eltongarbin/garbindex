@@ -11,10 +11,11 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'lodash-es';
 import { Link as RouterLink, useParams } from 'react-router-dom';
+import { getType } from 'typesafe-actions';
 
 import history from 'utils/history';
 import { withScreenLayout } from 'components/ScreenLayout';
-import { selectors, actions, types } from 'store/ducks/pokemons';
+import { selectors, actions } from 'store/ducks/pokemons';
 import { createLoadingSelector } from 'store/ducks/loading/selectors';
 import HeaderInfo from './containers/HeaderInfo';
 import PokeImage from './containers/PokeImage';
@@ -40,7 +41,7 @@ const GridMainInfo = styled(Grid)`
 `;
 
 const loadingSelector = createLoadingSelector([
-  types.ActionTypes.FETCH_POKEMON_REQUEST
+  getType(actions.fetchPokemon.request)
 ]);
 
 function PokemonScreen() {

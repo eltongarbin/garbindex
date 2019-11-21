@@ -1,5 +1,8 @@
-import { LoadingState } from './types';
 import { Action } from 'typesafe-actions';
+
+type LoadingState = Readonly<{
+  [Key: string]: boolean;
+}>;
 
 const initialState: LoadingState = {};
 

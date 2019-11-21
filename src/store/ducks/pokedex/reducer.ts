@@ -1,7 +1,15 @@
 import { createReducer } from 'typesafe-actions';
+import { DeepReadonly } from 'utility-types';
 
-import { PokedexState } from './types';
 import { releasePokemon, catchPokemon, changePokemonImage } from './actions';
+
+type PokedexState = DeepReadonly<{
+  pokemonsId: Array<number>;
+  customPokemonPhotoById: IDictionary<{
+    id: number;
+    image: string;
+  }>;
+}>;
 
 const initialState: PokedexState = {
   pokemonsId: [],

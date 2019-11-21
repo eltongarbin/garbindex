@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-
-import usePokemonId from '../../hooks/usePokemonId';
-import PokeAbilitiesItem from './PokeAbilitiesItem';
-import { actions, selectors, types } from 'store/ducks/pokemons';
 import { map } from 'lodash-es';
+
+import { actions, selectors } from 'store/ducks/pokemons';
+import { PokemonAbility } from 'store/ducks/pokemons/reducer';
+import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
+import PokeAbilitiesItem from './PokeAbilitiesItem';
 
 const PokeAbilities = React.memo(() => {
   const pokemonId = usePokemonId();
@@ -13,7 +14,7 @@ const PokeAbilities = React.memo(() => {
   const { abilitiesById } = useSelector(selectors.getPokemonById(pokemonId));
   const dispatch = useDispatch();
 
-  const handleToggleDetail = (ability: types.PokemonAbility) => (
+  const handleToggleDetail = (ability: PokemonAbility) => (
     _event: React.ChangeEvent<{}>,
     expanded: boolean
   ) => {

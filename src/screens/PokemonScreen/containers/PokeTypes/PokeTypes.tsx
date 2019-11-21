@@ -5,10 +5,11 @@ import styled from 'styled-components';
 import { isEmpty, map } from 'lodash-es';
 
 import { actions, selectors } from 'store/ducks/pokemons';
+import { PokemonType } from 'store/ducks/pokemons/reducer';
 import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
 import Segregator from 'screens/PokemonScreen/components/Segregator';
 import PokeTypesItem from './PokeTypesItem';
-import { PokemonType } from 'store/ducks/pokemons/types';
+import { DeepReadonly } from 'utility-types';
 
 const GridContent = styled(Grid)`
   && {
@@ -22,7 +23,7 @@ const PokeTypes = React.memo(() => {
   const { typesById } = useSelector(selectors.getPokemonById(pokemonId));
   const dispatch = useDispatch();
 
-  const handleToggleDetail = (type: PokemonType) => (
+  const handleToggleDetail = (type: DeepReadonly<PokemonType>) => (
     _event: React.ChangeEvent<{}>,
     expanded: boolean
   ) => {

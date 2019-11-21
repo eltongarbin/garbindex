@@ -1,10 +1,8 @@
 import { takeEvery, put, race, take } from 'redux-saga/effects';
+import { getType } from 'typesafe-actions';
 
 import * as actions from './actions';
-import {
-  actions as pokemonActions,
-  types as pokemonTypes
-} from 'store/ducks/pokemons';
+import { actions as pokemonActions } from 'store/ducks/pokemons';
 
 function* watchSearchPokemonRequest(
   action: ReturnType<typeof actions.searchForPokemon.request>
@@ -12,8 +10,8 @@ function* watchSearchPokemonRequest(
   yield put(pokemonActions.fetchPokemon.request(action.payload));
 
   const { task } = yield race({
-    task: take(pokemonTypes.ActionTypes.FETCH_POKEMON_SUCCESS),
-    cancel: take(pokemonTypes.ActionTypes.FETCH_POKEMON_FAILURE)
+    task: take(getType(pokemonActions.fetchPokemon.success)),
+    cancel: take(pokemonActions.fetchPokemon.failure)
   });
 
   yield put(actions.searchForPokemon.success(task ? task.payload.id : null));

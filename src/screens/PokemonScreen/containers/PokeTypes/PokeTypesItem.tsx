@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import styled from 'styled-components';
+import { isEmpty } from 'lodash-es';
 
 import {
   LinearProgressStyled,
@@ -23,7 +24,7 @@ const ChipStyled = styled(Chip)`
 type PokeTypesItemProps = {
   name: string;
   expanded: boolean;
-  pokemons: Array<{ id: number; name: string }>;
+  pokemons?: ReadonlyArray<{ id: number; name: string }>;
   onToggle: (event: React.ChangeEvent<{}>, expanded: boolean) => void;
 };
 
@@ -38,10 +39,11 @@ const PokeTypesItem = (props: PokeTypesItemProps) => (
         <Typography>{props.name}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetailsStyled>
-        {props.pokemons.map(({ id, name }) => (
-          <ChipStyled label={name} key={id} color="secondary" />
-        ))}
-        {!props.pokemons.length && <LinearProgressStyled color="secondary" />}
+        {props.pokemons &&
+          props.pokemons.map(({ id, name }) => (
+            <ChipStyled label={name} key={id} color="secondary" />
+          ))}
+        {isEmpty(props.pokemons) && <LinearProgressStyled color="secondary" />}
       </ExpansionPanelDetailsStyled>
     </ExpansionPanel>
   </Grid>

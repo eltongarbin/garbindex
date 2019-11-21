@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'lodash-es';
+import { getType } from 'typesafe-actions';
 
 import PokeCard from 'components/PokeCard';
-import { actions, types, selectors } from '../state';
+import { actions, selectors } from '../state';
 import {
   selectors as pokedexSelectors,
   actions as pokedexActions
@@ -19,7 +20,9 @@ export const GridResultStyled = styled(Grid)`
   }
 `;
 
-const loadingSelector = createLoadingSelector([types.SEARCH_POKEMON_REQUEST]);
+const loadingSelector = createLoadingSelector([
+  getType(actions.searchForPokemon.request)
+]);
 
 const SearchResult = React.memo(() => {
   const searched = useSelector(selectors.hasSearched);

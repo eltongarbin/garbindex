@@ -1,10 +1,9 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { keyBy } from 'lodash-es';
 
 import { extractParamId } from 'utils';
 import { genericAsyncResolver } from 'utils/reduxHelpers';
 import * as actions from './actions';
-import * as services from 'services/pokemonServices';
+import * as services from 'services/pokemonService';
 
 function* watchFetchPokemonRequest(
   action: ReturnType<typeof actions.fetchPokemon.request>
@@ -12,33 +11,7 @@ function* watchFetchPokemonRequest(
   yield genericAsyncResolver(
     services.getPokemon,
     action.payload,
-    actions.fetchPokemon,
-    (data: any) => ({
-      id: data.id,
-      name: data.name,
-      image: data.sprites.front_default,
-      weight: data.weight,
-      height: data.height,
-      abilitiesById: keyBy(
-        data.abilities.map(({ ability }: any) => ({
-          id: parseInt(extractParamId(ability.url)),
-          name: ability.name
-        })),
-        'id'
-      ),
-      stats: data.stats.map((stat: any) => ({
-        base_stat: stat.base_stat,
-        name: stat.stat.name,
-        id: parseInt(extractParamId(stat.stat.url))
-      })),
-      typesById: keyBy(
-        data.types.map(({ type }: any) => ({
-          id: parseInt(extractParamId(type.url)),
-          name: type.name
-        })),
-        'id'
-      )
-    })
+    actions.fetchPokemon
   );
 }
 
@@ -54,13 +27,7 @@ function* watchFetchEnvolvedFromRequest(
   yield genericAsyncResolver(
     services.getSpecie,
     action.payload,
-    actions.fetchEvolvedFrom,
-    (data: any) => ({
-      id: action.payload,
-      evolvedFrom: data.evolves_from_species
-        ? data.evolves_from_species.name
-        : null
-    })
+    actions.fetchEvolvedFrom
   );
 }
 
@@ -71,10 +38,10 @@ function* watchFetchPokemonsByTypeRequest(
     services.getType,
     action.payload.typeId,
     actions.fetchPokemonsByTypeId,
-    (data: any) => ({
+    (data: services.PokemonType) => ({
       pokemonId: action.payload.pokemonId,
       typeId: action.payload.typeId,
-      pokemons: data.pokemon.map(({ pokemon }: any) => ({
+      pokemons: data.pokemon.map(({ pokemon }) => ({
         id: parseInt(extractParamId(pokemon.url)),
         name: pokemon.name
       }))
@@ -89,7 +56,7 @@ function* watchFetchShortEffectByAbilityRequest(
     services.getAbility,
     action.payload.abilityId,
     actions.fetchShortEffectByAbilityId,
-    (data: any) => ({
+    (data: services.PokemonAbility) => ({
       pokemonId: action.payload.pokemonId,
       abilityId: action.payload.abilityId,
       short_effect: data.effect_entries[0].short_effect
