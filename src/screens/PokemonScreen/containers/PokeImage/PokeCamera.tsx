@@ -10,7 +10,7 @@ import PokeCameraControls from './PokeCameraControls';
 
 const WebcamStyles = {
   display: 'flex',
-  width: '100%'
+  width: '100%',
 };
 
 type PokeCameraProps = {
@@ -21,11 +21,11 @@ type PokeCameraProps = {
 const PokeCamera = ({ onCancel, onError }: PokeCameraProps) => {
   const pokemonId = usePokemonId();
   const dispatch = useDispatch();
-  const [image, setImage] = useState();
-  const webcamRef = useRef<Webcam>(null!);
+  const [image, setImage] = useState<string>('');
+  const webcamRef = useRef<any>(null);
   const handleCapture = useCallback(() => {
     if (webcamRef && webcamRef.current) {
-      setImage(webcamRef.current.getScreenshot());
+      setImage(webcamRef.current.getScreenshot() || '');
     }
   }, [webcamRef, setImage]);
 
@@ -45,7 +45,7 @@ const PokeCamera = ({ onCancel, onError }: PokeCameraProps) => {
         isCaptured={Boolean(image)}
         onCapture={handleCapture}
         onCancel={onCancel}
-        onClear={() => setImage(null)}
+        onClear={() => setImage('')}
         onConfirm={() =>
           dispatch(actions.changePokemonImage({ id: pokemonId, image }))
         }

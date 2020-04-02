@@ -9,14 +9,14 @@ function* watchSearchPokemonRequest(
 ): Generator {
   yield put(pokemonActions.fetchPokemon.request(action.payload));
 
-  const { task } = yield race({
+  const { task }: any = yield race({
     task: take(getType(pokemonActions.fetchPokemon.success)),
-    cancel: take(pokemonActions.fetchPokemon.failure)
+    cancel: take(pokemonActions.fetchPokemon.failure),
   });
 
   yield put(actions.searchForPokemon.success(task ? task.payload.id : null));
 }
 
 export default [
-  takeEvery(actions.searchForPokemon.request, watchSearchPokemonRequest)
+  takeEvery(actions.searchForPokemon.request, watchSearchPokemonRequest),
 ];
