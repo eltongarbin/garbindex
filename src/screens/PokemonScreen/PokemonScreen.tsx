@@ -5,7 +5,7 @@ import {
   SnackbarContent,
   Link,
   CircularProgress,
-  Grid
+  Grid,
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -41,7 +41,7 @@ const GridMainInfo = styled(Grid)`
 `;
 
 const loadingSelector = createLoadingSelector([
-  getType(actions.fetchPokemon.request)
+  getType(actions.fetchPokemon.request),
 ]);
 
 function PokemonScreen() {
@@ -100,7 +100,8 @@ function PokemonScreen() {
 }
 
 const handleBackClick = () => {
-  const { state } = history.location;
+  const { state }: any = history.location;
+
   if (state) {
     history.push(state.from);
     return;
@@ -111,5 +112,5 @@ const handleBackClick = () => {
 
 export default withScreenLayout({
   title: 'Pokémon Detail',
-  onBackClick: handleBackClick
+  onBackClick: handleBackClick,
 })(PokemonScreen);
