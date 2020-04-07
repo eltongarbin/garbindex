@@ -46,7 +46,7 @@
     "@types/webpack-env": "^1.15.1",
     "cypress": "^4.3.0",
     "husky": "^4.2.3",
-    "jest-styled-components": "^7.0.0",
+    "jest-styled-components": "^7.0.1",
     "lint-staged": "^10.1.1",
     "prettier": "^2.0.4",
     "react-test-renderer": "^16.13.1",
