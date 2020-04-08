@@ -20,11 +20,13 @@ const PokeCardList = React.memo(() => {
             name={name}
             image={image}
             onSeeMoreClick={() => history.push(`/pokemons/${id}`)}
-            onReleaseClick={() =>
-              window.confirm(
-                'Are you sure you want to release this pokémon?'
-              ) && dispatch(actions.releasePokemon(id))
-            }
+            captureState={{
+              nextState: 'Release',
+              onChange: () =>
+                window.confirm(
+                  'Are you sure you want to release this pokémon?'
+                ) && dispatch(actions.releasePokemon(id))
+            }}
           />
         </Grid>
       ))}

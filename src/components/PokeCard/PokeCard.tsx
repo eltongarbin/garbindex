@@ -12,13 +12,17 @@ import {
   CardActionsStyled
 } from './PokeCardStyled';
 
+type CaptureStates = 'Release' | 'Catch';
+
 type PokeCardProps = {
   image: string;
   id: number;
   name: string;
+  captureState: {
+    nextState: CaptureStates;
+    onChange: (event: MouseEvent<HTMLElement>) => void;
+  };
   onSeeMoreClick: (event: MouseEvent<HTMLElement>) => void;
-  onReleaseClick?: (event: MouseEvent<HTMLElement>) => void;
-  onCatchClick?: (event: MouseEvent<HTMLElement>) => void;
 };
 
 const PokeCard = (props: PokeCardProps) => (
@@ -39,16 +43,13 @@ const PokeCard = (props: PokeCardProps) => (
       <IconButton aria-label="See more" onClick={props.onSeeMoreClick}>
         <VisibilityIcon />
       </IconButton>
-      {props.onReleaseClick && (
-        <IconButton aria-label="Release" onClick={props.onReleaseClick}>
-          <DeleteIcon />
-        </IconButton>
-      )}
-      {props.onCatchClick && (
-        <IconButton aria-label="Catch" onClick={props.onCatchClick}>
-          <AddCircleIcon />
-        </IconButton>
-      )}
+      <IconButton
+        aria-label={props.captureState.nextState}
+        onClick={props.captureState.onChange}
+      >
+        {props.captureState.nextState === 'Release' && <DeleteIcon />}
+        {props.captureState.nextState === 'Catch' && <AddCircleIcon />}
+      </IconButton>
     </CardActionsStyled>
   </Card>
 );
