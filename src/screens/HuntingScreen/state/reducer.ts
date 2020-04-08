@@ -1,8 +1,7 @@
 import { createReducer } from 'typesafe-actions';
-
 import { cleanSearchResult, searchForPokemon } from './actions';
 
-type HuntingScreenState = Readonly<{
+export type HuntingScreenState = Readonly<{
   searched: boolean;
   pokemonFoundId?: number;
 }>;

@@ -1,35 +1,28 @@
-import reducer, { initialState } from './reducer';
 import * as actions from './actions';
+import reducer, { HuntingScreenState } from './reducer';
 
-/* eslint-disable func-names */
-describe('huntingScreenReducer', () => {
-  describe('cleanSearchResult', () => {
-    const action = actions.cleanSearchResult();
-    const state = reducer(initialState, action);
+const getInitialState = (initial?: Partial<HuntingScreenState>) =>
+  reducer(initial as HuntingScreenState, {} as any);
 
-    it('should reset state', () => {
-      expect(state.searched).toBeFalsy();
-      expect(state.pokemonFoundId).toBeUndefined();
-    });
-  });
+it('should return the initial state by default', () => {
+  const initialState = getInitialState();
+  expect(initialState).toEqual({ searched: false, pokemonFoundId: undefined });
+});
 
-  describe('searchForPokemon.request', () => {
-    const action = actions.searchForPokemon.request('1');
-    const state = reducer(initialState, action);
+it('should return the initial state when clear search is dispatched', () => {
+  const initialState = getInitialState({ searched: true, pokemonFoundId: 1 });
+  const state = reducer(initialState, actions.cleanSearchResult());
+  expect(state).toEqual({ searched: false, pokemonFoundId: undefined });
+});
 
-    it('should reset state', () => {
-      expect(state.searched).toBeFalsy();
-      expect(state.pokemonFoundId).toBeUndefined();
-    });
-  });
+it('should return the initial state when search request is dispatched', () => {
+  const initialState = getInitialState({ searched: true, pokemonFoundId: 12 });
+  const state = reducer(initialState, actions.searchForPokemon.request('12'));
+  expect(state).toEqual({ searched: false, pokemonFoundId: undefined });
+});
 
-  describe('searchForPokemon.success', () => {
-    const action = actions.searchForPokemon.success(3);
-    const state = reducer(initialState, action);
-
-    it('should set state', () => {
-      expect(state.searched).toBeTruthy();
-      expect(state.pokemonFoundId).toEqual(3);
-    });
-  });
+it('should return founded pokemon in the state', () => {
+  const initialState = getInitialState();
+  const state = reducer(initialState, actions.searchForPokemon.success(12));
+  expect(state).toEqual({ searched: true, pokemonFoundId: 12 });
 });
