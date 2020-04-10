@@ -1,11 +1,11 @@
 import * as actions from './actions';
 
-test('should create an action to clear the search result', () => {
+it('should create an action to clear the search result', () => {
   const action = actions.cleanSearchResult();
   expect(action).toEqual({ type: '@@huntingScreen/CLEAN_RESULT' });
 });
 
-test('should create an action to request pokemons by name', () => {
+it('should create an action to request pokemons by name', () => {
   const action = actions.searchForPokemon.request('pikachu');
   expect(action).toEqual({
     type: '@@huntingScreen/SEARCH_POKEMON_REQUEST',
@@ -13,7 +13,7 @@ test('should create an action to request pokemons by name', () => {
   });
 });
 
-test('should create an action to request pokemons by id', () => {
+it('should create an action to request pokemons by id', () => {
   const action = actions.searchForPokemon.request('23');
   expect(action).toEqual({
     type: '@@huntingScreen/SEARCH_POKEMON_REQUEST',
@@ -21,7 +21,7 @@ test('should create an action to request pokemons by id', () => {
   });
 });
 
-test('should create an action to receive the search result', () => {
+it('should create an action to receive the search result', () => {
   const action = actions.searchForPokemon.success(10);
   expect(action).toEqual({
     type: '@@huntingScreen/SEARCH_POKEMON_SUCCESS',
@@ -29,7 +29,7 @@ test('should create an action to receive the search result', () => {
   });
 });
 
-test('should create an action to failed the search result', () => {
+it('should create an action to failed the search result', () => {
   const action = actions.searchForPokemon.failure(Error('Failed result!'));
   expect(action).toEqual({
     type: '@@huntingScreen/SEARCH_POKEMON_FAILURE',
