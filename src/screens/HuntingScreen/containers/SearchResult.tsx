@@ -22,7 +22,6 @@ const loadingSelector = createLoadingSelector([
 
 const SearchResult = React.memo(() => {
   const searched = useSelector(selectors.hasSearched);
-  const founded = useSelector(selectors.hasFounded);
   const pokemon = useSelector(selectors.getFoundedPokemon);
   const isFetching = useSelector(loadingSelector);
   const dispatch = useDispatch();
@@ -35,6 +34,8 @@ const SearchResult = React.memo(() => {
   }, [dispatch]);
 
   const onChangeState = () => {
+    if (!pokemon) return;
+
     if (!pokemon.isCaptured)
       return dispatch(pokedexActions.catchPokemon(pokemon.id));
 
@@ -47,7 +48,7 @@ const SearchResult = React.memo(() => {
     <GridResultStyled container justify="center" spacing={0}>
       <Grid item xs={6} md={4}>
         {isFetching && <LinearProgress color="secondary" />}
-        {founded && (
+        {pokemon && (
           <PokeCard
             id={pokemon.id}
             name={pokemon.name}
@@ -63,7 +64,7 @@ const SearchResult = React.memo(() => {
             }}
           />
         )}
-        {!founded && searched && (
+        {!pokemon && searched && (
           <SnackbarContent
             message="Sorry, we did'nt find the pokémon. Try new search!"
             data-testid="empty-message"
