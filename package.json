@@ -6,7 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:analyze": "npm run build && npm run analyze",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "test:cypress": "cypress run",
     "cypress:open": "cypress open",
     "analyze": "source-map-explorer build/static/js/*.js"
@@ -51,7 +51,8 @@
     "prettier": "^2.0.4",
     "react-test-renderer": "^16.13.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-saga-test-plan": "^4.0.0-rc.3"
+    "redux-saga-test-plan": "^4.0.0-rc.3",
+    "jest-environment-jsdom-sixteen": "^1.0.3"
   },
   "jest": {
     "transformIgnorePatterns": [
