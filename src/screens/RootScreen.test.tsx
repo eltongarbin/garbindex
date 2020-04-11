@@ -6,13 +6,14 @@ import RootScreen from './RootScreen';
 jest.mock('./PokedexScreen', () => () => 'PokedexScreen');
 jest.mock('./HuntingScreen', () => () => 'HuntingScreen');
 jest.mock('./PokemonScreen', () => () => 'PokemonScreen');
+jest.mock('./NotFoundScreen', () => () => 'NotFoundScreen');
 
 it('should render the not found screen', async () => {
   const { findByText } = renderWithRouter(<RootScreen />, {
     route: '/something-that-does-not-match'
   });
 
-  const lazyElement = await findByText("Sorry, this page isn't here.");
+  const lazyElement = await findByText('NotFoundScreen');
 
   expect(lazyElement).toBeInTheDocument();
 });

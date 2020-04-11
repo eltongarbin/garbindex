@@ -7,7 +7,7 @@ import { createMemoryHistory } from 'history';
 export function renderWithRouter(
   ui: React.ReactElement,
   {
-    route,
+    route = '/',
     history = createMemoryHistory({ initialEntries: [route] })
   }: any = {}
 ) {

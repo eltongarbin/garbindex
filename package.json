@@ -7,6 +7,7 @@
     "build": "react-scripts build",
     "build:analyze": "npm run build && npm run analyze",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test:coverage": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage --watchAll=false",
     "test:cypress": "cypress run",
     "cypress:open": "cypress open",
     "analyze": "source-map-explorer build/static/js/*.js"
