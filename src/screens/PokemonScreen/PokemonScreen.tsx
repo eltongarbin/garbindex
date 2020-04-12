@@ -5,7 +5,7 @@ import {
   SnackbarContent,
   Link,
   CircularProgress,
-  Grid,
+  Grid
 } from '@material-ui/core';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,8 +13,6 @@ import { isEmpty } from 'lodash-es';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import { getType } from 'typesafe-actions';
 
-import history from 'utils/history';
-import { withScreenLayout } from 'components/ScreenLayout';
 import { selectors, actions } from 'store/ducks/pokemons';
 import { createLoadingSelector } from 'store/ducks/loading/selectors';
 import HeaderInfo from './containers/HeaderInfo';
@@ -41,7 +39,7 @@ const GridMainInfo = styled(Grid)`
 `;
 
 const loadingSelector = createLoadingSelector([
-  getType(actions.fetchPokemon.request),
+  getType(actions.fetchPokemon.request)
 ]);
 
 function PokemonScreen() {
@@ -99,18 +97,4 @@ function PokemonScreen() {
   );
 }
 
-const handleBackClick = () => {
-  const { state }: any = history.location;
-
-  if (state) {
-    history.push(state.from);
-    return;
-  }
-
-  history.push('/');
-};
-
-export default withScreenLayout({
-  title: 'Pokémon Detail',
-  onBackClick: handleBackClick,
-})(PokemonScreen);
+export default PokemonScreen;

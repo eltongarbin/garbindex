@@ -53,11 +53,7 @@ const SearchResult = React.memo(() => {
             id={pokemon.id}
             name={pokemon.name}
             image={pokemon.image}
-            onSeeMoreClick={() =>
-              history.push(`/pokemons/${pokemon.id}`, {
-                from: '/pokemons'
-              })
-            }
+            onSeeMoreClick={() => history.push(`/pokemons/${pokemon.id}`)}
             captureState={{
               nextState: pokemon.isCaptured ? 'Release' : 'Catch',
               onChange: onChangeState

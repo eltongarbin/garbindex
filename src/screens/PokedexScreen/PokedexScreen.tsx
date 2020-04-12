@@ -1,5 +1,4 @@
 import React from 'react';
-import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import {
   Fab,
@@ -11,7 +10,6 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-import { withScreenLayout } from 'components/ScreenLayout';
 import PokeCardList from './containers/PokeCardList';
 
 const styles = (theme: Theme) =>
@@ -71,7 +69,4 @@ const PokedexScreen = ({ classes }: PokedexScreenProps) => (
   </div>
 );
 
-export default compose(
-  withScreenLayout({ title: 'My Pokédex' }),
-  withStyles(styles, { withTheme: true })
-)(PokedexScreen);
+export default withStyles(styles, { withTheme: true })(PokedexScreen);

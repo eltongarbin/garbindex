@@ -1,15 +1,9 @@
 import React, { ReactNode, MouseEvent } from 'react';
-
 import { Toolbar, AppBar, Grid } from '@material-ui/core';
-import { ArrowBack as ArrowBackIcon } from '@material-ui/icons';
 
-import {
-  RootContainer,
-  HeaderTitle,
-  MenuButton,
-  GridContent
-} from './ScreenLayoutStyled';
+import { RootContainer, HeaderTitle, GridContent } from './ScreenLayoutStyled';
 import InstallButton from '../InstallButton';
+import BackButton from '../BackButton';
 
 type ScreenLayoutProps = {
   title: string;
@@ -21,11 +15,7 @@ const ScreenLayout = ({ title, onBackClick, children }: ScreenLayoutProps) => (
   <RootContainer>
     <AppBar position="static">
       <Toolbar>
-        {onBackClick && (
-          <MenuButton color="inherit" aria-label="Back" onClick={onBackClick}>
-            <ArrowBackIcon />
-          </MenuButton>
-        )}
+        <BackButton />
         <HeaderTitle variant="h6" color="inherit">
           {title}
         </HeaderTitle>

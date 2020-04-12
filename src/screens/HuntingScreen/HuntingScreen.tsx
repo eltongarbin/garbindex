@@ -1,7 +1,5 @@
 import React from 'react';
-import history from 'utils/history';
 
-import { withScreenLayout } from 'components/ScreenLayout';
 import SearchForm from './containers/SearchForm';
 import SearchResult from './containers/SearchResult';
 
@@ -14,7 +12,4 @@ function HuntingScreen() {
   );
 }
 
-export default withScreenLayout({
-  title: 'Search Pokémons',
-  onBackClick: () => history.push('/')
-})(HuntingScreen);
+export default HuntingScreen;

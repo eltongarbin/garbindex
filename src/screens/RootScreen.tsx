@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { LinearProgress } from '@material-ui/core';
+
+import ScreenRoute from 'components/ScreenRoute';
 
 const PokedexScreen = lazy(() => import('./PokedexScreen'));
 const HuntingScreen = lazy(() => import('./HuntingScreen'));
@@ -11,10 +13,25 @@ function RootScreen() {
   return (
     <Suspense fallback={<LinearProgress />}>
       <Switch>
-        <Route exact path="/" component={PokedexScreen} />
-        <Route exact path="/pokemons" component={HuntingScreen} />
-        <Route exact path="/pokemons/:id(\d+)" component={PokemonScreen} />
-        <Route component={NotFoundScreen} />
+        <ScreenRoute
+          title="My Pokédex"
+          exact
+          path="/"
+          component={PokedexScreen}
+        />
+        <ScreenRoute
+          title="Search Pokémons"
+          exact
+          path="/pokemons"
+          component={HuntingScreen}
+        />
+        <ScreenRoute
+          title="Pokémon Detail"
+          exact
+          path="/pokemons/:id(\d+)"
+          component={PokemonScreen}
+        />
+        <ScreenRoute title="Page not found (404)" component={NotFoundScreen} />
       </Switch>
     </Suspense>
   );
