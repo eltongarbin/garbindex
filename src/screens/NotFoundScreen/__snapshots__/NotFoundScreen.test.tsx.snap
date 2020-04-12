@@ -3,52 +3,27 @@
 exports[`should render correctly 1`] = `
 <div>
   <div
-    class="sc-AxjAm hYgLoi"
+    class="sc-AxjAm JiDcw"
   >
-    <header
-      class="MuiPaper-root MuiAppBar-root MuiAppBar-positionStatic MuiAppBar-colorPrimary MuiPaper-elevation4"
+    <h6
+      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
     >
-      <div
-        class="MuiToolbar-root MuiToolbar-regular MuiToolbar-gutters"
-      >
-        <h6
-          class="MuiTypography-root sc-AxirZ jgEvOh MuiTypography-h6 MuiTypography-colorInherit"
-        >
-          Page not found (404)
-        </h6>
-      </div>
-    </header>
-    <div
-      class="MuiGrid-root sc-AxhCb cNYLIj MuiGrid-container MuiGrid-justify-xs-center"
+      Sorry, this page isn't here.
+    </h6>
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+      tabindex="0"
+      type="button"
     >
-      <div
-        class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-sm-8 MuiGrid-grid-md-6"
+      <span
+        class="MuiButton-label"
       >
-        <div
-          class="sc-AxhUy binLdG"
-        >
-          <h6
-            class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom"
-          >
-            Sorry, this page isn't here.
-          </h6>
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
-            tabindex="0"
-            type="button"
-          >
-            <span
-              class="MuiButton-label"
-            >
-              Voltar
-            </span>
-            <span
-              class="MuiTouchRipple-root"
-            />
-          </button>
-        </div>
-      </div>
-    </div>
+        Voltar
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
   </div>
 </div>
 `;
