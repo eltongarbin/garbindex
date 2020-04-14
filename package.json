@@ -46,7 +46,7 @@
     "@types/react-router-dom": "^5.1.4",
     "@types/styled-components": "^5.0.1",
     "@types/webpack-env": "^1.15.1",
-    "cypress": "^4.3.0",
+    "cypress": "^4.4.0",
     "husky": "^4.2.5",
     "jest-styled-components": "^7.0.2",
     "lint-staged": "^10.1.3",
