@@ -17,7 +17,7 @@ export const MenuButton = styled(IconButton)`
 function BackButton() {
   const history = useHistory();
   const location = useLocation();
-  const isInitialLoad = history.length === 2;
+  const isInitialLoad = history.length <= 2;
   const isInitialScreen = location.pathname === '/';
 
   if (isInitialScreen) return null;

@@ -8,14 +8,14 @@ on:
     branches:
       - master
     tags:
-      - '!*' # Do not execute on tags
+      - "!*" # Do not execute on tags
     paths:
       - src/*
-      - '*.json'
+      - "*.json"
       - package-lock.json
   pull_request:
     paths:
-      - '!*.MD'
+      - "!*.MD"
 
 jobs:
   test:
