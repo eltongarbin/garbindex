@@ -1,30 +1,53 @@
-// test-utils.js
-import React from 'react';
-import { Router } from 'react-router-dom';
+import React, { ReactElement } from 'react';
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import { Router } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
+import configureStore from 'redux-mock-store';
 
-type IRouterParams = {
+import rootSaga from 'store/rootSaga';
+
+const sagaMiddleware = createSagaMiddleware();
+const mockStore = configureStore([sagaMiddleware]);
+
+type RouterOptions = {
   route?: string;
   history?: MemoryHistory;
 };
 
-export function renderWithRouter(
-  ui: React.ReactElement,
+type ReduxOptions = {
+  store?: any;
+};
+
+type CustomRenderOptions = RouterOptions & ReduxOptions;
+
+export function customRender(
+  ui: ReactElement,
   {
     route = '/',
-    history = createMemoryHistory({ initialEntries: [route] })
-  }: IRouterParams = {}
+    history = createMemoryHistory({ initialEntries: [route] }),
+    store = mockStore({})
+  }: CustomRenderOptions = {}
 ) {
-  const Wrapper = ({ children }: any) => (
-    <Router history={history}>{children}</Router>
-  );
+  const AllTheProviders = ({ children }: any) => {
+    sagaMiddleware.run(rootSaga);
+    return (
+      <Provider store={store}>
+        <Router history={history}>{children}</Router>
+      </Provider>
+    );
+  };
 
   return {
-    ...render(ui, { wrapper: Wrapper }),
+    ...render(ui, { wrapper: AllTheProviders }),
+    store,
     history
   };
 }
 
 // re-export everything
 export * from '@testing-library/react';
+
+// override render method
+export { customRender as render };

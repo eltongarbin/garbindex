@@ -42,7 +42,7 @@ const SearchForm = React.memo(() => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton type="submit" aria-label="Toggle password visibility">
+              <IconButton type="submit" aria-label="Search">
                 <SearchIcon />
               </IconButton>
             </InputAdornment>

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { renderWithRouter } from 'utils/test-utils';
+import { render } from 'utils/test-utils';
 import ScreenRoute from './ScreenRoute';
 
 it('should render a screen route', () => {
-  const { getByText } = renderWithRouter(
+  const { getByText } = render(
     <ScreenRoute title="Screen Title" component={() => <div>My screen</div>} />
   );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithRouter } from 'utils/test-utils';
+import { render } from 'utils/test-utils';
 
 import RootScreen from './RootScreen';
 
@@ -9,7 +9,7 @@ jest.mock('./PokemonScreen', () => () => 'PokemonScreen');
 jest.mock('./NotFoundScreen', () => () => 'NotFoundScreen');
 
 it('should render the not found screen', async () => {
-  const { findByText } = renderWithRouter(<RootScreen />, {
+  const { findByText } = render(<RootScreen />, {
     route: '/something-that-does-not-match'
   });
 
@@ -19,7 +19,7 @@ it('should render the not found screen', async () => {
 });
 
 it('should render the pokedex screen', async () => {
-  const { findByText } = renderWithRouter(<RootScreen />, {
+  const { findByText } = render(<RootScreen />, {
     route: '/'
   });
 
@@ -29,7 +29,7 @@ it('should render the pokedex screen', async () => {
 });
 
 it('should render the hunting screen', async () => {
-  const { findByText } = renderWithRouter(<RootScreen />, {
+  const { findByText } = render(<RootScreen />, {
     route: '/pokemons'
   });
 
@@ -39,7 +39,7 @@ it('should render the hunting screen', async () => {
 });
 
 it('should render the pokemon detail screen', async () => {
-  const { findByText } = renderWithRouter(<RootScreen />, {
+  const { findByText } = render(<RootScreen />, {
     route: '/pokemons/12'
   });
 
