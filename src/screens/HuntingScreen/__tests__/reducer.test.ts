@@ -1,5 +1,5 @@
-import * as actions from './actions';
-import reducer, { HuntingScreenState } from './reducer';
+import * as actions from '../state/actions';
+import reducer, { HuntingScreenState } from '../state/reducer';
 
 const getInitialState = (initial?: Partial<HuntingScreenState>) =>
   reducer(initial as HuntingScreenState, {} as any);

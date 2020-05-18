@@ -1,6 +1,6 @@
 import { expectSaga } from 'redux-saga-test-plan';
 
-import * as sagas from './sagas';
+import * as sagas from '../state/sagas';
 
 it('fetches a pokemon', () => {
   return expectSaga(sagas.watchSearchPokemonRequest, {

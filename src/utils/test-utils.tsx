@@ -1,15 +1,16 @@
 import React, { ReactElement } from 'react';
 import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
+import { createStore } from 'redux';
+import { Provider, RootStateOrAny } from 'react-redux';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory, MemoryHistory } from 'history';
-import configureStore from 'redux-mock-store';
+import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
+import { RootState } from 'typesafe-actions';
 
-import rootSaga from 'store/rootSaga';
+import rootReducer from 'store/rootReducer';
 
-const sagaMiddleware = createSagaMiddleware();
-const mockStore = configureStore([sagaMiddleware]);
+export const initialAppState = createStore(rootReducer).getState();
+const mockStore = configureStore([]);
 
 type RouterOptions = {
   route?: string;
@@ -17,27 +18,26 @@ type RouterOptions = {
 };
 
 type ReduxOptions = {
-  store?: any;
+  initialState?: RootState | {};
+  store?: MockStoreEnhanced<RootStateOrAny, {}>;
 };
 
-type CustomRenderOptions = RouterOptions & ReduxOptions;
+export type CustomRenderOptions = RouterOptions & ReduxOptions;
 
 export function customRender(
   ui: ReactElement,
   {
     route = '/',
     history = createMemoryHistory({ initialEntries: [route] }),
-    store = mockStore({})
+    initialState = initialAppState,
+    store = mockStore(initialState)
   }: CustomRenderOptions = {}
 ) {
-  const AllTheProviders = ({ children }: any) => {
-    sagaMiddleware.run(rootSaga);
-    return (
-      <Provider store={store}>
-        <Router history={history}>{children}</Router>
-      </Provider>
-    );
-  };
+  const AllTheProviders = ({ children }: any) => (
+    <Provider store={store}>
+      <Router history={history}>{children}</Router>
+    </Provider>
+  );
 
   return {
     ...render(ui, { wrapper: AllTheProviders }),

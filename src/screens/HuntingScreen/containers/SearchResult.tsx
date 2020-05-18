@@ -34,20 +34,17 @@ const SearchResult = React.memo(() => {
   }, [dispatch]);
 
   const onChangeState = () => {
-    if (!pokemon) return;
+    if (!pokemon!.isCaptured)
+      return dispatch(pokedexActions.catchPokemon(pokemon!.id));
 
-    if (!pokemon.isCaptured)
-      return dispatch(pokedexActions.catchPokemon(pokemon.id));
-
-    if (window.confirm('Are you sure you want to release this pokémon?')) {
-      dispatch(pokedexActions.releasePokemon(pokemon.id));
-    }
+    if (window.confirm('Are you sure you want to release this pokémon?'))
+      dispatch(pokedexActions.releasePokemon(pokemon!.id));
   };
 
   return (
     <GridResultStyled container justify="center" spacing={0}>
       <Grid item xs={6} md={4}>
-        {isFetching && <LinearProgress color="secondary" />}
+        {isFetching && <LinearProgress color="secondary" title="Loading..." />}
         {pokemon && (
           <PokeCard
             id={pokemon.id}

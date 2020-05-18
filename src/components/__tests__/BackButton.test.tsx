@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createMemoryHistory } from 'history';
 import { render, fireEvent } from 'utils/test-utils';
-import BackButton from './BackButton';
+import BackButton from '../BackButton';
 
 it('should not render anything', () => {
   const { container } = render(<BackButton />);

@@ -6,7 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:analyze": "npm run build && npm run analyze",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false",
+    "test": "react-scripts test --env=jest-environment-jsdom-sixteen --watchAll=false --detectOpenHandles",
     "test:watch": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "test:coverage": "react-scripts test --env=jest-environment-jsdom-sixteen --coverage --watchAll=false",
     "test:cypress": "cypress run",

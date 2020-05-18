@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { render } from 'utils/test-utils';
-import ScreenRoute from './ScreenRoute';
+import ScreenRoute from '../ScreenRoute';
 
 it('should render a screen route', () => {
   const { getByText } = render(

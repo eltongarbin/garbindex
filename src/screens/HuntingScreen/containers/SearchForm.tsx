@@ -19,7 +19,7 @@ const SearchForm = React.memo(() => {
   const handelSubmit = useCallback(
     (event) => {
       event.preventDefault();
-      dispatch(actions.searchForPokemon.request(searchText));
+      searchText && dispatch(actions.searchForPokemon.request(searchText));
     },
     [dispatch, searchText]
   );

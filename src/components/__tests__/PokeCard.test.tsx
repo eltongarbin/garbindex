@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 
-import PokeCard from './PokeCard';
+import PokeCard from '../PokeCard';
 
 const defaultProps = {
   captureState: {

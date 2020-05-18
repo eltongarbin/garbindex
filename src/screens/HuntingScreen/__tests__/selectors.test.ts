@@ -3,8 +3,7 @@ import { Store } from 'redux';
 import configureStore from 'store';
 import { actions as pokemonActions } from 'store/ducks/pokemons';
 import { actions as pokedexActions } from 'store/ducks/pokedex';
-import * as selectors from './selectors';
-import * as actions from './actions';
+import { selectors, actions } from 'screens/HuntingScreen/state';
 import { Pokemon } from 'services/pokemonService';
 
 const pokemonMock: Pokemon = {

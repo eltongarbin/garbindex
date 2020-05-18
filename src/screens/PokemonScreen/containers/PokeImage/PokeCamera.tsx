@@ -4,13 +4,13 @@ import Webcam from 'react-webcam';
 import { useDispatch } from 'react-redux';
 
 import { actions } from 'store/ducks/pokedex';
-import { CardMediaStyled } from 'components/PokeCard/PokeCardStyled';
+import { CardMediaStyled } from 'components/PokeCardStyled';
 import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
 import PokeCameraControls from './PokeCameraControls';
 
 const WebcamStyles = {
   display: 'flex',
-  width: '100%',
+  width: '100%'
 };
 
 type PokeCameraProps = {
