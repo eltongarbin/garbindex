@@ -88,7 +88,7 @@ describe('Tests with success in the search', () => {
     expect(
       queryByText("Sorry, we did'nt find the pokémon. Try new search!")
     ).not.toBeInTheDocument();
-    expect(getByTestId('pokecard')).toBeInTheDocument();
+    expect(getByTestId('pokecard-67')).toBeInTheDocument();
   });
 
   it('should catch the pokemon that has been found', () => {

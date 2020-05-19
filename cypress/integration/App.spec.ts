@@ -47,9 +47,7 @@ describe('App E2E', () => {
     });
 
     it('should find a pokemon', () => {
-      cy.get('[data-testid=input-search]')
-        .clear()
-        .type('pikachu{enter}');
+      cy.get('[data-testid=input-search]').clear().type('pikachu{enter}');
 
       cy.get('[data-testid=pokecard-header]')
         .should('contain', 'pikachu')
@@ -81,9 +79,7 @@ describe('App E2E', () => {
   context('when see pokemon details ', () => {
     it('should catch this pokemon', () => {
       cy.get('[aria-label="Release"]').should('not.exist');
-      cy.get('[aria-label="Catch"]')
-        .should('be.visible')
-        .click();
+      cy.get('[aria-label="Catch"]').should('be.visible').click();
       cy.get('[aria-label="Release"]').should('exist');
     });
   });
@@ -91,7 +87,7 @@ describe('App E2E', () => {
   context('when pokedex is not empty', () => {
     it('should see pokemon catched', () => {
       cy.visit('/');
-      cy.get('[data-testid=pokecard]').should('have.length', 1);
+      cy.get('[data-testid=pokecard-25]').should('have.length', 1);
     });
   });
 });

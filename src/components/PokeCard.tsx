@@ -26,7 +26,7 @@ type PokeCardProps = {
 };
 
 const PokeCard = (props: PokeCardProps) => (
-  <Card data-testid="pokecard">
+  <Card data-testid={`pokecard-${props.id}`}>
     <CardActionArea onClick={props.onSeeMoreClick}>
       <CardHeaderStyled
         title={props.name}
