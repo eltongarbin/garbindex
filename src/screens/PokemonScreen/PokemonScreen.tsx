@@ -10,7 +10,7 @@ import {
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { isEmpty } from 'lodash-es';
-import { Link as RouterLink, useParams } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { getType } from 'typesafe-actions';
 
 import { selectors, actions } from 'store/ducks/pokemons';
@@ -21,6 +21,7 @@ import PokeTypes from './containers/PokeTypes';
 import PokeProfile from './containers/PokeProfile';
 import PokeEvolution from './containers/PokeEvolution';
 import PokeStats from './containers/PokeStats';
+import usePokemonId from './hooks/usePokemonId';
 
 const CardContentStyled = styled(CardContent)`
   && {
@@ -43,16 +44,16 @@ const loadingSelector = createLoadingSelector([
 ]);
 
 function PokemonScreen() {
-  const { id = '' } = useParams();
-  const pokemon = useSelector(selectors.getPokemonById(parseInt(id)));
+  const pokemonId = usePokemonId();
+  const pokemon = useSelector(selectors.getPokemonById(pokemonId));
   const isFetching = useSelector(loadingSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (isEmpty(pokemon) && !isFetching) {
-      dispatch(actions.fetchPokemon.request(parseInt(id)));
+      dispatch(actions.fetchPokemon.request(pokemonId));
     }
-  }, [dispatch, isFetching, id, pokemon]);
+  }, [dispatch, isFetching, pokemonId, pokemon]);
 
   if (isFetching) {
     return (
@@ -66,7 +67,7 @@ function PokemonScreen() {
     return (
       <SnackbarContent
         message={
-          <span>
+          <span data-testid="empty-state">
             Sorry, we did'nt find the pokémon. Try new search{' '}
             <Link component={RouterLink} to="/pokemons">
               here!

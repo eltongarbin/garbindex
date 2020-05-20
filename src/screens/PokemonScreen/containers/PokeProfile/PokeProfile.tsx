@@ -27,13 +27,15 @@ function PokeProfile() {
         <Grid item xs={12} container spacing={1}>
           <Grid item xs>
             <Typography variant="subtitle2">Height</Typography>
-            <Typography variant="body2">
+            <Typography variant="body2" data-testid="poke-height">
               {convertoToMeters(height)} m
             </Typography>
           </Grid>
           <Grid item xs>
             <Typography variant="subtitle2">Weight</Typography>
-            <Typography variant="body2">{weight} kg</Typography>
+            <Typography variant="body2" data-testid="poke-weight">
+              {weight} kg
+            </Typography>
           </Grid>
         </Grid>
       </Grid>
