@@ -48,12 +48,13 @@ function PokemonScreen() {
   const pokemon = useSelector(selectors.getPokemonById(pokemonId));
   const isFetching = useSelector(loadingSelector);
   const dispatch = useDispatch();
+  const isFounded = isEmpty(pokemon);
 
   useEffect(() => {
-    if (isEmpty(pokemon) && !isFetching) {
+    if (isFounded && !isFetching) {
       dispatch(actions.fetchPokemon.request(pokemonId));
     }
-  }, [dispatch, isFetching, pokemonId, pokemon]);
+  }, [dispatch, isFetching, pokemonId, isFounded]);
 
   if (isFetching) {
     return (

@@ -25,6 +25,7 @@ const PokeAbilitiesItem = (props: PokeAbilitiesItemProps) => (
       expanded={props.expanded}
       onChange={props.onToggle}
       elevation={1}
+      data-testid={`ability-${props.name}`}
     >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>{props.name}</Typography>
