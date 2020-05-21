@@ -12,7 +12,7 @@ import {
   selectors as pokedexSelectors
 } from 'store/ducks/pokedex';
 import { selectors as pokemonsSelectors } from 'store/ducks/pokemons';
-import usePokemonId from '../../hooks/usePokemonId';
+import usePokemonId from '../hooks/usePokemonId';
 
 const CardHeaderStyled = styled(CardHeader)`
   &&& {
