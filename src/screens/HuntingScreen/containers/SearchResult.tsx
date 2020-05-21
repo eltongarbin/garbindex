@@ -11,7 +11,7 @@ import { actions as pokedexActions } from 'store/ducks/pokedex';
 import { createLoadingSelector } from 'store/ducks/loading/selectors';
 
 export const GridResultStyled = styled(Grid)`
-  && {
+  &&& {
     margin-top: 10px;
   }
 `;

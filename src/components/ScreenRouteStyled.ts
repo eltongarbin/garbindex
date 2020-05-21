@@ -10,7 +10,7 @@ export const HeaderTitle = styled(Typography)`
 `;
 
 export const GridContent = styled(Grid)`
-  && {
+  &&& {
     padding: 16px;
   }
 `;

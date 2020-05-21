@@ -12,7 +12,7 @@ import PokeTypesItem from './PokeTypesItem';
 import { DeepReadonly } from 'utility-types';
 
 const GridContent = styled(Grid)`
-  && {
+  &&& {
     margin-bottom: 10px;
   }
 `;

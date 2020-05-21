@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../state';
 
 const TextFieldStyled = styled(TextField)`
-  && {
+  &&& {
     background-color: white;
   }
 `;

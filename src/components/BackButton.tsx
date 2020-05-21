@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 
 export const MenuButton = styled(IconButton)`
-  && {
+  &&& {
     margin-left: -12px;
     margin-right: 4px;
   }

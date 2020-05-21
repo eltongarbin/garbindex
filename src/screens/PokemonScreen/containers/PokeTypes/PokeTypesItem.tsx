@@ -16,7 +16,7 @@ import {
 } from '../../components/Styles';
 
 const ChipStyled = styled(Chip)`
-  && {
+  &&& {
     margin: 2px;
   }
 `;

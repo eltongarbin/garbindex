@@ -3,7 +3,7 @@ import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
 const TypoStyled = styled(Typography)`
-  && {
+  &&& {
     background-color: rgba(0, 0, 0, 0.12);
   }
 `;

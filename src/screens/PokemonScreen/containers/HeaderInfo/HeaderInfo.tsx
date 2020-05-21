@@ -15,7 +15,7 @@ import { selectors as pokemonsSelectors } from 'store/ducks/pokemons';
 import usePokemonId from '../../hooks/usePokemonId';
 
 const CardHeaderStyled = styled(CardHeader)`
-  && {
+  &&& {
     padding-bottom: 0px;
   }
 `;

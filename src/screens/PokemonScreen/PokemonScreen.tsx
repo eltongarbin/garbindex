@@ -24,7 +24,7 @@ import PokeStats from './containers/PokeStats';
 import usePokemonId from './hooks/usePokemonId';
 
 const CardContentStyled = styled(CardContent)`
-  && {
+  &&& {
     padding-top: 0px;
   }
 `;
@@ -34,7 +34,7 @@ const LoadingContainer = styled.div`
 `;
 
 const GridMainInfo = styled(Grid)`
-  && {
+  &&& {
     margin-bottom: 10px;
   }
 `;
