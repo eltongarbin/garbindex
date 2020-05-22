@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 
 import { render, initialAppState, fireEvent, within } from 'utils/test-utils';
-import { actions } from 'store/ducks/pokemons';
 import * as pokemonFactory from '../utils/pokemonFactory';
 import PokemonScreen from '../PokemonScreen';
 
@@ -13,9 +12,7 @@ const setup = (pokemon = pokemonFactory.create()) =>
       ...initialAppState,
       entities: {
         ...initialAppState.entities,
-        pokemons: {
-          byId: { [pokemon.id]: pokemon }
-        }
+        pokemons: { byId: { [pokemon.id]: pokemon } }
       }
     }
   });
@@ -201,3 +198,5 @@ it('should display ability detail', () => {
     )
   ).toBeInTheDocument();
 });
+
+it.todo('should loading the screen');

@@ -69,16 +69,16 @@ const PokeImage = React.memo(() => {
             actionIcon={
               <>
                 {supportsCamera && (
-                  <IconButton onClick={() => setEnableCamera(true)}>
+                  <IconButton
+                    onClick={() => setEnableCamera(true)}
+                    title="Open camera"
+                  >
                     <PhotoCameraIcon />
                   </IconButton>
                 )}
                 <IconButton
-                  onClick={() =>
-                    fileInputRef &&
-                    fileInputRef.current &&
-                    fileInputRef.current.click()
-                  }
+                  onClick={() => fileInputRef.current.click()}
+                  title="Upload button"
                 >
                   <CloudUploadIcon />
                 </IconButton>
@@ -92,6 +92,7 @@ const PokeImage = React.memo(() => {
         type="file"
         accept=".jpg, .jpeg, .png"
         onChange={handleLoadLocalImage}
+        data-testid="file-upload"
       />
     </Grid>
   );
