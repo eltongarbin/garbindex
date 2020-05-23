@@ -16,37 +16,30 @@ type PokeCameraControlsProps = {
   onClear: () => void;
 };
 
-const PokeCameraControls = (props: PokeCameraControlsProps) => {
-  if (!props.isCaptured) {
-    return (
-      <GridListTileBarStyled
-        actionIcon={
-          <>
-            <IconButton onClick={props.onCapture}>
-              <CameraIcon />
-            </IconButton>
-            <IconButton onClick={props.onCancel}>
-              <ClearIcon />
-            </IconButton>
-          </>
-        }
-      />
-    );
-  }
-  return (
-    <GridListTileBarStyled
-      actionIcon={
+const PokeCameraControls = (props: PokeCameraControlsProps) => (
+  <GridListTileBarStyled
+    actionIcon={
+      props.isCaptured ? (
         <>
-          <IconButton onClick={props.onConfirm}>
+          <IconButton onClick={props.onConfirm} title="Confirm photo">
             <DoneIcon />
           </IconButton>
-          <IconButton onClick={props.onClear}>
+          <IconButton onClick={props.onClear} title="Cancel photo">
             <ClearIcon />
           </IconButton>
         </>
-      }
-    />
-  );
-};
+      ) : (
+        <>
+          <IconButton onClick={props.onCapture} title="Capture image">
+            <CameraIcon />
+          </IconButton>
+          <IconButton onClick={props.onCancel} title="Close camera">
+            <ClearIcon />
+          </IconButton>
+        </>
+      )
+    }
+  />
+);
 
 export default PokeCameraControls;

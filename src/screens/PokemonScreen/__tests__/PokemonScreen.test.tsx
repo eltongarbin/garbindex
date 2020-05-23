@@ -199,4 +199,17 @@ it('should display ability detail', () => {
   ).toBeInTheDocument();
 });
 
-it.todo('should loading the screen');
+it('should loading the screen', () => {
+  const { getByRole } = render(
+    <Route path="/pokemons/:id" component={PokemonScreen} />,
+    {
+      route: `/pokemons/23434`,
+      initialState: {
+        ...initialAppState,
+        ui: { loading: { '@@pokemons/FETCH_POKEMON': true } }
+      }
+    }
+  );
+
+  expect(getByRole('progressbar')).toBeInTheDocument();
+});

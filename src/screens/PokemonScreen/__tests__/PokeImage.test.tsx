@@ -6,15 +6,23 @@ import PokeImage from '../containers/PokeImage';
 import * as pokemonFactory from '../utils/pokemonFactory';
 
 jest.mock('react-webcam', () => {
-  const { forwardRef } = require('react');
-  return forwardRef((_props: any, ref: any) => (
-    <video
-      ref={ref as React.RefObject<any>}
-      autoPlay
-      playsInline
-      data-testid="video-camera"
-    />
-  ));
+  const { Component } = require('react');
+  return class Wrapper extends Component {
+    getScreenshot() {
+      return 'data:image/jpeg;base64,/9j/JHKAJDHFJH...';
+    }
+
+    render() {
+      return (
+        <video
+          ref={(ref) => {}}
+          autoPlay
+          playsInline
+          data-testid="video-camera"
+        />
+      );
+    }
+  };
 });
 
 const globalAny: any = global;
@@ -104,10 +112,58 @@ it('should open camera', () => {
   expect(getByTestId('video-camera')).toBeInTheDocument();
 });
 
-it.todo('should close camera');
+it('should close camera', () => {
+  globalAny.navigator.mediaDevices = {};
+  const { getByTitle, queryByTestId } = setup();
 
-it.todo('should take a photo with the camera');
+  fireEvent.click(getByTitle('Open camera'));
+  fireEvent.click(getByTitle('Close camera'));
 
-it.todo('should agree with the photo taken by the camera');
+  expect(queryByTestId('video-camera')).not.toBeInTheDocument();
+});
 
-it.todo('should disagree with the photo taken by the camera');
+it('should take a photo with the camera', () => {
+  globalAny.navigator.mediaDevices = {};
+  const { getByTitle } = setup();
+
+  fireEvent.click(getByTitle('Open camera'));
+  fireEvent.click(getByTitle('Capture image'));
+
+  expect(getByTitle('Pokémon').getAttribute('style')).toBe(
+    'background-image: url(data:image/jpeg;base64,/9j/JHKAJDHFJH...);'
+  );
+});
+
+it('should agree with the photo taken by the camera', () => {
+  globalAny.navigator.mediaDevices = {};
+  const { getByTitle, store } = setup();
+
+  fireEvent.click(getByTitle('Open camera'));
+  fireEvent.click(getByTitle('Capture image'));
+  fireEvent.click(getByTitle('Confirm photo'));
+
+  expect(store.getActions()).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "payload": Object {
+          "id": 35,
+          "image": "data:image/jpeg;base64,/9j/JHKAJDHFJH...",
+        },
+        "type": "@@pokedex/CHANGE_IMAGE",
+      },
+    ]
+  `);
+});
+
+it('should disagree with the photo taken by the camera', () => {
+  globalAny.navigator.mediaDevices = {};
+  const { getByTitle, queryByTestId, store } = setup();
+
+  fireEvent.click(getByTitle('Open camera'));
+  fireEvent.click(getByTitle('Capture image'));
+  expect(queryByTestId('video-camera')).not.toBeInTheDocument();
+
+  fireEvent.click(getByTitle('Cancel photo'));
+  expect(queryByTestId('video-camera')).toBeInTheDocument();
+  expect(store.getActions()).toMatchInlineSnapshot(`Array []`);
+});
