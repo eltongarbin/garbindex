@@ -6,23 +6,43 @@ const getInitialState = (initial?: Partial<HuntingScreenState>) =>
 
 it('should return the initial state by default', () => {
   const initialState = getInitialState();
-  expect(initialState).toEqual({ searched: false, pokemonFoundId: undefined });
+  expect(initialState).toMatchInlineSnapshot(`
+    Object {
+      "pokemonFoundId": undefined,
+      "searched": false,
+    }
+  `);
 });
 
 it('should return the initial state when clear search is dispatched', () => {
   const initialState = getInitialState({ searched: true, pokemonFoundId: 1 });
   const state = reducer(initialState, actions.cleanSearchResult());
-  expect(state).toEqual({ searched: false, pokemonFoundId: undefined });
+  expect(state).toMatchInlineSnapshot(`
+    Object {
+      "pokemonFoundId": undefined,
+      "searched": false,
+    }
+  `);
 });
 
 it('should return the initial state when search request is dispatched', () => {
   const initialState = getInitialState({ searched: true, pokemonFoundId: 12 });
   const state = reducer(initialState, actions.searchForPokemon.request('12'));
-  expect(state).toEqual({ searched: false, pokemonFoundId: undefined });
+  expect(state).toMatchInlineSnapshot(`
+    Object {
+      "pokemonFoundId": undefined,
+      "searched": false,
+    }
+  `);
 });
 
 it('should return founded pokemon in the state', () => {
   const initialState = getInitialState();
   const state = reducer(initialState, actions.searchForPokemon.success(12));
-  expect(state).toEqual({ searched: true, pokemonFoundId: 12 });
+  expect(state).toMatchInlineSnapshot(`
+    Object {
+      "pokemonFoundId": 12,
+      "searched": true,
+    }
+  `);
 });

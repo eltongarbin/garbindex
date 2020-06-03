@@ -25,7 +25,7 @@ export type PokemonAbility = {
   short_effect?: string;
 };
 
-type PokemonState = DeepReadonly<{
+export type PokemonState = DeepReadonly<{
   byId: IDictionary<{
     id: number;
     name: string;

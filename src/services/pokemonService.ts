@@ -3,7 +3,8 @@ import request from 'utils/request';
 export type Pokemon = {
   id: number;
   name: string;
-  image: string;
+  height: number;
+  weight: number;
   sprites: { front_default: string };
   abilities: Array<{ ability: { url: string; name: string } }>;
   stats: Array<{ stat: { url: string; name: string }; base_stat: number }>;
