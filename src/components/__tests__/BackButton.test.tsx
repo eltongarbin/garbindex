@@ -6,7 +6,7 @@ import BackButton from '../BackButton';
 
 it('should not render anything', () => {
   const { container } = render(<BackButton />);
-  expect(container).toBeEmpty();
+  expect(container).toBeEmptyDOMElement();
 });
 
 it('should render home button', () => {

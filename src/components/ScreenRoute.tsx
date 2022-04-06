@@ -31,7 +31,7 @@ function ScreenRoute({
               <InstallButton />
             </Toolbar>
           </AppBar>
-          <GridContent container justify="center" spacing={0}>
+          <GridContent container justifyContent="center" spacing={0}>
             <Grid item xs={12} sm={8} md={6}>
               <Component {...props} />
             </Grid>

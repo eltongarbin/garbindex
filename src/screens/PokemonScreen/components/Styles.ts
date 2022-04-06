@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LinearProgress, ExpansionPanelDetails } from '@material-ui/core';
+import { LinearProgress, AccordionDetails } from '@material-ui/core';
 
 export const LinearProgressStyled = styled(LinearProgress)`
   &&& {
@@ -7,7 +7,7 @@ export const LinearProgressStyled = styled(LinearProgress)`
   }
 `;
 
-export const ExpansionPanelDetailsStyled = styled(ExpansionPanelDetails)`
+export const AccordionDetailsStyled = styled(AccordionDetails)`
   &&& {
     flex-wrap: wrap;
     padding: 0px 24px 24px;

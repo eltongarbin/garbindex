@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardMedia, GridListTileBar } from '@material-ui/core';
+import { CardMedia, ImageListItemBar } from '@material-ui/core';
 
 export const CardMediaStyled = styled(CardMedia)`
   &&& {
@@ -8,7 +8,7 @@ export const CardMediaStyled = styled(CardMedia)`
   }
 `;
 
-export const GridListTileBarStyled = styled(GridListTileBar)`
+export const ImageListItemBarStyled = styled(ImageListItemBar)`
   &&& {
     position: relative;
   }

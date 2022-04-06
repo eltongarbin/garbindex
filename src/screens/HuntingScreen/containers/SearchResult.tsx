@@ -42,7 +42,7 @@ const SearchResult = React.memo(() => {
   };
 
   return (
-    <GridResultStyled container justify="center" spacing={0}>
+    <GridResultStyled container justifyContent="center" spacing={0}>
       <Grid item xs={6} md={4}>
         {isFetching && <LinearProgress color="secondary" title="Loading..." />}
         {pokemon && (

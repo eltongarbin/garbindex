@@ -23,18 +23,17 @@ const PokeTypes = React.memo(() => {
   const { typesById } = useSelector(selectors.getPokemonById(pokemonId));
   const dispatch = useDispatch();
 
-  const handleToggleDetail = (type: DeepReadonly<PokemonType>) => (
-    _event: React.ChangeEvent<{}>,
-    expanded: boolean
-  ) => {
-    if (expanded && isEmpty(type.pokemons)) {
-      dispatch(
-        actions.fetchPokemonsByTypeId.request({ pokemonId, typeId: type.id })
-      );
-    }
+  const handleToggleDetail =
+    (type: DeepReadonly<PokemonType>) =>
+    (_event: React.ChangeEvent<{}>, expanded: boolean) => {
+      if (expanded && isEmpty(type.pokemons)) {
+        dispatch(
+          actions.fetchPokemonsByTypeId.request({ pokemonId, typeId: type.id })
+        );
+      }
 
-    setExpandedId(expanded ? type.id : 0);
-  };
+      setExpandedId(expanded ? type.id : 0);
+    };
 
   return (
     <GridContent container spacing={1} alignItems="center">
@@ -42,7 +41,7 @@ const PokeTypes = React.memo(() => {
         <Segregator title="Types" />
       </Grid>
       <Grid item xs={12}>
-        <Grid container justify="center" spacing={1}>
+        <Grid container justifyContent="center" spacing={1}>
           {map(typesById).map((type) => (
             <PokeTypesItem
               key={type.id}

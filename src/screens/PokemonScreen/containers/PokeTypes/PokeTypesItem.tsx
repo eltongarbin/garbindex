@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  ExpansionPanel,
-  ExpansionPanelSummary,
+  Accordion,
+  AccordionSummary,
   Typography,
   Grid,
   Chip
@@ -12,7 +12,7 @@ import { isEmpty } from 'lodash-es';
 
 import {
   LinearProgressStyled,
-  ExpansionPanelDetailsStyled
+  AccordionDetailsStyled
 } from '../../components/Styles';
 
 const ChipStyled = styled(Chip)`
@@ -30,23 +30,23 @@ type PokeTypesItemProps = {
 
 const PokeTypesItem = (props: PokeTypesItemProps) => (
   <Grid item xs={12} sm={6}>
-    <ExpansionPanel
+    <Accordion
       expanded={props.expanded}
       onChange={props.onToggle}
       elevation={1}
       data-testid={`type-${props.name}`}
     >
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>{props.name}</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetailsStyled>
+      </AccordionSummary>
+      <AccordionDetailsStyled>
         {props.pokemons &&
           props.pokemons.map(({ id, name }) => (
             <ChipStyled label={name} key={id} color="secondary" />
           ))}
         {isEmpty(props.pokemons) && <LinearProgressStyled color="secondary" />}
-      </ExpansionPanelDetailsStyled>
-    </ExpansionPanel>
+      </AccordionDetailsStyled>
+    </Accordion>
   </Grid>
 );
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  ExpansionPanel,
-  ExpansionPanelSummary,
+  Accordion,
+  AccordionSummary,
   Typography,
   Grid
 } from '@material-ui/core';
@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {
   LinearProgressStyled,
-  ExpansionPanelDetailsStyled
+  AccordionDetailsStyled
 } from '../../components/Styles';
 
 type PokeAbilitiesItemProps = {
@@ -21,22 +21,22 @@ type PokeAbilitiesItemProps = {
 
 const PokeAbilitiesItem = (props: PokeAbilitiesItemProps) => (
   <Grid item xs={12} sm={6}>
-    <ExpansionPanel
+    <Accordion
       expanded={props.expanded}
       onChange={props.onToggle}
       elevation={1}
       data-testid={`ability-${props.name}`}
     >
-      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Typography>{props.name}</Typography>
-      </ExpansionPanelSummary>
-      <ExpansionPanelDetailsStyled>
+      </AccordionSummary>
+      <AccordionDetailsStyled>
         {props.short_effect && (
           <Typography variant="caption">{props.short_effect}</Typography>
         )}
         {!props.short_effect && <LinearProgressStyled color="secondary" />}
-      </ExpansionPanelDetailsStyled>
-    </ExpansionPanel>
+      </AccordionDetailsStyled>
+    </Accordion>
   </Grid>
 );
 

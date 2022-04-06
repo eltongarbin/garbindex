@@ -13,7 +13,7 @@ import {
 } from 'store/ducks/pokedex';
 import { selectors as pokemonSelectors } from 'store/ducks/pokemons';
 import usePokemonId from 'screens/PokemonScreen/hooks/usePokemonId';
-import { CardMediaStyled, GridListTileBarStyled } from './PokeImageStyled';
+import { CardMediaStyled, ImageListItemBarStyled } from './PokeImageStyled';
 import PokeCamera from './PokeCamera';
 
 const FileInputStyled = styled.input`
@@ -65,7 +65,7 @@ const PokeImage = React.memo(() => {
       <CardMediaStyled image={image} title="Pokémon" />
       {captured && (
         <>
-          <GridListTileBarStyled
+          <ImageListItemBarStyled
             actionIcon={
               <>
                 {supportsCamera && (

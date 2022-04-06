@@ -6,7 +6,7 @@ import {
 } from '@material-ui/icons';
 import { IconButton } from '@material-ui/core';
 
-import { GridListTileBarStyled } from './PokeImageStyled';
+import { ImageListItemBarStyled } from './PokeImageStyled';
 
 type PokeCameraControlsProps = {
   isCaptured?: boolean;
@@ -17,7 +17,7 @@ type PokeCameraControlsProps = {
 };
 
 const PokeCameraControls = (props: PokeCameraControlsProps) => (
-  <GridListTileBarStyled
+  <ImageListItemBarStyled
     actionIcon={
       props.isCaptured ? (
         <>

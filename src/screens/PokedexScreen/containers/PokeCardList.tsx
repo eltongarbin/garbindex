@@ -31,7 +31,7 @@ const PokeCardList = React.memo(() => {
         </Grid>
       ))}
       {!pokemons.length && (
-        <Grid item xs={12} container justify="center">
+        <Grid item xs={12} container justifyContent="center">
           <SnackbarContent
             message={
               <span data-testid="empty-message">

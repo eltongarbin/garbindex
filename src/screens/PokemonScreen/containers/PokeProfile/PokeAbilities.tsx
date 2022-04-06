@@ -14,25 +14,24 @@ const PokeAbilities = React.memo(() => {
   const { abilitiesById } = useSelector(selectors.getPokemonById(pokemonId));
   const dispatch = useDispatch();
 
-  const handleToggleDetail = (ability: PokemonAbility) => (
-    _event: React.ChangeEvent<{}>,
-    expanded: boolean
-  ) => {
-    if (expanded && !ability.short_effect) {
-      dispatch(
-        actions.fetchShortEffectByAbilityId.request({
-          pokemonId,
-          abilityId: ability.id
-        })
-      );
-    }
+  const handleToggleDetail =
+    (ability: PokemonAbility) =>
+    (_event: React.ChangeEvent<{}>, expanded: boolean) => {
+      if (expanded && !ability.short_effect) {
+        dispatch(
+          actions.fetchShortEffectByAbilityId.request({
+            pokemonId,
+            abilityId: ability.id
+          })
+        );
+      }
 
-    setExpandedId(expanded ? ability.id : 0);
-  };
+      setExpandedId(expanded ? ability.id : 0);
+    };
 
   return (
     <Grid item xs={12}>
-      <Grid container justify="center" spacing={1}>
+      <Grid container justifyContent="center" spacing={1}>
         {map(abilitiesById).map((ability) => (
           <PokeAbilitiesItem
             key={ability.id}

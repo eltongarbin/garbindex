@@ -1,5 +1,5 @@
 {
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "jest.autoEnable": false,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": false
 }
